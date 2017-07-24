@@ -15,7 +15,7 @@ import java.net.URL;
  * @author Fernando
  */
 public class Descargar {
-    private static final String url = "https://www.dropbox.com/s/aw4ihl2xj391c0i/Animat%C3%A9%20a%20hacer%20fichas%20en%20xls%20v12.06.2017.xlsx?dl=0";//"https://drive.google.com/file/d/0Bx_jVxdHQr5mOWdyOVZzU1pPTEU/view?usp=sharing";
+    private static final String url = "https://github.com/TheCorPlay/AnimaDicer/raw/master/Animat%C3%A9%20a%20hacer%20fichas%20en%20xls%20v12.06.2017.xlsx";
 
     public Descargar() {}
     

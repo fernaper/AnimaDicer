@@ -61,7 +61,8 @@ public class Anima {
         } catch (NullPointerException | CargaException ex) {}
         // cerramos el libro excel
         try {
-            workbook.close();
+            if (workbook != null)
+                workbook.close();
         } catch (IOException e) {
         }
         
@@ -77,64 +78,12 @@ public class Anima {
         return this.ficha;
     }
     
-    private void mostrarFicha(Ficha ficha) {
-        System.out.println("Nombre: " +  ficha.getNombre());
-        System.out.println("Categoria: " + ficha.getCategoria());
-        System.out.println("Nivel: " + ficha.getNivel());
-        System.out.println("Vida: " + ficha.getVida());
-        System.out.println("Zeon: " + ficha.getZeon());
-        System.out.print("Ki: ");
-        for (int i = 0; i < 6; i++) {
-            System.out.print(ficha.getKi(i)+" ");
-        }
-        System.out.println("");
-        System.out.print("Atributos: ");
-        for (int i = 0; i < 8; i++) {
-            System.out.print(ficha.getAtributo(i)+" ");
-        }
-        System.out.println("");
-
-        System.out.print("Combate: ");
-        for (int i = 0; i < 5; i++) {
-            System.out.print(ficha.getCombate(i)+" ");
-        }
-        System.out.println("");
-
-        System.out.print("Resistencias: ");
-        for (int i = 0; i < 6; i++) {
-            System.out.print(ficha.getRes(i)+" ");
-        }
-        System.out.println("");
-
-        System.out.print("Secundarias: ");
-        for (int i = 0; i < 38; i++) {
-            System.out.print(ficha.getSecundarias(i)+" ");
-        }
-        System.out.println("");
-
-        System.out.print("Turno: ");
-        for (int i = 0; i < 5; i++) {
-            System.out.print(ficha.getTurno(i)+" ");
-        }
-        System.out.println("");
-
-        System.out.print("Convocatoria: ");
-        for (int i = 0; i < 4; i++) {
-            System.out.print(ficha.getConvocatoria(i)+" ");
-        }
-        System.out.println("");
-
-        System.out.println("Potencial Ps�quico: " +  ficha.getPotencialPsiquico());
-    }
-
     private Ficha cargarGenerico(Sheet sheet) throws CargaException {
         // Testeo de que está leyendo una ficha y no un documento cualquiera
         if (!"Turno".equals(sheet.getRow(0).getCell(CellReference.convertColStringToIndex("L")).getStringCellValue()) ||
-            !"Resistencias".equals(sheet.getRow(56).getCell(CellReference.convertColStringToIndex("B")).getStringCellValue()) ||
             !"Creativas".equals(sheet.getRow(51).getCell(CellReference.convertColStringToIndex("P")).getStringCellValue())) {
             throw new CargaException("Este documento no es una ficha preparada");
         }
-        
         ficha = new Ficha();
         
         ficha.setNombre(sheet.getRow(0).getCell(CellReference.convertColStringToIndex("C")).getStringCellValue());
@@ -147,7 +96,7 @@ public class Anima {
         ficha.setVidaActual(ficha.getVida());
         ficha.setZeonActual(ficha.getZeon());
         ficha.setCansancioActual(ficha.getCansancio());
-
+        
         {
             int [] ki = new int[6];
             for (int i = 0; i < 6; i++) {
@@ -187,8 +136,11 @@ public class Anima {
         }
         {
             int[] res = new int [6];
+            int add = 0;
+            if ("Resistencias".equals(sheet.getRow(57).getCell(CellReference.convertColStringToIndex("B")).getStringCellValue()))
+                add = 1;
             for (int i = 0; i < 6; i++) {
-                res[i] = (int)(sheet.getRow(57+i).getCell(CellReference.convertColStringToIndex("H")).getNumericCellValue());
+                res[i] = (int)(sheet.getRow(57+add+i).getCell(CellReference.convertColStringToIndex("H")).getNumericCellValue());
             }
             ficha.setRes(res);
         }
@@ -217,19 +169,24 @@ public class Anima {
         {
             Arma[] arma;
             arma = new Arma[4];
+            
+            int add = 0;
+            if ("Arma 1".equals(sheet.getRow(36).getCell(CellReference.convertColStringToIndex("B")).getStringCellValue()))
+                add = 1;
+            
             for (int i = 0; i < 4; i++) {
                 String [] criticos = new String [2];
-                String nombre = sheet.getRow(35+(5*i)).getCell(CellReference.convertColStringToIndex("C")).getStringCellValue();
+                String nombre = sheet.getRow(35+(5*i)+add).getCell(CellReference.convertColStringToIndex("C")).getStringCellValue();
                 arma[i] = new Arma();
                 if (!"Nada".equals(nombre)) {
                     arma[i].setNombre(nombre);
-                    criticos[0] = sheet.getRow(39+(5*i)).getCell(CellReference.convertColStringToIndex("F")).getStringCellValue();
-                    criticos[1] = sheet.getRow(39+(5*i)).getCell(CellReference.convertColStringToIndex("G")).getStringCellValue();
+                    criticos[0] = sheet.getRow(39+(5*i)+add).getCell(CellReference.convertColStringToIndex("F")).getStringCellValue();
+                    criticos[1] = sheet.getRow(39+(5*i)+add).getCell(CellReference.convertColStringToIndex("G")).getStringCellValue();
                     arma[i].setCritico(criticos);
-                    arma[i].setDamage((int)(sheet.getRow(37+(5*i)).getCell(CellReference.convertColStringToIndex("F")).getNumericCellValue()));
-                    arma[i].setEntereza((int)(sheet.getRow(39+(5*i)).getCell(CellReference.convertColStringToIndex("C")).getNumericCellValue()));
-                    arma[i].setRotura((int)(sheet.getRow(39+(5*i)).getCell(CellReference.convertColStringToIndex("D")).getNumericCellValue()));
-                    arma[i].setPresencia((int)(sheet.getRow(39+(5*i)).getCell(CellReference.convertColStringToIndex("E")).getNumericCellValue()));
+                    arma[i].setDamage((int)(sheet.getRow(37+(5*i)+add).getCell(CellReference.convertColStringToIndex("F")).getNumericCellValue()));
+                    arma[i].setEntereza((int)(sheet.getRow(39+(5*i)+add).getCell(CellReference.convertColStringToIndex("C")).getNumericCellValue()));
+                    arma[i].setRotura((int)(sheet.getRow(39+(5*i)+add).getCell(CellReference.convertColStringToIndex("D")).getNumericCellValue()));
+                    arma[i].setPresencia((int)(sheet.getRow(39+(5*i)+add).getCell(CellReference.convertColStringToIndex("E")).getNumericCellValue()));
                 } else {
                     criticos[0] = "FIL";
                     criticos[1] = "CON";
@@ -272,7 +229,6 @@ public class Anima {
         ficha.setPotencialPsiquico((int)(sheet.getRow(5).getCell(CellReference.convertColStringToIndex("BH")).getNumericCellValue()));
         
         ficha.setNotas(cargarNotas());
-        
         return ficha;
     }
     

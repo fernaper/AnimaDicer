@@ -15,7 +15,13 @@ public class Armadura {
     String posicion;
     
     public void Armadura() {
+        this.nombre = "";
+        this.posicion = "";
         this.defensa = new int[7];
+        
+        for (int i = 0; i < 7; i++) {
+            this.defensa[i] = 0;
+        }
     }
     
     public void setNombre(String nombre) {

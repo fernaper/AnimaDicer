@@ -18,7 +18,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -40,11 +39,15 @@ import javax.swing.JTextField;
  */
 public class Dicer extends javax.swing.JFrame {
 
+    private final String version;
+
     /** Creates new form Dicer
+     * @param version
      * @param settings
      * @param ficha
      * @param direccion */
-    public Dicer(Settings settings, Ficha ficha, String direccion) {
+    public Dicer(String version, Settings settings, Ficha ficha, String direccion) {
+        this.version = version;
         this.settings = settings;
         this.ficha = ficha;
         this.direccion = direccion;
@@ -83,7 +86,7 @@ public class Dicer extends javax.swing.JFrame {
 
     private void doTask() {
         this.setVisible(true);
-        this.setTitle("Anima Dicer v1.0.0");
+        this.setTitle("Anima Dicer " + this.version);
         this.setLocationRelativeTo(null);
     }
     
@@ -416,6 +419,11 @@ public class Dicer extends javax.swing.JFrame {
         jLabel340 = new javax.swing.JLabel();
         jLabel341 = new javax.swing.JLabel();
         jLabel342 = new javax.swing.JLabel();
+        jLabel356 = new javax.swing.JLabel();
+        jLabel357 = new javax.swing.JLabel();
+        jLabel358 = new javax.swing.JLabel();
+        comboTurno = new javax.swing.JComboBox<>();
+        jLabel355 = new javax.swing.JLabel();
         jPanel22 = new javax.swing.JPanel();
         jLabel347 = new javax.swing.JLabel();
         jLabel348 = new javax.swing.JLabel();
@@ -558,7 +566,7 @@ public class Dicer extends javax.swing.JFrame {
         checkTiradas = new javax.swing.JCheckBoxMenuItem();
         checkDadosFisicos = new javax.swing.JCheckBoxMenuItem();
         jMenu3 = new javax.swing.JMenu();
-        jMenuItem6 = new javax.swing.JMenuItem();
+        ayuda = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
         jMenuItem7 = new javax.swing.JMenuItem();
 
@@ -1531,7 +1539,7 @@ public class Dicer extends javax.swing.JFrame {
         });
         jPanel18.add(baseCalcComb, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 30, 60, -1));
 
-        jPanel4.add(jPanel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, 310, 90));
+        jPanel4.add(jPanel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(285, 170, 325, 90));
 
         jPanel19.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Convocatoria", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
         jPanel19.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1604,68 +1612,88 @@ public class Dicer extends javax.swing.JFrame {
         jLabel326.setText("=");
         jPanel19.add(jLabel326, new org.netbeans.lib.awtextra.AbsoluteConstraints(225, 130, -1, 20));
 
-        jPanel4.add(jPanel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 310, 160));
+        jPanel4.add(jPanel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 310, 160));
 
         jPanel21.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Combate Físico", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
         jPanel21.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel327.setText("Esquiva:");
-        jPanel21.add(jLabel327, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
+        jPanel21.add(jLabel327, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, -1, -1));
 
         jLabel328.setText("Ataque:");
-        jPanel21.add(jLabel328, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, -1, -1));
+        jPanel21.add(jLabel328, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
 
         jLabel329.setText("Defensa:");
-        jPanel21.add(jLabel329, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 75, -1, -1));
+        jPanel21.add(jLabel329, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, -1));
 
         jLabel330.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel330.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel330.setText("Base");
-        jPanel21.add(jLabel330, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 20, 50, -1));
+        jPanel21.add(jLabel330, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, 50, -1));
 
         jLabel331.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel331.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel331.setText("Libre");
-        jPanel21.add(jLabel331, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 30, -1));
+        jPanel21.add(jLabel331, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 30, 30, -1));
 
         jLabel332.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel332.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel332.setText("Dado");
-        jPanel21.add(jLabel332, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, 40, -1));
+        jPanel21.add(jLabel332, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, 40, -1));
 
         jLabel333.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel333.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel333.setText("Resultado");
-        jPanel21.add(jLabel333, new org.netbeans.lib.awtextra.AbsoluteConstraints(208, 20, 60, -1));
+        jPanel21.add(jLabel333, new org.netbeans.lib.awtextra.AbsoluteConstraints(208, 30, 60, -1));
 
         jLabel334.setText("+");
-        jPanel21.add(jLabel334, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 40, -1, 20));
+        jPanel21.add(jLabel334, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 110, -1, 20));
 
         jLabel335.setText("+");
-        jPanel21.add(jLabel335, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 40, -1, 20));
+        jPanel21.add(jLabel335, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 110, -1, 20));
 
         jLabel336.setText("=");
-        jPanel21.add(jLabel336, new org.netbeans.lib.awtextra.AbsoluteConstraints(195, 40, -1, 20));
+        jPanel21.add(jLabel336, new org.netbeans.lib.awtextra.AbsoluteConstraints(195, 110, -1, 20));
 
         jLabel337.setText("=");
-        jPanel21.add(jLabel337, new org.netbeans.lib.awtextra.AbsoluteConstraints(195, 75, -1, 20));
+        jPanel21.add(jLabel337, new org.netbeans.lib.awtextra.AbsoluteConstraints(195, 150, -1, 20));
 
         jLabel338.setText("+");
-        jPanel21.add(jLabel338, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 75, -1, 20));
+        jPanel21.add(jLabel338, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, -1, 20));
 
         jLabel339.setText("+");
-        jPanel21.add(jLabel339, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 75, -1, 20));
+        jPanel21.add(jLabel339, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 150, -1, 20));
 
         jLabel340.setText("+");
-        jPanel21.add(jLabel340, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 110, -1, 20));
+        jPanel21.add(jLabel340, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 190, -1, 20));
 
         jLabel341.setText("+");
-        jPanel21.add(jLabel341, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 110, -1, 20));
+        jPanel21.add(jLabel341, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 190, -1, 20));
 
         jLabel342.setText("=");
-        jPanel21.add(jLabel342, new org.netbeans.lib.awtextra.AbsoluteConstraints(195, 110, -1, 20));
+        jPanel21.add(jLabel342, new org.netbeans.lib.awtextra.AbsoluteConstraints(195, 190, -1, 20));
 
-        jPanel4.add(jPanel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 275, 160));
+        jLabel356.setText("+");
+        jPanel21.add(jLabel356, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, -1, 20));
+
+        jLabel357.setText("+");
+        jPanel21.add(jLabel357, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, -1, 20));
+
+        jLabel358.setText("=");
+        jPanel21.add(jLabel358, new org.netbeans.lib.awtextra.AbsoluteConstraints(195, 70, -1, 20));
+
+        comboTurno.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Turno Arma 1", "Turno Arma 2", "Turno Arma 3", "Turno Arma 4" }));
+        comboTurno.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                comboTurnoItemStateChanged(evt);
+            }
+        });
+        jPanel21.add(comboTurno, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 240, -1));
+
+        jLabel355.setText("Turno:");
+        jPanel21.add(jLabel355, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, -1));
+
+        jPanel4.add(jPanel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 275, 250));
 
         jPanel22.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Crítico", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
         jPanel22.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1673,26 +1701,26 @@ public class Dicer extends javax.swing.JFrame {
         jLabel347.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel347.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel347.setText("Daño Final");
-        jPanel22.add(jLabel347, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 60, -1));
+        jPanel22.add(jLabel347, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 60, -1));
 
         jLabel348.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel348.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel348.setText("Libre");
-        jPanel22.add(jLabel348, new org.netbeans.lib.awtextra.AbsoluteConstraints(86, 30, 30, -1));
+        jPanel22.add(jLabel348, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 30, 30, -1));
 
         jLabel349.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel349.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel349.setText("Dado");
-        jPanel22.add(jLabel349, new org.netbeans.lib.awtextra.AbsoluteConstraints(135, 30, 40, -1));
+        jPanel22.add(jLabel349, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, 40, -1));
 
         jLabel350.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel350.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel350.setText("Resultado");
-        jPanel22.add(jLabel350, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 30, 60, -1));
+        jPanel22.add(jLabel350, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 30, 60, -1));
 
         resCritico.setEditable(false);
         resCritico.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jPanel22.add(resCritico, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, 60, -1));
+        jPanel22.add(resCritico, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 60, 60, -1));
 
         damageCritico.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         damageCritico.setText("0");
@@ -1709,7 +1737,7 @@ public class Dicer extends javax.swing.JFrame {
                 damageCriticoKeyTyped(evt);
             }
         });
-        jPanel22.add(damageCritico, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 40, -1));
+        jPanel22.add(damageCritico, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, 40, -1));
 
         libreCritico.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         libreCritico.setText("0");
@@ -1721,31 +1749,31 @@ public class Dicer extends javax.swing.JFrame {
                 libreCriticoKeyTyped(evt);
             }
         });
-        jPanel22.add(libreCritico, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, 40, -1));
+        jPanel22.add(libreCritico, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, 40, -1));
 
         dadoCritico.setEditable(false);
         dadoCritico.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jPanel22.add(dadoCritico, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, 40, -1));
+        jPanel22.add(dadoCritico, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, 40, -1));
 
         jLabel351.setText("+");
-        jPanel22.add(jLabel351, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, -1, 20));
+        jPanel22.add(jLabel351, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, -1, 20));
 
         jLabel352.setText("=");
-        jPanel22.add(jLabel352, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, -1, 20));
+        jPanel22.add(jLabel352, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 60, -1, 20));
 
         jLabel353.setText("+");
-        jPanel22.add(jLabel353, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, -1, 20));
+        jPanel22.add(jLabel353, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, -1, 20));
 
         jLabel354.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel354.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel354.setText("Localización de Crítico");
-        jPanel22.add(jLabel354, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 290, 30));
+        jPanel22.add(jLabel354, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 290, 30));
 
         posCritico.setEditable(false);
         posCritico.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jPanel22.add(posCritico, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 230, -1));
+        jPanel22.add(posCritico, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 230, -1));
 
-        jPanel4.add(jPanel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 190, 290, 210));
+        jPanel4.add(jPanel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 260, 290, 160));
 
         jTabbedPane1.addTab("Combate", jPanel4);
 
@@ -2283,13 +2311,13 @@ public class Dicer extends javax.swing.JFrame {
 
         jMenu3.setText("Ayuda");
 
-        jMenuItem6.setText("Manual de uso");
-        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+        ayuda.setText("Manual de uso");
+        ayuda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem6ActionPerformed(evt);
+                ayudaActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem6);
+        jMenu3.add(ayuda);
         jMenu3.add(jSeparator2);
 
         jMenuItem7.setText("Sobre nosotros");
@@ -2326,9 +2354,9 @@ public class Dicer extends javax.swing.JFrame {
         settings.setAbiertas(checkAbiertas.isSelected());
     }//GEN-LAST:event_checkAbiertasActionPerformed
 
-    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem6ActionPerformed
+    private void ayudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ayudaActionPerformed
+        cargarAyuda();
+    }//GEN-LAST:event_ayudaActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
         // TODO add your handling code here:
@@ -2431,13 +2459,28 @@ public class Dicer extends javax.swing.JFrame {
     }//GEN-LAST:event_checkArmadura3MouseReleased
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        new Thread () {
-            @Override
-            public void run() {
-                Dicer d = new Dicer(settings,new Anima(direccion).start(), direccion);
-                d.cargar();
+        if (seleccionado.showDialog(null, "Abrir ficha") == JFileChooser.APPROVE_OPTION){
+            File archivos[] = seleccionado.getSelectedFiles();
+            //archivo = archivos[0];
+            for (int i = 0; i < archivos.length; i++) {
+                new Thread () {
+                    File archivo;
+                    
+                    @Override
+                    public void run() {
+                        if (archivo.getName().endsWith("xlsx") || archivo.getName().endsWith("xls")) {
+                            Dicer d = new Dicer(version, settings,new Anima(direccion).start(), direccion);
+                            d.darValores(archivo);
+                        }
+                    }
+                    
+                    public Thread prepare(File archivo) {
+                        this.archivo = archivo;
+                        return this;
+                    }
+                }.prepare(archivos[i]).start();
             }
-        }.start();
+        }
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void baseCalcCombKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_baseCalcCombKeyReleased
@@ -2509,15 +2552,30 @@ public class Dicer extends javax.swing.JFrame {
         new Thread () {
             @Override
             public void run() {
-                Descargar des = new Descargar();
-                try {
-                    des.descargar("C:\\Users\\Fernando\\Documents\\AnimaDicer\\ficha.txt");
-                } catch (Exception ex) {
-                    Logger.getLogger(Dicer.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                JFileChooser guardarDesc = new JFileChooser();
+                String ruta; 
+
+                if(guardarDesc.showSaveDialog(null)==guardarDesc.APPROVE_OPTION){ 
+                    ruta = guardarDesc.getSelectedFile().getAbsolutePath();
+                    if (!ruta.endsWith("xlsx")) {
+                        ruta = ruta + ".xlsx";
+                    }
+                    Descargar des = new Descargar();
+                    try {
+                        des.descargar(ruta);
+                    } catch (Exception ex) {
+                        Logger.getLogger(Dicer.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                } 
+
+                
             }
         }.start();
     }//GEN-LAST:event_menuDescargarActionPerformed
+
+    private void comboTurnoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboTurnoItemStateChanged
+        base_turno.setText(String.valueOf(this.ficha.getTurno(comboTurno.getSelectedIndex())));
+    }//GEN-LAST:event_comboTurnoItemStateChanged
 
     private void intTextField(java.awt.event.KeyEvent evt, JTextField field) {
         char vchar = evt.getKeyChar();
@@ -2713,20 +2771,50 @@ public class Dicer extends javax.swing.JFrame {
     
     private void cargar() {
         if (seleccionado.showDialog(null, "Abrir ficha") == JFileChooser.APPROVE_OPTION){
-            archivo = seleccionado.getSelectedFile();
-            if(archivo.canRead()) {
-                this.ficha = new Anima(archivo, direccion).cargar();
-                valuesPrincipales();
-                valuesSecundarias();
-                valuesResistencias();
-                valuesArmaduras();
-                valuesArmas();
-                valuesCombate();
-                calculadora();
-                textNotas1.setText(ficha.getNotas());
-                log.setNotas(ficha.getNotas());
-                this.setTitle("Anima Dicer v1.0.0 - " + fieldNombre.getText());
+            File archivos[] = seleccionado.getSelectedFiles();
+            archivo = archivos[0];
+
+            if (archivo.getName().endsWith("xlsx") || archivo.getName().endsWith("xls")) {
+                darValores(archivo);
             }
+            
+            for (int i = 1; i < archivos.length; i++) {
+                new Thread () {
+                    File archivo;
+                    
+                    @Override
+                    public void run() {
+                        if (archivo.getName().endsWith("xlsx") || archivo.getName().endsWith("xls")) {
+                            Dicer d = new Dicer(version, settings,new Anima(direccion).start(), direccion);
+                            d.darValores(archivo);
+                        }
+                    }
+                    
+                    public Thread prepare(File archivo) {
+                        this.archivo = archivo;
+                        return this;
+                    }
+                }.prepare(archivos[i]).start();
+            }
+        }
+    }
+    
+    private void darValores(File archivo) {
+        if(archivo.canRead()) {
+            this.ficha = new Anima(archivo, direccion).cargar();
+            valuesPrincipales();
+            valuesSecundarias();
+            valuesResistencias();
+            valuesArmaduras();
+            valuesArmas();
+            valuesCombate();
+            calculadora();
+            textNotas1.setText(ficha.getNotas());
+
+            log.resetLog();
+            log.setNotas(ficha.getNotas());
+
+            this.setTitle("Anima Dicer " + this.version + " - " + fieldNombre.getText());
         }
     }
     
@@ -2740,7 +2828,7 @@ public class Dicer extends javax.swing.JFrame {
         valuesCombate();
         calculadora();
         textNotas1.setText(ficha.getNotas());
-        this.setTitle("Anima Dicer v1.0.0");
+        this.setTitle("Anima Dicer " + this.version);
     }
     /**
      * @param args the command line arguments
@@ -2823,6 +2911,12 @@ public class Dicer extends javax.swing.JFrame {
     private JTextField dado_combateFisico[];
     private JTextField res_combateFisico[];
     
+    private JLabel b_turno;
+    private JTextField base_turno;
+    private JTextField libre_turno;
+    private JTextField dado_turno;
+    private JTextField res_turno;
+    
     private JLabel b_combateSobrenatural[];
     private JTextField base_combateSobrenatural[];
     private JTextField libre_combateSobrenatural[];
@@ -2841,6 +2935,7 @@ public class Dicer extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField armaduraCalcComb;
+    private javax.swing.JMenuItem ayuda;
     private javax.swing.JTextField baseCalcComb;
     private javax.swing.JTextField calcBase;
     private javax.swing.JTextField calcFinal;
@@ -2853,6 +2948,7 @@ public class Dicer extends javax.swing.JFrame {
     private javax.swing.JCheckBoxMenuItem checkDadosFisicos;
     private javax.swing.JCheckBoxMenuItem checkTiradas;
     private javax.swing.JComboBox<String> comboCritico;
+    private javax.swing.JComboBox<String> comboTurno;
     private javax.swing.JTextField dadoCritico;
     private javax.swing.JTextField damageCritico;
     private javax.swing.JTextField fieldCansancio;
@@ -3149,6 +3245,10 @@ public class Dicer extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel352;
     private javax.swing.JLabel jLabel353;
     private javax.swing.JLabel jLabel354;
+    private javax.swing.JLabel jLabel355;
+    private javax.swing.JLabel jLabel356;
+    private javax.swing.JLabel jLabel357;
+    private javax.swing.JLabel jLabel358;
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
@@ -3225,7 +3325,6 @@ public class Dicer extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
@@ -4004,12 +4103,78 @@ public class Dicer extends javax.swing.JFrame {
             res_combateFisico[i].setHorizontalAlignment(JTextField.CENTER);
             res_combateFisico[i].setFont(res_combateFisico[i].getFont().deriveFont(Font.BOLD));
             
-            jPanel21.add(b_combateFisico[i], new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40+(i*35), -1, -1));
-            jPanel21.add(base_combateFisico[i], new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40+(i*35), 30, 20));
-            jPanel21.add(libre_combateFisico[i], new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40+(i*35), 30, 20));
-            jPanel21.add(dado_combateFisico[i], new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 40+(i*35), 30, 20));
-            jPanel21.add(res_combateFisico[i], new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 40+(i*35), 50, 20));
+            jPanel21.add(b_combateFisico[i], new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110+(i*40), -1, -1));
+            jPanel21.add(base_combateFisico[i], new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110+(i*40), 30, 20));
+            jPanel21.add(libre_combateFisico[i], new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 110+(i*40), 30, 20));
+            jPanel21.add(dado_combateFisico[i], new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 110+(i*40), 30, 20));
+            jPanel21.add(res_combateFisico[i], new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 110+(i*40), 50, 20));
         }
+        
+        // Turno
+        b_turno = new javax.swing.JLabel();
+        b_turno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/boton.png"))); // NOI18N
+        b_turno.addMouseListener(new java.awt.event.MouseAdapter() {
+            JLabel j;
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                log.addLog("Turno arma" + String.valueOf(comboTurno.getSelectedIndex()+1) + ": " + b_MouseClickedTurno());
+            }
+            @Override
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                b_MouseEntered(evt,j);
+            }
+            @Override
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                b_MouseExited(evt,j);
+            }
+            @Override
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                b_MousePressed(evt,j);
+            }
+            @Override
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                b_MouseEntered(evt,j);
+            }
+
+            public MouseListener init (JLabel i) {
+                this.j = i;
+                return this;
+            }
+        }.init(b_turno));
+
+        base_turno = new javax.swing.JTextField();
+        base_turno.setHorizontalAlignment(JTextField.CENTER);
+        base_turno.setEditable(false);
+        libre_turno = new javax.swing.JTextField();
+        libre_turno.setHorizontalAlignment(JTextField.CENTER);
+
+        libre_turno.addKeyListener(new java.awt.event.KeyAdapter() {
+            JTextField f;
+            @Override
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                intTextField(evt,f);
+            }
+
+            public KeyListener init(JTextField f) {
+                this.f = f;
+                return this;
+            }
+
+        }.init(libre_turno));
+
+        dado_turno = new javax.swing.JTextField();
+        dado_turno.setEditable(false);
+        dado_turno.setHorizontalAlignment(JTextField.CENTER);
+        res_turno = new javax.swing.JTextField();
+        res_turno.setEditable(false);
+        res_turno.setHorizontalAlignment(JTextField.CENTER);
+        res_turno.setFont(res_turno.getFont().deriveFont(Font.BOLD));
+
+        jPanel21.add(b_turno, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, -1));
+        jPanel21.add(base_turno, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, 30, 20));
+        jPanel21.add(libre_turno, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, 30, 20));
+        jPanel21.add(dado_turno, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 70, 30, 20));
+        jPanel21.add(res_turno, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 70, 50, 20));
         
         // Sobrenatural
         for (int i = 0; i < 3; i++) {
@@ -4304,7 +4469,7 @@ public class Dicer extends javax.swing.JFrame {
                 }
             }.init(bDadoCritico));
         
-        jPanel22.add(bDadoCritico, new org.netbeans.lib.awtextra.AbsoluteConstraints(133, 100, -1, -1));
+        jPanel22.add(bDadoCritico, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 60, -1, -1));
         
         valuesCombate();
     }
@@ -4352,9 +4517,10 @@ public class Dicer extends javax.swing.JFrame {
         }
     }
     
-    private void valuesArmaduras() {
+    private void valuesArmaduras() {        
         for (int i = 0; i < 3; i++) {
             Armadura a = this.ficha.getArmadura(i);
+            
             nombreArmadura[i].setText(a.getNombre());
             filArmadura[i].setText(String.valueOf(a.getDefensa(0)));
             conArmadura[i].setText(String.valueOf(a.getDefensa(1)));
@@ -4397,6 +4563,8 @@ public class Dicer extends javax.swing.JFrame {
         for (int i = 0; i < 3; i++){ // Cojo ataque, defensa y esquiva
             base_combateFisico[i].setText(String.valueOf(this.ficha.getCombate(i)));
         }
+        
+        base_turno.setText(String.valueOf(this.ficha.getTurno(comboTurno.getSelectedIndex())));
         
         base_combateSobrenatural[0].setText(String.valueOf(this.ficha.getCombate(3)));
         base_combateSobrenatural[1].setText(String.valueOf(this.ficha.getPotencialPsiquico()));
@@ -4574,6 +4742,51 @@ public class Dicer extends javax.swing.JFrame {
             return (base_combateFisico[i].getText() + " + " + libre + " + " + String.valueOf(d.getResultado()) + " = " + String.valueOf(Integer.parseInt(base_combateFisico[i].getText()) + libre + d.getResultado()));
     }
     
+    private String b_MouseClickedTurno() {
+        // Hace el cálculo con el dado nuevo
+        Dado d = new Dado(settings);
+        d.lanzarDado(true);
+        
+        if (settings.getFisicos()) {
+            int truco = 1;
+            try{
+                truco = Integer.parseInt(dado_turno.getText());
+            } catch(NumberFormatException ex){}
+            d.trucarDado(truco);
+        } else {
+            d.lanzarDado(true);
+        }
+        
+        if (d.getResultado() >= 90) {
+            ArrayList<Integer> traza = d.getTraza();
+
+            if (traza.size() == 2){
+                res_turno.setForeground(Color.GREEN);
+            }else if (traza.size() == 3) {
+                res_turno.setForeground(Color.BLUE);
+            } else if (traza.size() >= 4) {
+                res_turno.setForeground(Color.MAGENTA);
+            }
+            } else if (d.getResultado() <= 3) {
+                res_turno.setForeground(Color.RED);
+            } else {
+                res_turno.setForeground(Color.BLACK);
+            }
+            
+            if (!settings.getFisicos())
+                dado_turno.setText(String.valueOf(d.getResultado()));
+
+            int libre = 0;
+            try {
+                libre = Integer.parseInt(libre_turno.getText());
+            } catch (NumberFormatException e) {
+
+            }
+
+            res_turno.setText(String.valueOf(Integer.parseInt(base_turno.getText()) + libre + Integer.parseInt(dado_turno.getText())));
+            return (base_turno.getText() + " + " + libre + " + " + String.valueOf(d.getResultado()) + " = " + String.valueOf(Integer.parseInt(base_turno.getText()) + libre + d.getResultado()));
+    }
+    
     private String b_MouseClickedSobrenatural(int i) {
         // Hace el cálculo con el dado nuevo
         Dado d = new Dado(settings);
@@ -4721,6 +4934,7 @@ public class Dicer extends javax.swing.JFrame {
 
     private void myInitComponents() {
         seleccionado = new javax.swing.JFileChooser();
+        seleccionado.setMultiSelectionEnabled(true);
     }
     
     private void guardarNotas() {
@@ -4815,16 +5029,14 @@ public class Dicer extends javax.swing.JFrame {
         if (settings.getTiradas()) {
             if (guardarLog()) {
                 this.dispose();
-                if (!"Nombre".equals(ficha.getNombre())) {
+                if (!"Nombre".equals(ficha.getNombre()))
                     guardarNotas();
-                }
                 guardarSettings();
             }
         } else {
             this.dispose();
-            if (!"Nombre".equals(ficha.getNombre())) {
+            if (!"Nombre".equals(ficha.getNombre()))
                 guardarNotas();
-            }
             guardarSettings();
         }
     }
@@ -4851,6 +5063,10 @@ public class Dicer extends javax.swing.JFrame {
         for (int i = 0; i < 3; i++) {
             dado_combateFisico[i].setEditable(settings.getFisicos());
             dado_combateSobrenatural[i].setEditable(settings.getFisicos());
+        }
+        // Turno
+        {
+            dado_turno.setEditable(settings.getFisicos());
         }
         // Convocatoria
         for (int i = 0; i < 4; i++) {
@@ -5018,6 +5234,30 @@ public class Dicer extends javax.swing.JFrame {
                 }
             }.init(i));
         }
+        // Turno
+        {
+            dado_turno.addKeyListener(new java.awt.event.KeyAdapter() {
+                @Override
+                public void keyTyped(java.awt.event.KeyEvent evt) {
+                    char vchar = evt.getKeyChar();
+                    if (!Character.isDigit(vchar) || vchar == KeyEvent.VK_BACK_SPACE || vchar == KeyEvent.VK_DELETE) {
+                        evt.consume();
+                    }
+                }
+                
+                @Override
+                public void keyReleased(java.awt.event.KeyEvent evt) {
+                    int d = 1;
+                    try {
+                        d = Integer.parseInt (dado_turno.getText());
+                    } catch (NumberFormatException ex){}
+                    if (d <= 0) {
+                        dado_turno.setText("1");
+                    }
+                    b_MouseClickedTurno();
+                }
+            });   
+        }
         // Convocatoria
         for (int i = 0; i < 4; i++) {
             dado_convocatoria[i].addKeyListener(new java.awt.event.KeyAdapter() {
@@ -5073,5 +5313,9 @@ public class Dicer extends javax.swing.JFrame {
                 b_MouseClickedCritico();
             }
         });
+    }
+    
+    private void cargarAyuda() {
+        
     }
 }

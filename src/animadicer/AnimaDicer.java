@@ -15,7 +15,7 @@ import java.io.InputStream;
  * @author Fernando
  */
 public class AnimaDicer {
-
+    private static final String version = "v1.0.2";
     /**
      * @param args the command line arguments
      */
@@ -24,7 +24,7 @@ public class AnimaDicer {
             @Override
             public void run() {
                 String dir = direccionCargaGuardado();
-                Dicer d = new Dicer(new CargarSettings(dir).cargar(),new Anima(dir).start(), dir);
+                Dicer d = new Dicer(version, new CargarSettings(dir).cargar(),new Anima(dir).start(), dir);
             }
         }.start();
     }
@@ -49,6 +49,10 @@ public class AnimaDicer {
         }
         
         File folder = new File(myDocuments + "\\AnimaDicer");
+        if (!folder.exists())
+            folder.mkdir();
+        
+        folder = new File(myDocuments + "\\AnimaDicer\\notas");
         if (!folder.exists())
             folder.mkdir();
         

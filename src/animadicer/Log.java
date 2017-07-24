@@ -25,6 +25,12 @@ public class Log {
         this.notas = "";
     }
     
+    public void resetLog() {
+        this.info = new ArrayList<>();
+        this.area.setText("");
+        this.notas = "";
+    }
+    
     public String getNotas () {
         return this.notas;
     }

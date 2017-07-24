@@ -18,7 +18,14 @@ public class Arma {
     int presencia;
     
     public Arma () {
-        critico = new String[2];
+        this.nombre = "";
+        this.damage = 0;
+        this.entereza = 0;
+        this.rotura = 0;
+        this.presencia = 0;
+        this.critico = new String[2];
+        this.critico[0] = "FIL";
+        this.critico[1] = "CON";
     }
     
     public int getPresencia() {
