@@ -8,23 +8,32 @@
  	E-Mail: fernaperg@gmail.com
  	Current version: v1.0.2 - RC (Release Candidate)
 ***
+## CONCEPTUAL IDEA
 	
+	The purpouse of this project is to make the rol games faster.
+	This project is specifically focused on the role play Anima.
 	
+	It is an especially complex and slow roll game in terms of dice and calculations,
+	for this reason we have decided to create a program that makes dice rolls faster,
+	allowing both players and the master to focus on the immersion in this world.
 ***
 	
 ## CONTRIBUTORS
   
-  FERNANDO PÉREZ GUTIÉRREZ
-    Main programmer, conceptual designer.
-    Absolutely all the code in java has been written by him.
-  
+	FERNANDO PÉREZ GUTIÉRREZ
+		Main programmer, conceptual designer.
+    	Absolutely all the code in java has been written by him.
+	
 	ALFREDO PÉREZ GUTIÉRREZ
-    Designer of the excel documents with wich the program works.
-    Tester, and ideas provider.
-
-  JUAN MAS AGUILAR
-    Co-worker to create and make compatible AnimaDicer Mobile
-    Tester, and ideas provider.
+    	Designer of the excel documents with wich the program works.
+    	Tester, and ideas provider.
+	
+	JUAN MAS AGUILAR
+    	Co-worker to create and make compatible AnimaDicer Mobile
+    	Tester, and ideas provider.
+	
+	EDGEE
+		Creators of "Anima Beyond Fantasy" for which our program serves.
 ***
  	
 ## COPYRIGHT ©
@@ -42,14 +51,15 @@
  	
 ## FUTURE UPDATES
  	
- 	 +  Redesign the interface to make it much more accesible, interactive and intuitive
-   +  Change the actual form to open lot of files, now it uses a system based in windows.
-      It will use a new system based in a multi charge (It will saturate less the interface).
-   +  Create a search engine that let the user find quickly the atributes, resistences or whatever.
-   +  Reorganize the interface.
-   +  Make the interface resizable.
-   +  Improve the Battle organization
-   +  Create and make compatible with an Android versión (AnimaDicer Mobile)
+ 	+	Redesign the interface to make it much more accesible, interactive and intuitive
+   	+	Change the actual form to open lot of files, now it uses a system based in windows.
+      	It will use a new system based in a multi charge (It will saturate less the interface).
+   	+	Create a search engine that let the user find quickly the atributes, resistences or whatever.
+   	+	Reorganize the interface.
+   	+	Make the interface resizable.
+   	+	Improve the Battle organization.
+	+	Make the program Multilanguage (Right now only in Spanish).
+   	+	Create and make compatible with an Android versión (AnimaDicer Mobile).
    
 ***
   
