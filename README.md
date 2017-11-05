@@ -29,7 +29,8 @@
     	Tester, and ideas provider.
 	
 	JUAN MAS AGUILAR
-    	Co-worker to create and make compatible AnimaDicer Mobile
+    	Co-worker to create and make compatible AnimaDicer Mobile and
+	improve the basic multi-load
     	Tester, and ideas provider.
 	
 	EDGEE
