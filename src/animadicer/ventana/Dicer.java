@@ -40,6 +40,8 @@ import javax.swing.JTextField;
 public class Dicer extends javax.swing.JFrame {
 
     private final String version;
+    private File[] archivosCargados;
+    private boolean nombresBorrados;
 
     /** Creates new form Dicer
      * @param version
@@ -147,6 +149,7 @@ public class Dicer extends javax.swing.JFrame {
         jLabel176 = new javax.swing.JLabel();
         fieldCansancioActual = new javax.swing.JTextField();
         fieldCansancio = new javax.swing.JTextField();
+        comboNombre = new javax.swing.JComboBox<>();
         jPanel7 = new javax.swing.JPanel();
         jLabel132 = new javax.swing.JLabel();
         jLabel133 = new javax.swing.JLabel();
@@ -555,6 +558,7 @@ public class Dicer extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         menuNuevo = new javax.swing.JMenuItem();
         mnuAbrir = new javax.swing.JMenuItem();
+        mnuAbrirVarios = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         menuDescargar = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
@@ -691,7 +695,12 @@ public class Dicer extends javax.swing.JFrame {
 
         fieldNombre.setEditable(false);
         fieldNombre.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jPanel6.add(fieldNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 20, 180, -1));
+        fieldNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fieldNombreActionPerformed(evt);
+            }
+        });
+        jPanel6.add(fieldNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 20, 70, -1));
 
         fieldCategoria.setEditable(false);
         fieldCategoria.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -775,6 +784,21 @@ public class Dicer extends javax.swing.JFrame {
         fieldCansancio.setEditable(false);
         fieldCansancio.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jPanel6.add(fieldCansancio, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 170, 80, -1));
+
+        comboNombre.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"None"}));
+        comboNombre.setEnabled(false);
+        comboNombre.setName("");
+        comboNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboNombreActionPerformed(evt);
+            }
+        });
+        comboNombre.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                comboNombrePropertyChange(evt);
+            }
+        });
+        jPanel6.add(comboNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, 100, -1));
 
         jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 270, 200));
 
@@ -2239,6 +2263,15 @@ public class Dicer extends javax.swing.JFrame {
         });
         jMenu1.add(mnuAbrir);
 
+        mnuAbrirVarios.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        mnuAbrirVarios.setText("Abrir Varios");
+        mnuAbrirVarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuAbrirVariosActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mnuAbrirVarios);
+
         jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem2.setText("Abrir en otra ventana");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
@@ -2459,9 +2492,10 @@ public class Dicer extends javax.swing.JFrame {
     }//GEN-LAST:event_checkArmadura3MouseReleased
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        seleccionado.setMultiSelectionEnabled(true);
         if (seleccionado.showDialog(null, "Abrir ficha") == JFileChooser.APPROVE_OPTION){
             File archivos[] = seleccionado.getSelectedFiles();
-            //archivo = archivos[0];
+                
             for (int i = 0; i < archivos.length; i++) {
                 new Thread () {
                     File archivo;
@@ -2548,6 +2582,23 @@ public class Dicer extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_libreCriticoKeyReleased
 
+    private void cargarVarios(){
+        seleccionado.setMultiSelectionEnabled(true);
+           
+        borrarComboNombre();
+        
+        if (seleccionado.showDialog(null, "Abrir fichas") == JFileChooser.APPROVE_OPTION){
+            this.archivosCargados = seleccionado.getSelectedFiles();
+            this.comboNombre.setEnabled(true);
+            
+            
+            for (int i = 0; i < archivosCargados.length; i++) {
+                comboNombre.addItem(archivosCargados[i].getName());
+            }
+            cargar(archivosCargados[0]);
+        }
+    }
+    
     private void menuDescargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuDescargarActionPerformed
         new Thread () {
             @Override
@@ -2576,6 +2627,28 @@ public class Dicer extends javax.swing.JFrame {
     private void comboTurnoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboTurnoItemStateChanged
         base_turno.setText(String.valueOf(this.ficha.getTurno(comboTurno.getSelectedIndex())));
     }//GEN-LAST:event_comboTurnoItemStateChanged
+
+    private void fieldNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldNombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fieldNombreActionPerformed
+
+    private void comboNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboNombreActionPerformed
+        // TODO add your handling code here:
+        if(!nombresBorrados){
+            int index = comboNombre.getSelectedIndex();
+            cargar(archivosCargados[index]);
+        }
+    }//GEN-LAST:event_comboNombreActionPerformed
+
+    private void mnuAbrirVariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuAbrirVariosActionPerformed
+        // TODO add your handling code here:
+        cargarVarios();
+    }//GEN-LAST:event_mnuAbrirVariosActionPerformed
+
+    private void comboNombrePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_comboNombrePropertyChange
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_comboNombrePropertyChange
 
     private void intTextField(java.awt.event.KeyEvent evt, JTextField field) {
         char vchar = evt.getKeyChar();
@@ -2772,33 +2845,24 @@ public class Dicer extends javax.swing.JFrame {
     private void cargar() {
         if (seleccionado.showDialog(null, "Abrir ficha") == JFileChooser.APPROVE_OPTION){
             File archivos[] = seleccionado.getSelectedFiles();
+            
             archivo = archivos[0];
 
             if (archivo.getName().endsWith("xlsx") || archivo.getName().endsWith("xls")) {
                 darValores(archivo);
             }
             
-            for (int i = 1; i < archivos.length; i++) {
-                new Thread () {
-                    File archivo;
-                    
-                    @Override
-                    public void run() {
-                        if (archivo.getName().endsWith("xlsx") || archivo.getName().endsWith("xls")) {
-                            Dicer d = new Dicer(version, settings,new Anima(direccion).start(), direccion);
-                            d.darValores(archivo);
-                        }
-                    }
-                    
-                    public Thread prepare(File archivo) {
-                        this.archivo = archivo;
-                        return this;
-                    }
-                }.prepare(archivos[i]).start();
-            }
+            borrarComboNombre();
+            comboNombre.setEnabled(false);
         }
     }
     
+
+    private void cargar(File selected_archivo) {
+            
+        archivo = selected_archivo;
+        darValores(archivo);
+    }
     private void darValores(File archivo) {
         if(archivo.canRead()) {
             this.ficha = new Anima(archivo, direccion).cargar();
@@ -2868,7 +2932,7 @@ public class Dicer extends javax.swing.JFrame {
 
     private final Settings settings;
     private final Log log;
-    File archivo;
+    public File archivo;
     private Ficha ficha;
     private final String direccion;
     
@@ -2948,6 +3012,7 @@ public class Dicer extends javax.swing.JFrame {
     private javax.swing.JCheckBoxMenuItem checkDadosFisicos;
     private javax.swing.JCheckBoxMenuItem checkTiradas;
     private javax.swing.JComboBox<String> comboCritico;
+    private javax.swing.JComboBox<String> comboNombre;
     private javax.swing.JComboBox<String> comboTurno;
     private javax.swing.JTextField dadoCritico;
     private javax.swing.JTextField damageCritico;
@@ -3399,6 +3464,7 @@ public class Dicer extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuDescargar;
     private javax.swing.JMenuItem menuNuevo;
     private javax.swing.JMenuItem mnuAbrir;
+    private javax.swing.JMenuItem mnuAbrirVarios;
     private javax.swing.JTextField posCritico;
     private javax.swing.JTextField resCritico;
     private javax.swing.JTextArea textNotas;
@@ -5317,5 +5383,12 @@ public class Dicer extends javax.swing.JFrame {
     
     private void cargarAyuda() {
         
+    }
+    
+    private void borrarComboNombre()
+    {
+         nombresBorrados = true;
+        comboNombre.removeAllItems();
+        nombresBorrados = false;
     }
 }
