@@ -563,11 +563,7 @@ public class Dicer extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         menuNuevo = new javax.swing.JMenuItem();
-<<<<<<< HEAD
-        mnuAbrirVarios = new javax.swing.JMenuItem();
-=======
         mnuAbrir = new javax.swing.JMenuItem();
->>>>>>> ParallelCharge
         jMenuItem2 = new javax.swing.JMenuItem();
         menuDescargar = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
@@ -2205,16 +2201,6 @@ public class Dicer extends javax.swing.JFrame {
         });
         jMenu1.add(menuNuevo);
 
-<<<<<<< HEAD
-        mnuAbrirVarios.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
-        mnuAbrirVarios.setText("Abrir");
-        mnuAbrirVarios.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuAbrirVariosActionPerformed(evt);
-            }
-        });
-        jMenu1.add(mnuAbrirVarios);
-=======
         mnuAbrir.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
         mnuAbrir.setText("Abrir");
         mnuAbrir.addActionListener(new java.awt.event.ActionListener() {
@@ -2223,7 +2209,6 @@ public class Dicer extends javax.swing.JFrame {
             }
         });
         jMenu1.add(mnuAbrir);
->>>>>>> ParallelCharge
 
         jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem2.setText("Abrir en otra ventana");
