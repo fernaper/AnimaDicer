@@ -16,6 +16,7 @@ import animadicer.Settings;
 import animadicer.connection.Descargar;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.HeadlessException;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
@@ -557,7 +558,6 @@ public class Dicer extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         menuNuevo = new javax.swing.JMenuItem();
-        mnuAbrir = new javax.swing.JMenuItem();
         mnuAbrirVarios = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         menuDescargar = new javax.swing.JMenuItem();
@@ -2254,17 +2254,8 @@ public class Dicer extends javax.swing.JFrame {
         });
         jMenu1.add(menuNuevo);
 
-        mnuAbrir.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
-        mnuAbrir.setText("Abrir");
-        mnuAbrir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuAbrirActionPerformed(evt);
-            }
-        });
-        jMenu1.add(mnuAbrir);
-
-        mnuAbrirVarios.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
-        mnuAbrirVarios.setText("Abrir Varios");
+        mnuAbrirVarios.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
+        mnuAbrirVarios.setText("Abrir");
         mnuAbrirVarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuAbrirVariosActionPerformed(evt);
@@ -2395,10 +2386,6 @@ public class Dicer extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
-    private void mnuAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuAbrirActionPerformed
-        cargar();
-    }//GEN-LAST:event_mnuAbrirActionPerformed
-
     private void fieldNivelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldNivelActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_fieldNivelActionPerformed
@@ -2492,7 +2479,16 @@ public class Dicer extends javax.swing.JFrame {
     }//GEN-LAST:event_checkArmadura3MouseReleased
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        seleccionado.setMultiSelectionEnabled(true);
+        new Thread () {
+            @Override
+            public void run() {
+                Dicer d = new Dicer(version, settings,new Anima(direccion).start(), direccion);
+                d.cargarVarios();
+            }
+        }.start();
+
+        
+        /*seleccionado.setMultiSelectionEnabled(true);
         if (seleccionado.showDialog(null, "Abrir ficha") == JFileChooser.APPROVE_OPTION){
             File archivos[] = seleccionado.getSelectedFiles();
                 
@@ -2514,7 +2510,7 @@ public class Dicer extends javax.swing.JFrame {
                     }
                 }.prepare(archivos[i]).start();
             }
-        }
+        }*/
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void baseCalcCombKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_baseCalcCombKeyReleased
@@ -2842,7 +2838,7 @@ public class Dicer extends javax.swing.JFrame {
         }
     }
     
-    private void cargar() {
+    /*private void cargar() {
         if (seleccionado.showDialog(null, "Abrir ficha") == JFileChooser.APPROVE_OPTION){
             File archivos[] = seleccionado.getSelectedFiles();
             
@@ -2855,7 +2851,7 @@ public class Dicer extends javax.swing.JFrame {
             borrarComboNombre();
             comboNombre.setEnabled(false);
         }
-    }
+    }*/
     
 
     private void cargar(File selected_archivo) {
@@ -3463,7 +3459,6 @@ public class Dicer extends javax.swing.JFrame {
     private javax.swing.JTextField libreCritico;
     private javax.swing.JMenuItem menuDescargar;
     private javax.swing.JMenuItem menuNuevo;
-    private javax.swing.JMenuItem mnuAbrir;
     private javax.swing.JMenuItem mnuAbrirVarios;
     private javax.swing.JTextField posCritico;
     private javax.swing.JTextField resCritico;
@@ -5041,20 +5036,20 @@ public class Dicer extends javax.swing.JFrame {
                     for (int i = 0; i < info.size(); i++)
                         pw.println(info.get(i));
 
-                } catch (Exception e) {
+                } catch (IOException e) {
                 } finally {
                    try {
                    // Nuevamente aprovechamos el finally para 
                    // asegurarnos que se cierra el fichero.
                    if (null != fichero)
                       fichero.close();
-                   } catch (Exception e2) {
+                   } catch (IOException e2) {
                    }
                 }
                 
                 return true;
             } 
-        }catch (Exception ex){ 
+        }catch (HeadlessException ex){ 
         }
         return false;
     }

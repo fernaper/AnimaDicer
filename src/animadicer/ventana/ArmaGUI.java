@@ -11,7 +11,6 @@ import animadicer.Settings;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -307,12 +306,17 @@ public class ArmaGUI {
         if (settings.getFisicos()) {
             int truco = 1;
             try {
-                if (i == 0)
-                    truco = Integer.parseInt(enterezaDado.getText());
-                else if (i == 1)
-                    truco = Integer.parseInt(roturaDado.getText());
-                else
-                    truco = Integer.parseInt(presenciaDado.getText());
+                switch (i) {
+                    case 0:
+                        truco = Integer.parseInt(enterezaDado.getText());
+                        break;
+                    case 1:
+                        truco = Integer.parseInt(roturaDado.getText());
+                        break;
+                    default:
+                        truco = Integer.parseInt(presenciaDado.getText());
+                        break;
+                }
             } catch (NumberFormatException ex) {}
             
             d.trucarDado(truco);
