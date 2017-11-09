@@ -9,7 +9,7 @@ public class Settings {
     public Settings() {
         abiertas = true;
         capicua = false;
-        tiradas = true;
+        tiradas = false;
         fisicos = false;
     }
 
