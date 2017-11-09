@@ -34,6 +34,7 @@ import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**
@@ -563,11 +564,7 @@ public class Dicer extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         menuNuevo = new javax.swing.JMenuItem();
-<<<<<<< HEAD
-        mnuAbrirVarios = new javax.swing.JMenuItem();
-=======
         mnuAbrir = new javax.swing.JMenuItem();
->>>>>>> ParallelCharge
         jMenuItem2 = new javax.swing.JMenuItem();
         menuDescargar = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
@@ -2205,16 +2202,6 @@ public class Dicer extends javax.swing.JFrame {
         });
         jMenu1.add(menuNuevo);
 
-<<<<<<< HEAD
-        mnuAbrirVarios.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
-        mnuAbrirVarios.setText("Abrir");
-        mnuAbrirVarios.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuAbrirVariosActionPerformed(evt);
-            }
-        });
-        jMenu1.add(mnuAbrirVarios);
-=======
         mnuAbrir.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
         mnuAbrir.setText("Abrir");
         mnuAbrir.addActionListener(new java.awt.event.ActionListener() {
@@ -2223,7 +2210,6 @@ public class Dicer extends javax.swing.JFrame {
             }
         });
         jMenu1.add(mnuAbrir);
->>>>>>> ParallelCharge
 
         jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem2.setText("Abrir en otra ventana");
@@ -2339,7 +2325,6 @@ public class Dicer extends javax.swing.JFrame {
         cargarAyuda();
     }//GEN-LAST:event_ayudaActionPerformed
 
-
     private void mnuAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuAbrirActionPerformed
         cargar();
     }//GEN-LAST:event_mnuAbrirActionPerformed
@@ -2405,16 +2390,17 @@ public class Dicer extends javax.swing.JFrame {
     }//GEN-LAST:event_checkArmadura3MouseReleased
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        
         new Thread () {
             @Override
             public void run() {
                 Dicer d = new Dicer(version, settings,new Anima(direccion).start(), direccion);
-                d.cargarVarios();
+                d.cargar();
             }
         }.start();
-
         
-        /*seleccionado.setMultiSelectionEnabled(true);
+        /*
+        seleccionado.setMultiSelectionEnabled(true);
         if (seleccionado.showDialog(null, "Abrir ficha") == JFileChooser.APPROVE_OPTION){
             File archivos[] = seleccionado.getSelectedFiles();
                 
@@ -2488,10 +2474,40 @@ public class Dicer extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_libreCriticoKeyReleased
 
-    private void cargar(){
-        //Seleccionamos los archivos
+    private void comprobarExistencia(File archivosSeleccionado) throws CargaException { 
+        String path = archivosSeleccionado.getPath();
+        System.out.print(path);
+        
+        if(archivosDireccionCargados.containsKey(path))
+            throw new CargaException("Esta ficha ya ha sido cargada con anterioridad");
+        //Si no estaba en nuestro registro de direcciones lo añadimos al diccionario
+        archivosDireccionCargados.put(archivosSeleccionado.getPath(), archivosSeleccionado.getName());
+        //Añadimos el nombre a nuestro combo
+        archivosCargados.add(archivosSeleccionado);
+        anadirComboNombre(archivosSeleccionado.getName());
+    }
+    
+    private void carga_inicial(File archivo){ 
         int primer_nuevo = comboNombre.getSelectedIndex();
         boolean primer_aceptado = false;
+        
+        try{
+            comprobarExistencia(archivo);
+            if(!primer_aceptado){
+                primer_nuevo = archivosCargados.size() - 1;
+                primer_aceptado=true;
+            }
+            cargar(archivosCargados.get(primer_nuevo));
+        }catch(CargaException ex){
+            String infoMessage = "La ficha cargada ya existe, se ignorará la operación.";
+            String titleBar = "Error de Carga";
+            JOptionPane.showMessageDialog(null, infoMessage, titleBar, JOptionPane.INFORMATION_MESSAGE);
+        } 
+    }
+
+    private void cargar(){
+        //Seleccionamos los archivos
+
         seleccionado.setMultiSelectionEnabled(true);
         
         if (seleccionado.showDialog(null, "Abrir fichas") == JFileChooser.APPROVE_OPTION){
@@ -2499,47 +2515,25 @@ public class Dicer extends javax.swing.JFrame {
             File[] archivosSeleccionados = seleccionado.getSelectedFiles();
             
             this.comboNombre.setEnabled(true);
-            
-            //comprobamos que este/os archivo/s no lo/s hemos cargado ya
-            for (File archivosSeleccionado : archivosSeleccionados) {
-                //Si ya lo hemos cargado
-                String path = archivosSeleccionado.getPath();
-                System.out.print(path);
-                if(archivosDireccionCargados.containsKey(path))
-                    throw new CargaException("Esta ficha ya ha sido cargada con anterioridad");
-                //Si no estaba en nuestro registro de direcciones lo añadimos al diccionario
-                archivosDireccionCargados.put(archivosSeleccionado.getPath(), archivosSeleccionado.getName());
-                //Añadimos el nombre a nuestro combo
-                archivosCargados.add(archivosSeleccionado);
-                anadirComboNombre(archivosSeleccionado.getName());
-                System.out.println(archivosCargados.size());
-                
-                //Cargamos el primero en una hebra aparte para mejorar la velocidad
-                if(!primer_aceptado){
-                    primer_nuevo = archivosCargados.size() - 1;
-                    primer_aceptado=true;
-                    
-                    new Thread () {
-                        File archivo;
+            carga_inicial(archivosSeleccionados[0]);
 
-                        @Override
-                        public void run() {
-                            if (archivo.getName().endsWith("xlsx") || archivo.getName().endsWith("xls")) {
-                                cargar(archivo);
-                            }
-                        }
-
-                        public Thread prepare(File archivo) {
-                            this.archivo = archivo;
-                            return this;
-                        }
-                    }.prepare(archivosCargados.get(primer_nuevo)).start();
-                    comboNombre.setSelectedIndex(primer_nuevo);
+            new Thread () {
+                @Override
+                public void run() {
+                    for (int i = 1; i < archivosSeleccionados.length; i++) {   
+                        try{
+                            comprobarExistencia(archivosSeleccionados[i]);
+                        }catch(CargaException ex){
+                            String infoMessage = "La ficha cargada ya existe, se ignorará la operación.";
+                            String titleBar = "Error de Carga";
+                            JOptionPane.showMessageDialog(null, infoMessage, titleBar, JOptionPane.INFORMATION_MESSAGE);
+                        } 
+                    }      
                 }
-            }
+            }.start();   
         }
     }
-    
+  
     private void menuDescargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuDescargarActionPerformed
         new Thread () {
             @Override
@@ -2764,7 +2758,6 @@ public class Dicer extends javax.swing.JFrame {
         }
     }
     
-
     //muestra una ficha ya cargada
     private void cargar(File selected_archivo) {      
         archivo = selected_archivo;
