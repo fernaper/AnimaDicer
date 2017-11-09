@@ -9,6 +9,7 @@ package animadicer.ventana;
 import animadicer.Anima;
 import animadicer.Arma;
 import animadicer.Armadura;
+import animadicer.CargaException;
 import animadicer.Dado;
 import animadicer.Ficha;
 import animadicer.Log;
@@ -16,6 +17,7 @@ import animadicer.Settings;
 import animadicer.connection.Descargar;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.HeadlessException;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
@@ -26,6 +28,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -40,8 +43,9 @@ import javax.swing.JTextField;
 public class Dicer extends javax.swing.JFrame {
 
     private final String version;
-    private File[] archivosCargados;
-    private boolean nombresBorrados;
+    private final HashMap<String, String> archivosDireccionCargados;
+    private final ArrayList<File> archivosCargados;
+    private boolean cambioNombres;
 
     /** Creates new form Dicer
      * @param version
@@ -53,6 +57,8 @@ public class Dicer extends javax.swing.JFrame {
         this.settings = settings;
         this.ficha = ficha;
         this.direccion = direccion;
+        this.archivosDireccionCargados = new HashMap();
+        this.archivosCargados = new ArrayList();
         myInitComponents();
         initComponents();
         this.log = new Log(textNotas);
@@ -558,7 +564,6 @@ public class Dicer extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         menuNuevo = new javax.swing.JMenuItem();
         mnuAbrir = new javax.swing.JMenuItem();
-        mnuAbrirVarios = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         menuDescargar = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
@@ -576,11 +581,6 @@ public class Dicer extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setResizable(false);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowOpened(java.awt.event.WindowEvent evt) {
-                formWindowOpened(evt);
-            }
-        });
 
         jPanel5.setBackground(new java.awt.Color(102, 102, 102));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -695,11 +695,6 @@ public class Dicer extends javax.swing.JFrame {
 
         fieldNombre.setEditable(false);
         fieldNombre.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        fieldNombre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fieldNombreActionPerformed(evt);
-            }
-        });
         jPanel6.add(fieldNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 20, 70, -1));
 
         fieldCategoria.setEditable(false);
@@ -708,11 +703,6 @@ public class Dicer extends javax.swing.JFrame {
 
         fieldNivel.setEditable(false);
         fieldNivel.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        fieldNivel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fieldNivelActionPerformed(evt);
-            }
-        });
         jPanel6.add(fieldNivel, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 80, 180, -1));
 
         fieldZeon.setEditable(false);
@@ -720,11 +710,6 @@ public class Dicer extends javax.swing.JFrame {
         jPanel6.add(fieldZeon, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 140, 80, -1));
 
         fieldZeonActual.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        fieldZeonActual.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                fieldZeonActualFocusLost(evt);
-            }
-        });
         fieldZeonActual.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 fieldZeonActualKeyReleased(evt);
@@ -736,15 +721,7 @@ public class Dicer extends javax.swing.JFrame {
         jPanel6.add(fieldZeonActual, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 140, 80, -1));
 
         fieldVidaActual.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        fieldVidaActual.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fieldVidaActualActionPerformed(evt);
-            }
-        });
         fieldVidaActual.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                fieldVidaActualKeyPressed(evt);
-            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 fieldVidaActualKeyReleased(evt);
             }
@@ -785,17 +762,12 @@ public class Dicer extends javax.swing.JFrame {
         fieldCansancio.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jPanel6.add(fieldCansancio, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 170, 80, -1));
 
-        comboNombre.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"None"}));
+        comboNombre.setModel(new javax.swing.DefaultComboBoxModel<>());
         comboNombre.setEnabled(false);
         comboNombre.setName("");
         comboNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboNombreActionPerformed(evt);
-            }
-        });
-        comboNombre.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                comboNombrePropertyChange(evt);
             }
         });
         jPanel6.add(comboNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, 100, -1));
@@ -1748,17 +1720,9 @@ public class Dicer extends javax.swing.JFrame {
 
         damageCritico.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         damageCritico.setText("0");
-        damageCritico.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                damageCriticoActionPerformed(evt);
-            }
-        });
         damageCritico.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 damageCriticoKeyReleased(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                damageCriticoKeyTyped(evt);
             }
         });
         jPanel22.add(damageCritico, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, 40, -1));
@@ -1768,9 +1732,6 @@ public class Dicer extends javax.swing.JFrame {
         libreCritico.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 libreCriticoKeyReleased(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                libreCriticoKeyTyped(evt);
             }
         });
         jPanel22.add(libreCritico, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, 40, -1));
@@ -2113,9 +2074,6 @@ public class Dicer extends javax.swing.JFrame {
 
         checkArmadura1.setText("Armadura 1");
         checkArmadura1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                checkArmadura1MousePressed(evt);
-            }
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 checkArmadura1MouseReleased(evt);
             }
@@ -2124,9 +2082,6 @@ public class Dicer extends javax.swing.JFrame {
 
         checkArmadura2.setText("Armadura 2");
         checkArmadura2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                checkArmadura2MousePressed(evt);
-            }
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 checkArmadura2MouseReleased(evt);
             }
@@ -2135,9 +2090,6 @@ public class Dicer extends javax.swing.JFrame {
 
         checkArmadura3.setText("Armadura 3");
         checkArmadura3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                checkArmadura3MousePressed(evt);
-            }
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 checkArmadura3MouseReleased(evt);
             }
@@ -2164,11 +2116,6 @@ public class Dicer extends javax.swing.JFrame {
 
         calcPorcentaje.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         calcPorcentaje.setText("100");
-        calcPorcentaje.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                calcPorcentajeActionPerformed(evt);
-            }
-        });
         calcPorcentaje.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 calcPorcentajeKeyReleased(evt);
@@ -2263,15 +2210,6 @@ public class Dicer extends javax.swing.JFrame {
         });
         jMenu1.add(mnuAbrir);
 
-        mnuAbrirVarios.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
-        mnuAbrirVarios.setText("Abrir Varios");
-        mnuAbrirVarios.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuAbrirVariosActionPerformed(evt);
-            }
-        });
-        jMenu1.add(mnuAbrirVarios);
-
         jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem2.setText("Abrir en otra ventana");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
@@ -2354,11 +2292,6 @@ public class Dicer extends javax.swing.JFrame {
         jMenu3.add(jSeparator2);
 
         jMenuItem7.setText("Sobre nosotros");
-        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem7ActionPerformed(evt);
-            }
-        });
         jMenu3.add(jMenuItem7);
 
         jMenuBar1.add(jMenu3);
@@ -2391,25 +2324,9 @@ public class Dicer extends javax.swing.JFrame {
         cargarAyuda();
     }//GEN-LAST:event_ayudaActionPerformed
 
-    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem7ActionPerformed
-
     private void mnuAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuAbrirActionPerformed
         cargar();
     }//GEN-LAST:event_mnuAbrirActionPerformed
-
-    private void fieldNivelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldNivelActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_fieldNivelActionPerformed
-
-    private void fieldVidaActualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldVidaActualActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_fieldVidaActualActionPerformed
-
-    private void fieldVidaActualKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fieldVidaActualKeyPressed
-        
-    }//GEN-LAST:event_fieldVidaActualKeyPressed
 
     private void fieldVidaActualKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fieldVidaActualKeyTyped
         intTextField(evt,fieldVidaActual);
@@ -2447,14 +2364,6 @@ public class Dicer extends javax.swing.JFrame {
             fieldZeonActual.setText(fieldZeon.getText());
     }//GEN-LAST:event_fieldZeonActualKeyReleased
 
-    private void fieldZeonActualFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldZeonActualFocusLost
-        // TODO add your handling code here:
-    }//GEN-LAST:event_fieldZeonActualFocusLost
-
-    private void calcPorcentajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calcPorcentajeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_calcPorcentajeActionPerformed
-
     private void calcBaseKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_calcBaseKeyReleased
         calculadora();
     }//GEN-LAST:event_calcBaseKeyReleased
@@ -2462,18 +2371,6 @@ public class Dicer extends javax.swing.JFrame {
     private void calcPorcentajeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_calcPorcentajeKeyReleased
         calculadora();
     }//GEN-LAST:event_calcPorcentajeKeyReleased
-
-    private void checkArmadura1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_checkArmadura1MousePressed
-        
-    }//GEN-LAST:event_checkArmadura1MousePressed
-
-    private void checkArmadura2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_checkArmadura2MousePressed
-        
-    }//GEN-LAST:event_checkArmadura2MousePressed
-
-    private void checkArmadura3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_checkArmadura3MousePressed
-        
-    }//GEN-LAST:event_checkArmadura3MousePressed
 
     private void comboCriticoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboCriticoItemStateChanged
         calculadora();
@@ -2496,7 +2393,7 @@ public class Dicer extends javax.swing.JFrame {
         if (seleccionado.showDialog(null, "Abrir ficha") == JFileChooser.APPROVE_OPTION){
             File archivos[] = seleccionado.getSelectedFiles();
                 
-            for (int i = 0; i < archivos.length; i++) {
+            for(File archivo1 : archivos) {
                 new Thread () {
                     File archivo;
                     
@@ -2512,7 +2409,7 @@ public class Dicer extends javax.swing.JFrame {
                         this.archivo = archivo;
                         return this;
                     }
-                }.prepare(archivos[i]).start();
+                }.prepare(archivo1).start();
             }
         }
     }//GEN-LAST:event_jMenuItem2ActionPerformed
@@ -2520,10 +2417,6 @@ public class Dicer extends javax.swing.JFrame {
     private void baseCalcCombKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_baseCalcCombKeyReleased
         calculadoraAtaque();
     }//GEN-LAST:event_baseCalcCombKeyReleased
-
-    private void damageCriticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_damageCriticoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_damageCriticoActionPerformed
 
     private void ventajaCalcCombKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ventajaCalcCombKeyReleased
         calculadoraAtaque();
@@ -2536,10 +2429,6 @@ public class Dicer extends javax.swing.JFrame {
     private void checkCapicuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkCapicuaActionPerformed
         settings.setCapicua(checkCapicua.isSelected());
     }//GEN-LAST:event_checkCapicuaActionPerformed
-
-    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        
-    }//GEN-LAST:event_formWindowOpened
 
     private void menuNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuNuevoActionPerformed
         crear();
@@ -2558,14 +2447,6 @@ public class Dicer extends javax.swing.JFrame {
         dadosFisicos();
     }//GEN-LAST:event_checkDadosFisicosActionPerformed
 
-    private void libreCriticoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_libreCriticoKeyTyped
-
-    }//GEN-LAST:event_libreCriticoKeyTyped
-
-    private void damageCriticoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_damageCriticoKeyTyped
-        
-    }//GEN-LAST:event_damageCriticoKeyTyped
-
     private void damageCriticoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_damageCriticoKeyReleased
         if (settings.getFisicos()) {
             try {
@@ -2582,20 +2463,55 @@ public class Dicer extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_libreCriticoKeyReleased
 
-    private void cargarVarios(){
+    private void cargar(){
+        //Seleccionamos los archivos
+        int primer_nuevo = comboNombre.getSelectedIndex();
+        boolean primer_aceptado = false;
         seleccionado.setMultiSelectionEnabled(true);
-           
-        borrarComboNombre();
         
         if (seleccionado.showDialog(null, "Abrir fichas") == JFileChooser.APPROVE_OPTION){
-            this.archivosCargados = seleccionado.getSelectedFiles();
+            
+            File[] archivosSeleccionados = seleccionado.getSelectedFiles();
+            
             this.comboNombre.setEnabled(true);
             
-            
-            for (int i = 0; i < archivosCargados.length; i++) {
-                comboNombre.addItem(archivosCargados[i].getName());
+            //comprobamos que este/os archivo/s no lo/s hemos cargado ya
+            for (File archivosSeleccionado : archivosSeleccionados) {
+                //Si ya lo hemos cargado
+                String path = archivosSeleccionado.getPath();
+                System.out.print(path);
+                if(archivosDireccionCargados.containsKey(path))
+                    throw new CargaException("Esta ficha ya ha sido cargada con anterioridad");
+                //Si no estaba en nuestro registro de direcciones lo añadimos al diccionario
+                archivosDireccionCargados.put(archivosSeleccionado.getPath(), archivosSeleccionado.getName());
+                //Añadimos el nombre a nuestro combo
+                archivosCargados.add(archivosSeleccionado);
+                anadirComboNombre(archivosSeleccionado.getName());
+                System.out.println(archivosCargados.size());
+                
+                //Cargamos el primero en una hebra aparte para mejorar la velocidad
+                if(!primer_aceptado){
+                    primer_nuevo = archivosCargados.size() - 1;
+                    primer_aceptado=true;
+                    
+                    new Thread () {
+                        File archivo;
+
+                        @Override
+                        public void run() {
+                            if (archivo.getName().endsWith("xlsx") || archivo.getName().endsWith("xls")) {
+                                cargar(archivo);
+                            }
+                        }
+
+                        public Thread prepare(File archivo) {
+                            this.archivo = archivo;
+                            return this;
+                        }
+                    }.prepare(archivosCargados.get(primer_nuevo)).start();
+                    comboNombre.setSelectedIndex(primer_nuevo);
+                }
             }
-            cargar(archivosCargados[0]);
         }
     }
     
@@ -2606,20 +2522,17 @@ public class Dicer extends javax.swing.JFrame {
                 JFileChooser guardarDesc = new JFileChooser();
                 String ruta; 
 
-                if(guardarDesc.showSaveDialog(null)==guardarDesc.APPROVE_OPTION){ 
+                if(guardarDesc.showSaveDialog(null)== JFileChooser.APPROVE_OPTION){ 
                     ruta = guardarDesc.getSelectedFile().getAbsolutePath();
                     if (!ruta.endsWith("xlsx")) {
                         ruta = ruta + ".xlsx";
                     }
-                    Descargar des = new Descargar();
                     try {
-                        des.descargar(ruta);
+                        Descargar.descargar(ruta);
                     } catch (Exception ex) {
                         Logger.getLogger(Dicer.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                } 
-
-                
+                }    
             }
         }.start();
     }//GEN-LAST:event_menuDescargarActionPerformed
@@ -2628,27 +2541,11 @@ public class Dicer extends javax.swing.JFrame {
         base_turno.setText(String.valueOf(this.ficha.getTurno(comboTurno.getSelectedIndex())));
     }//GEN-LAST:event_comboTurnoItemStateChanged
 
-    private void fieldNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldNombreActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_fieldNombreActionPerformed
-
     private void comboNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboNombreActionPerformed
         // TODO add your handling code here:
-        if(!nombresBorrados){
-            int index = comboNombre.getSelectedIndex();
-            cargar(archivosCargados[index]);
-        }
+        if(!cambioNombres)
+            cargar(archivosCargados.get(comboNombre.getSelectedIndex()));
     }//GEN-LAST:event_comboNombreActionPerformed
-
-    private void mnuAbrirVariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuAbrirVariosActionPerformed
-        // TODO add your handling code here:
-        cargarVarios();
-    }//GEN-LAST:event_mnuAbrirVariosActionPerformed
-
-    private void comboNombrePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_comboNombrePropertyChange
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_comboNombrePropertyChange
 
     private void intTextField(java.awt.event.KeyEvent evt, JTextField field) {
         char vchar = evt.getKeyChar();
@@ -2842,27 +2739,12 @@ public class Dicer extends javax.swing.JFrame {
         }
     }
     
-    private void cargar() {
-        if (seleccionado.showDialog(null, "Abrir ficha") == JFileChooser.APPROVE_OPTION){
-            File archivos[] = seleccionado.getSelectedFiles();
-            
-            archivo = archivos[0];
-
-            if (archivo.getName().endsWith("xlsx") || archivo.getName().endsWith("xls")) {
-                darValores(archivo);
-            }
-            
-            borrarComboNombre();
-            comboNombre.setEnabled(false);
-        }
-    }
-    
-
-    private void cargar(File selected_archivo) {
-            
+    //muestra una ficha ya cargada
+    private void cargar(File selected_archivo) {      
         archivo = selected_archivo;
         darValores(archivo);
     }
+    
     private void darValores(File archivo) {
         if(archivo.canRead()) {
             this.ficha = new Anima(archivo, direccion).cargar();
@@ -3464,7 +3346,6 @@ public class Dicer extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuDescargar;
     private javax.swing.JMenuItem menuNuevo;
     private javax.swing.JMenuItem mnuAbrir;
-    private javax.swing.JMenuItem mnuAbrirVarios;
     private javax.swing.JTextField posCritico;
     private javax.swing.JTextField resCritico;
     private javax.swing.JTextArea textNotas;
@@ -4922,24 +4803,25 @@ public class Dicer extends javax.swing.JFrame {
             } else if (traza.size() >= 4) {
                 res_convocatoria[i].setForeground(Color.MAGENTA);
             }
-            } else if (d.getResultado() <= 3) {
-                res_convocatoria[i].setForeground(Color.RED);
-            } else {
-                res_convocatoria[i].setForeground(Color.BLACK);
-            }
             
-            if (!settings.getFisicos())
-                dado_convocatoria[i].setText(String.valueOf(d.getResultado()));
+        } else if (d.getResultado() <= 3) {
+            res_convocatoria[i].setForeground(Color.RED);
+        } else {
+            res_convocatoria[i].setForeground(Color.BLACK);
+        }
+            
+        if (!settings.getFisicos())
+            dado_convocatoria[i].setText(String.valueOf(d.getResultado()));
 
-            int libre = 0;
-            try {
-                libre = Integer.parseInt(libre_convocatoria[i].getText());
-            } catch (NumberFormatException e) {
+        int libre = 0;
+        try {
+            libre = Integer.parseInt(libre_convocatoria[i].getText());
+        } catch (NumberFormatException e) {
 
-            }
+        }
 
-            res_convocatoria[i].setText(String.valueOf(Integer.parseInt(base_convocatoria[i].getText()) + libre + d.getResultado()));
-            return (base_convocatoria[i].getText() + " + " + libre + " + " + String.valueOf(d.getResultado()) + " = " + String.valueOf(Integer.parseInt(base_convocatoria[i].getText()) + libre + d.getResultado()));
+        res_convocatoria[i].setText(String.valueOf(Integer.parseInt(base_convocatoria[i].getText()) + libre + d.getResultado()));
+        return (base_convocatoria[i].getText() + " + " + libre + " + " + String.valueOf(d.getResultado()) + " = " + String.valueOf(Integer.parseInt(base_convocatoria[i].getText()) + libre + d.getResultado()));
     }
     
     private String b_MouseClickedCritico() {
@@ -5041,20 +4923,20 @@ public class Dicer extends javax.swing.JFrame {
                     for (int i = 0; i < info.size(); i++)
                         pw.println(info.get(i));
 
-                } catch (Exception e) {
+                } catch (IOException e) {
                 } finally {
                    try {
                    // Nuevamente aprovechamos el finally para 
                    // asegurarnos que se cierra el fichero.
                    if (null != fichero)
                       fichero.close();
-                   } catch (Exception e2) {
+                   } catch (IOException e2) {
                    }
                 }
                 
                 return true;
             } 
-        }catch (Exception ex){ 
+        }catch (HeadlessException ex){ 
         }
         return false;
     }
@@ -5385,10 +5267,18 @@ public class Dicer extends javax.swing.JFrame {
         
     }
     
+    /*
     private void borrarComboNombre()
     {
-         nombresBorrados = true;
+        cambioNombres = true;
         comboNombre.removeAllItems();
-        nombresBorrados = false;
+        cambioNombres = false;
+    }
+    */
+    private void anadirComboNombre(String str)
+    {
+        cambioNombres = true;
+        comboNombre.addItem(str);
+        cambioNombres = false;
     }
 }
