@@ -62,6 +62,7 @@ public class Dicer extends javax.swing.JFrame {
         this.archivosCargados = new ArrayList();
         myInitComponents();
         initComponents();
+        jDownload.setVisible(false);
         this.log = new Log(textNotas);
         initPrincipales();
         initSecundarias();
@@ -560,6 +561,7 @@ public class Dicer extends javax.swing.JFrame {
         jPanel23 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         textNotas1 = new javax.swing.JTextArea();
+        jDownload = new javax.swing.JLabel();
         jLabel174 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -2188,6 +2190,10 @@ public class Dicer extends javax.swing.JFrame {
 
         jPanel5.add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 200, 620, -1));
 
+        jDownload.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/download.png"))); // NOI18N
+        jDownload.setPreferredSize(new java.awt.Dimension(50, 50));
+        jPanel5.add(jDownload, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 170, -1, -1));
+
         jLabel174.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Fondo.png"))); // NOI18N
         jPanel5.add(jLabel174, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 630, 660));
 
@@ -2547,7 +2553,9 @@ public class Dicer extends javax.swing.JFrame {
                         ruta = ruta + ".xlsx";
                     }
                     try {
+                        jDownload.setVisible(true);
                         Descargar.descargar(ruta);
+                        jDownload.setVisible(false);
                     } catch (Exception ex) {
                         Logger.getLogger(Dicer.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -2778,7 +2786,9 @@ public class Dicer extends javax.swing.JFrame {
 
             log.resetLog();
             log.setNotas(ficha.getNotas());
-
+            
+            resetColors();
+            
             this.setTitle("Anima Dicer " + this.version + " - " + fieldNombre.getText());
         }
     }
@@ -2927,6 +2937,7 @@ public class Dicer extends javax.swing.JFrame {
     private javax.swing.JTextField fieldZeon;
     private javax.swing.JTextField fieldZeonActual;
     private javax.swing.JTextField finalCalcComb;
+    private javax.swing.JLabel jDownload;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel100;
@@ -5299,5 +5310,37 @@ public class Dicer extends javax.swing.JFrame {
         cambioNombres = true;
         comboNombre.addItem(str);
         cambioNombres = false;
+    }
+    
+    private void resetColors(){
+        posCritico.setForeground(Color.BLACK);
+        
+        for (int i = 0; i < 38; i++)
+            res_Secundarias[i].setForeground(Color.BLACK);
+        
+        for (int i = 0; i < 8; i++)
+            res_Atributos[i].setForeground(Color.BLACK);
+        
+        for (int i = 0; i < 5; i++)
+            res_Resistencias[i].setForeground(Color.BLACK);
+        
+        for (int i = 0; i < 3; i++)
+            res_combateFisico[i].setForeground(Color.BLACK);
+        
+        res_turno.setForeground(Color.BLACK);
+        
+        for (int i = 0; i < 3; i++)
+            res_combateSobrenatural[i].setForeground(Color.BLACK);
+        
+        for (int i = 0; i < 4; i++)
+            res_convocatoria[i].setForeground(Color.BLACK);
+        
+        resCritico.setForeground(Color.BLACK);
+        
+        for (int i = 0; i < 4; i++) {
+            this.armas[i].enterezaResultado.setForeground(Color.BLACK);
+            this.armas[i].roturaResultado.setForeground(Color.BLACK);
+            this.armas[i].presenciaResultado.setForeground(Color.BLACK);
+        }
     }
 }
