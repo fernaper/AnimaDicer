@@ -15,7 +15,7 @@ import java.io.InputStream;
  * @author Fernando
  */
 public class AnimaDicer {
-    private static final String version = "v1.0.2";
+    private static final String version = "v1.0.5";
     /**
      * @param args the command line arguments
      */

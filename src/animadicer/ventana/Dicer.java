@@ -27,6 +27,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Level;
@@ -36,6 +37,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -92,6 +94,7 @@ public class Dicer extends javax.swing.JFrame {
         settings.setCapicua(checkCapicua.isSelected());*/
         
         doTask();
+        actualizarVersion();
     }
 
     private void doTask() {
@@ -2545,6 +2548,7 @@ public class Dicer extends javax.swing.JFrame {
             @Override
             public void run() {
                 JFileChooser guardarDesc = new JFileChooser();
+                guardarDesc.setFileFilter(new FileNameExtensionFilter("xls & xlsx Excel", "xls", "xlsx"));
                 String ruta; 
 
                 if(guardarDesc.showSaveDialog(null)== JFileChooser.APPROVE_OPTION){ 
@@ -4913,6 +4917,7 @@ public class Dicer extends javax.swing.JFrame {
     private void myInitComponents() {
         seleccionado = new javax.swing.JFileChooser();
         seleccionado.setMultiSelectionEnabled(true);
+        seleccionado.setFileFilter(new FileNameExtensionFilter("xls & xlsx Excel", "xls", "xlsx"));
     }
     
     private void guardarNotas() {
@@ -5341,6 +5346,37 @@ public class Dicer extends javax.swing.JFrame {
             this.armas[i].enterezaResultado.setForeground(Color.BLACK);
             this.armas[i].roturaResultado.setForeground(Color.BLACK);
             this.armas[i].presenciaResultado.setForeground(Color.BLACK);
+        }
+    }
+    
+    public void actualizarVersion () {
+        URL url;
+        if ((url = Descargar.actualizar(version)) != null) {
+            int respuesta = JOptionPane.showConfirmDialog(null, "Se han encontrado nuevas versiones de AnimaDicer\n¿Deseas descargarla?","¿Actualizar AnimaDicer?", JOptionPane.YES_NO_OPTION);
+            if (respuesta == JOptionPane.YES_OPTION) {
+                new Thread () {
+                    @Override
+                    public void run() {
+                        JFileChooser guardarDesc = new JFileChooser();
+                        guardarDesc.setFileFilter(new FileNameExtensionFilter("jar - Java Files", "jar"));
+                        String ruta; 
+
+                        if(guardarDesc.showSaveDialog(null)== JFileChooser.APPROVE_OPTION){ 
+                            ruta = guardarDesc.getSelectedFile().getAbsolutePath();
+                            if (!ruta.endsWith("jar")) {
+                                ruta = ruta + ".jar";
+                            }
+                            try {
+                                jDownload.setVisible(true);
+                                Descargar.actualiza(url, ruta);
+                                jDownload.setVisible(false);
+                            } catch (Exception ex) {
+                                Logger.getLogger(Dicer.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }    
+                    }
+                }.start();
+            }
         }
     }
 }
