@@ -47,7 +47,7 @@ public class Dicer extends javax.swing.JFrame {
 
     private final String version;
     private final HashMap<String, String> archivosDireccionCargados;
-    private final ArrayList<Ficha> archivosCargados;
+    private final ArrayList<File> archivosCargados;
     private boolean cambioNombres;
 
     /** Creates new form Dicer
@@ -150,6 +150,9 @@ public class Dicer extends javax.swing.JFrame {
         fieldNombre = new javax.swing.JTextField();
         fieldCategoria = new javax.swing.JTextField();
         fieldNivel = new javax.swing.JTextField();
+        fieldZeon = new javax.swing.JTextField();
+        fieldZeonActual = new javax.swing.JTextField();
+        jLabel130 = new javax.swing.JLabel();
         jLabel175 = new javax.swing.JLabel();
         jLabel176 = new javax.swing.JLabel();
         fieldCansancioActual = new javax.swing.JTextField();
@@ -160,11 +163,6 @@ public class Dicer extends javax.swing.JFrame {
         fieldVida = new javax.swing.JTextField();
         fieldVidaActual = new javax.swing.JTextField();
         jLabel129 = new javax.swing.JLabel();
-        jLayeredPane1 = new javax.swing.JLayeredPane();
-        barraZeon = new javax.swing.JProgressBar();
-        fieldZeonActual = new javax.swing.JTextField();
-        fieldZeon = new javax.swing.JTextField();
-        jLabel130 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jLabel132 = new javax.swing.JLabel();
         jLabel133 = new javax.swing.JLabel();
@@ -715,6 +713,24 @@ public class Dicer extends javax.swing.JFrame {
         fieldNivel.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jPanel6.add(fieldNivel, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 80, 180, -1));
 
+        fieldZeon.setEditable(false);
+        fieldZeon.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jPanel6.add(fieldZeon, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 140, 80, -1));
+
+        fieldZeonActual.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        fieldZeonActual.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                fieldZeonActualKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                fieldZeonActualKeyTyped(evt);
+            }
+        });
+        jPanel6.add(fieldZeonActual, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 140, 80, -1));
+
+        jLabel130.setText("/");
+        jPanel6.add(jLabel130, new org.netbeans.lib.awtextra.AbsoluteConstraints(167, 142, -1, -1));
+
         jLabel175.setText("Cansancio:");
         jPanel6.add(jLabel175, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 172, -1, -1));
 
@@ -745,145 +761,6 @@ public class Dicer extends javax.swing.JFrame {
             }
         });
         jPanel6.add(comboNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, 100, -1));
-
-        barraVida.setForeground(new java.awt.Color(0, 204, 51));
-
-        fieldVida.setEditable(false);
-        fieldVida.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        fieldVida.setText("125");
-        fieldVida.setBorder(null);
-        fieldVida.setOpaque(false);
-
-        fieldVidaActual.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        fieldVidaActual.setText("125");
-        fieldVidaActual.setBorder(null);
-        fieldVidaActual.setOpaque(false);
-        fieldVidaActual.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                fieldVidaActualKeyReleased(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                fieldVidaActualKeyTyped(evt);
-            }
-        });
-
-        jLabel129.setText("/");
-
-        jLayeredPane2.setLayer(barraVida, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane2.setLayer(fieldVida, javax.swing.JLayeredPane.PALETTE_LAYER);
-        jLayeredPane2.setLayer(fieldVidaActual, javax.swing.JLayeredPane.DRAG_LAYER);
-        jLayeredPane2.setLayer(jLabel129, javax.swing.JLayeredPane.PALETTE_LAYER);
-
-        javax.swing.GroupLayout jLayeredPane2Layout = new javax.swing.GroupLayout(jLayeredPane2);
-        jLayeredPane2.setLayout(jLayeredPane2Layout);
-        jLayeredPane2Layout.setHorizontalGroup(
-            jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane2Layout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addComponent(fieldVidaActual, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addComponent(fieldVida, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(46, Short.MAX_VALUE))
-            .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jLayeredPane2Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(barraVida, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-            .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jLayeredPane2Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jLabel129, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-        jLayeredPane2Layout.setVerticalGroup(
-            jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(fieldVidaActual, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
-                .addComponent(fieldVida))
-            .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jLayeredPane2Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(barraVida, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-            .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jLayeredPane2Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jLabel129)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-        jLabel130.setText("/");
-        jPanel6.add(jLabel130, new org.netbeans.lib.awtextra.AbsoluteConstraints(167, 142, -1, -1));
-        jPanel6.add(jLayeredPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, 180, 20));
-
-        barraZeon.setForeground(new java.awt.Color(0, 0, 204));
-
-        fieldZeonActual.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        fieldZeonActual.setText("125");
-        fieldZeonActual.setBorder(null);
-        fieldZeonActual.setOpaque(false);
-        fieldZeonActual.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fieldZeonActualActionPerformed(evt);
-            }
-        });
-        fieldZeonActual.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                fieldZeonActualKeyReleased(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                fieldZeonActualKeyTyped(evt);
-            }
-        });
-
-        fieldZeon.setEditable(false);
-        fieldZeon.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        fieldZeon.setText("125");
-        fieldZeon.setBorder(null);
-        fieldZeon.setOpaque(false);
-        fieldZeon.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fieldZeonActionPerformed(evt);
-            }
-        });
-
-        jLabel130.setText("/");
-
-        jLayeredPane1.setLayer(barraZeon, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(fieldZeonActual, javax.swing.JLayeredPane.PALETTE_LAYER);
-        jLayeredPane1.setLayer(fieldZeon, javax.swing.JLayeredPane.PALETTE_LAYER);
-        jLayeredPane1.setLayer(jLabel130, javax.swing.JLayeredPane.PALETTE_LAYER);
-
-        javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
-        jLayeredPane1.setLayout(jLayeredPane1Layout);
-        jLayeredPane1Layout.setHorizontalGroup(
-            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addComponent(fieldZeonActual, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel130, javax.swing.GroupLayout.PREFERRED_SIZE, 4, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(fieldZeon, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 47, Short.MAX_VALUE))
-            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(barraZeon, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-        jLayeredPane1Layout.setVerticalGroup(
-            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(fieldZeonActual, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
-            .addComponent(fieldZeon)
-            .addComponent(jLabel130, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(barraZeon, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-
-        jPanel6.add(jLayeredPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 140, 180, 20));
 
         barraVida.setForeground(new java.awt.Color(0, 204, 51));
 
@@ -2534,14 +2411,6 @@ public class Dicer extends javax.swing.JFrame {
         
         if (Integer.parseInt(fieldZeonActual.getText()) > Integer.parseInt(fieldZeon.getText()))
             fieldZeonActual.setText(fieldZeon.getText());
-        
-        int value = 0;
-        try{
-            this.ficha.setZeonActual(Integer.parseInt(fieldZeonActual.getText()));
-            value = this.ficha.getZeonActual();
-        }
-        catch(NumberFormatException ex){value = 0;}
-        finally{barraZeon.setValue(value);}
     }//GEN-LAST:event_fieldZeonActualKeyReleased
 
     private void calcBaseKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_calcBaseKeyReleased
@@ -2653,7 +2522,7 @@ public class Dicer extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_libreCriticoKeyReleased
 
-    private void comprobarExistencia(File archivosSeleccionado, boolean primero) throws CargaException { 
+    private void comprobarExistencia(File archivosSeleccionado) throws CargaException { 
         String path = archivosSeleccionado.getPath();
         System.out.print(path);
         
@@ -2662,21 +2531,21 @@ public class Dicer extends javax.swing.JFrame {
         //Si no estaba en nuestro registro de direcciones lo añadimos al diccionario
         archivosDireccionCargados.put(archivosSeleccionado.getPath(), archivosSeleccionado.getName());
         //Añadimos el nombre a nuestro combo
-        Ficha ficha;
-        
-        if(primero)
-            ficha = this.ficha;
-        
-        ficha = new Anima(archivosSeleccionado, direccion).cargar();
-        archivosCargados.add(ficha);
+        archivosCargados.add(archivosSeleccionado);
         anadirComboNombre(archivosSeleccionado.getName());
     }
     
-    private void carga_inicial(File archivo){     
+    private void carga_inicial(File archivo){ 
+        int primer_nuevo = comboNombre.getSelectedIndex();
+        boolean primer_aceptado = false;
+        
         try{
-            comprobarExistencia(archivo, true);
-            cargar(archivosCargados.get(comboNombre.getItemCount() - 1));
-            comboNombre.setSelectedIndex(comboNombre.getItemCount() - 1);
+            comprobarExistencia(archivo);
+            if(!primer_aceptado){
+                primer_nuevo = archivosCargados.size() - 1;
+                primer_aceptado=true;
+            }
+            cargar(archivosCargados.get(primer_nuevo));
         }catch(CargaException ex){
             String infoMessage = "La ficha cargada ya existe, se ignorará la operación.";
             String titleBar = "Error de Carga";
@@ -2686,6 +2555,7 @@ public class Dicer extends javax.swing.JFrame {
 
     private void cargar(){
         //Seleccionamos los archivos
+
         seleccionado.setMultiSelectionEnabled(true);
         
         if (seleccionado.showDialog(null, "Abrir fichas") == JFileChooser.APPROVE_OPTION){
@@ -2700,7 +2570,7 @@ public class Dicer extends javax.swing.JFrame {
                 public void run() {
                     for (int i = 1; i < archivosSeleccionados.length; i++) {   
                         try{
-                            comprobarExistencia(archivosSeleccionados[i], false);
+                            comprobarExistencia(archivosSeleccionados[i]);
                         }catch(CargaException ex){
                             String infoMessage = "La ficha cargada ya existe, se ignorará la operación.";
                             String titleBar = "Error de Carga";
@@ -2760,36 +2630,12 @@ public class Dicer extends javax.swing.JFrame {
         
         int value = 0;
         try{
-            this.ficha.setVidaActual(Integer.parseInt(fieldVidaActual.getText()));
-            value = this.ficha.getVidaActual();
+            value = Integer.parseInt(fieldVidaActual.getText());
         }
         catch(NumberFormatException ex){value = 0;}
         finally{barraVida.setValue(value);}
     }//GEN-LAST:event_fieldVidaActualKeyReleased
 
-    private void fieldZeonActualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldZeonActualActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_fieldZeonActualActionPerformed
-
-    private void fieldZeonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldZeonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_fieldZeonActionPerformed
-
-=======
-        return;
-
-        if (Integer.parseInt(fieldVidaActual.getText()) > Integer.parseInt(fieldVida.getText()))
-        fieldVidaActual.setText(fieldVida.getText());
-        
-        int value = 0;
-        try{
-            value = Integer.parseInt(fieldVidaActual.getText());
-        }
-        catch(Exception ex){value = 0;}
-        finally{barraVida.setValue(value);}
-    }//GEN-LAST:event_fieldVidaActualKeyReleased
-
->>>>>>> 5a2076e54916d7809f0cbdfcadb1524d8374f815
     private void intTextField(java.awt.event.KeyEvent evt, JTextField field) {
         char vchar = evt.getKeyChar();
         if (!Character.isDigit(vchar) || vchar == KeyEvent.VK_BACK_SPACE || vchar == KeyEvent.VK_DELETE) {
@@ -2983,20 +2829,20 @@ public class Dicer extends javax.swing.JFrame {
     }
     
     //muestra una ficha ya cargada
-    private void cargar(Ficha ficha) {   
-        this.ficha = ficha;
-        darValores(ficha);
+    private void cargar(File selected_archivo) {      
+        archivo = selected_archivo;
+        darValores(archivo);
     }
     
-    private void darValores(Ficha ficha) {
-        //if(archivo.canRead()) {
-            //this.ficha = new Anima(archivo, direccion).cargar();
-            valuesPrincipales(ficha);
-            valuesSecundarias(ficha);
-            valuesResistencias(ficha);
-            valuesArmaduras(ficha);
-            valuesArmas(ficha);
-            valuesCombate(ficha);
+    private void darValores(File archivo) {
+        if(archivo.canRead()) {
+            this.ficha = new Anima(archivo, direccion).cargar();
+            valuesPrincipales();
+            valuesSecundarias();
+            valuesResistencias();
+            valuesArmaduras();
+            valuesArmas();
+            valuesCombate();
             calculadora();
             textNotas1.setText(ficha.getNotas());
 
@@ -3006,17 +2852,17 @@ public class Dicer extends javax.swing.JFrame {
             resetColors();
             
             this.setTitle("Anima Dicer " + this.version + " - " + fieldNombre.getText());
-        //}
+        }
     }
-
+    
     private void crear() {
         this.ficha = new Anima(archivo, direccion).crear();
-        valuesPrincipales(ficha);
-        valuesSecundarias(ficha);
-        valuesResistencias(ficha);
-        valuesArmaduras(ficha);
-        valuesArmas(ficha);
-        valuesCombate(ficha);
+        valuesPrincipales();
+        valuesSecundarias();
+        valuesResistencias();
+        valuesArmaduras();
+        valuesArmas();
+        valuesCombate();
         calculadora();
         textNotas1.setText(ficha.getNotas());
         this.setTitle("Anima Dicer " + this.version);
@@ -3128,7 +2974,6 @@ public class Dicer extends javax.swing.JFrame {
     private javax.swing.JTextField armaduraCalcComb;
     private javax.swing.JMenuItem ayuda;
     private javax.swing.JProgressBar barraVida;
-    private javax.swing.JProgressBar barraZeon;
     private javax.swing.JTextField baseCalcComb;
     private javax.swing.JTextField calcBase;
     private javax.swing.JTextField calcFinal;
@@ -3514,7 +3359,6 @@ public class Dicer extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel97;
     private javax.swing.JLabel jLabel98;
     private javax.swing.JLabel jLabel99;
-    private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JLayeredPane jLayeredPane2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
@@ -3724,7 +3568,7 @@ public class Dicer extends javax.swing.JFrame {
             jPanel8.add(ki[i], new org.netbeans.lib.awtextra.AbsoluteConstraints(80+(35*i), 110, 25, 20));
         }
         
-        valuesPrincipales(this.ficha);
+        valuesPrincipales();
     }
     
     private void initSecundarias() {
@@ -3811,7 +3655,7 @@ public class Dicer extends javax.swing.JFrame {
             }
         }
         
-        valuesSecundarias(this.ficha);
+        valuesSecundarias();
     }
     
     private void initResistencias() {
@@ -3891,7 +3735,7 @@ public class Dicer extends javax.swing.JFrame {
             jPanel16.add(res_Resistencias[i], new org.netbeans.lib.awtextra.AbsoluteConstraints(202, 50+(i*30), 55, 20));
         }
         
-        valuesResistencias(this.ficha);
+        valuesResistencias();
     }
     
     private void initArmaduras() {
@@ -4107,7 +3951,7 @@ public class Dicer extends javax.swing.JFrame {
 
         }.init(calcPorcentaje));
         
-        valuesArmaduras(this.ficha);
+        valuesArmaduras();
     }
 
     private void initArmas() {
@@ -4212,7 +4056,7 @@ public class Dicer extends javax.swing.JFrame {
         jPanel13.add(armas[3].presenciaDado, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 100, 25, 20));
         jPanel13.add(armas[3].presenciaResultado, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 100, 40, 20));
         
-        valuesArmas(this.ficha);
+        valuesArmas();
     }
     
     private void initCombate() {
@@ -4668,46 +4512,39 @@ public class Dicer extends javax.swing.JFrame {
         
         jPanel22.add(bDadoCritico, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 60, -1, -1));
         
-        valuesCombate(this.ficha);
+        valuesCombate();
     }
     
-
-    private void valuesPrincipales(Ficha ficha) {
-        fieldNombre.setText(ficha.getNombre());
-        fieldCategoria.setText(ficha.getCategoria());
-        fieldNivel.setText(String.valueOf(ficha.getNivel()));
-        //===================VIDA======================
-        fieldVida.setText(String.valueOf(ficha.getVida()));
-        barraVida.setMaximum(ficha.getVida());
+    private void valuesPrincipales() {
+        fieldNombre.setText(this.ficha.getNombre());
+        fieldCategoria.setText(this.ficha.getCategoria());
+        fieldNivel.setText(String.valueOf(this.ficha.getNivel()));
+        fieldVida.setText(String.valueOf(this.ficha.getVida()));
+        barraVida.setMaximum(this.ficha.getVida());
         barraVida.setMinimum(0);
-        fieldVidaActual.setText(String.valueOf(ficha.getVidaActual()));
-        barraVida.setValue(ficha.getVidaActual());
-        //===================ZEON======================
-        fieldZeon.setText(String.valueOf(ficha.getZeon()));
-        barraZeon.setMaximum(ficha.getZeon());
-        barraZeon.setMinimum(0);
-        fieldZeonActual.setText(String.valueOf(ficha.getZeonActual()));
-        barraZeon.setValue(ficha.getZeonActual());
-        //=================CANSANCIO===================
-        fieldCansancio.setText(String.valueOf(ficha.getCansancio()));
-        fieldCansancioActual.setText(String.valueOf(ficha.getCansancioActual()));
+        fieldVidaActual.setText(String.valueOf(this.ficha.getVidaActual()));
+        barraVida.setValue(this.ficha.getVidaActual());
+        fieldZeon.setText(String.valueOf(this.ficha.getZeon()));
+        fieldZeonActual.setText(String.valueOf(this.ficha.getZeonActual()));
+        fieldCansancio.setText(String.valueOf(this.ficha.getCansancio()));
+        fieldCansancioActual.setText(String.valueOf(this.ficha.getCansancioActual()));
         
         for (int i = 0; i < 8; i++) {
-            base_Atributos[i].setText(String.valueOf(ficha.getAtributo(i)));
+            base_Atributos[i].setText(String.valueOf(this.ficha.getAtributo(i)));
             libre_Atributos[i].setText(String.valueOf(0));
             dado_Atributos[i].setText(String.valueOf(0));
             res_Atributos[i].setText(String.valueOf(Integer.parseInt(base_Atributos[i].getText()) + Integer.parseInt(libre_Atributos[i].getText()) + Integer.parseInt(dado_Atributos[i].getText())));
         }
         
         for (int i = 0; i < 6; i++) {
-            ki[i].setText(String.valueOf(ficha.getKi(i)));
-            kiActual[i].setText(String.valueOf(ficha.getKi(i)));
+            ki[i].setText(String.valueOf(this.ficha.getKi(i)));
+            kiActual[i].setText(String.valueOf(this.ficha.getKi(i)));
         }
     }
     
-    private void valuesSecundarias(Ficha ficha) {
+    private void valuesSecundarias() {
         for (int i = 0; i < 38; i++) {
-            base_Secundarias[i].setText(String.valueOf(ficha.getSecundarias(i)));
+            base_Secundarias[i].setText(String.valueOf(this.ficha.getSecundarias(i)));
             libre_Secundarias[i].setText(String.valueOf(0));
             dado_Secundarias[i].setText(String.valueOf(0));
             res_Secundarias[i].setText(String.valueOf(Integer.parseInt(base_Secundarias[i].getText()) + Integer.parseInt(libre_Secundarias[i].getText()) + Integer.parseInt(dado_Secundarias[i].getText())));
@@ -4715,18 +4552,18 @@ public class Dicer extends javax.swing.JFrame {
         
     }
     
-    private void valuesResistencias(Ficha ficha) {
+    private void valuesResistencias() {
         for (int i = 0; i < 5; i++) {
-            base_Resistencias[i].setText(String.valueOf(ficha.getRes(i)));
+            base_Resistencias[i].setText(String.valueOf(this.ficha.getRes(i)));
             libre_Resistencias[i].setText(String.valueOf(0));
             dado_Resistencias[i].setText(String.valueOf(0));
             res_Resistencias[i].setText(String.valueOf(Integer.parseInt(base_Resistencias[i].getText()) + Integer.parseInt(libre_Resistencias[i].getText()) + Integer.parseInt(dado_Resistencias[i].getText())));
         }
     }
     
-    private void valuesArmaduras(Ficha ficha) {        
+    private void valuesArmaduras() {        
         for (int i = 0; i < 3; i++) {
-            Armadura a = ficha.getArmadura(i);
+            Armadura a = this.ficha.getArmadura(i);
             
             nombreArmadura[i].setText(a.getNombre());
             filArmadura[i].setText(String.valueOf(a.getDefensa(0)));
@@ -4740,9 +4577,9 @@ public class Dicer extends javax.swing.JFrame {
         }
     }
     
-    private void valuesArmas(Ficha ficha) {
+    private void valuesArmas() {
         for (int i = 0; i < 4; i++) {
-            Arma a = ficha.getArma(i);
+            Arma a = this.ficha.getArma(i);
             
             this.armas[i].nombre.setText(a.getNombre());
             this.armas[i].damage.setText(String.valueOf(a.getDamage()));
@@ -4766,19 +4603,19 @@ public class Dicer extends javax.swing.JFrame {
         }
     }
     
-    private void valuesCombate(Ficha ficha) {
+    private void valuesCombate() {
         for (int i = 0; i < 3; i++){ // Cojo ataque, defensa y esquiva
             base_combateFisico[i].setText(String.valueOf(this.ficha.getCombate(i)));
         }
         
         base_turno.setText(String.valueOf(this.ficha.getTurno(comboTurno.getSelectedIndex())));
         
-        base_combateSobrenatural[0].setText(String.valueOf(ficha.getCombate(3)));
-        base_combateSobrenatural[1].setText(String.valueOf(ficha.getPotencialPsiquico()));
-        base_combateSobrenatural[2].setText(String.valueOf(ficha.getCombate(4)));
+        base_combateSobrenatural[0].setText(String.valueOf(this.ficha.getCombate(3)));
+        base_combateSobrenatural[1].setText(String.valueOf(this.ficha.getPotencialPsiquico()));
+        base_combateSobrenatural[2].setText(String.valueOf(this.ficha.getCombate(4)));
         
         for (int i = 0; i < 4; i++) {
-            base_convocatoria[i].setText(String.valueOf(ficha.getConvocatoria(i)));
+            base_convocatoria[i].setText(String.valueOf(this.ficha.getConvocatoria(i)));
         }
         
         
