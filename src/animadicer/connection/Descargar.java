@@ -115,7 +115,7 @@ public class Descargar {
             // Ahora compruebo si la versión es mejor
             if (numLine == 488) {
                 contenido = inputLine;
-                contenido = contenido.substring("        <td id=\"LC1\" class=\"blob-code blob-code-inner js-file-line\">".length(),contenido.length()-5);
+                contenido = contenido.substring("<td id=\"LC1\" class=\"blob-code blob-code-inner js-file-line\">".length(),contenido.length()-5);
                 String[] vector = contenido.split(" ");
                 if (vector[0].equals(version)) {
                     // No necesita actualizar
