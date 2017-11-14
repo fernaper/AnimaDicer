@@ -811,7 +811,8 @@ public class Dicer extends javax.swing.JFrame {
                     .addComponent(jLabel129)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
-
+        jLabel130.setText("/");
+        jPanel6.add(jLabel130, new org.netbeans.lib.awtextra.AbsoluteConstraints(167, 142, -1, -1));
         jPanel6.add(jLayeredPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, 180, 20));
 
         barraZeon.setForeground(new java.awt.Color(0, 0, 204));
@@ -883,6 +884,74 @@ public class Dicer extends javax.swing.JFrame {
         );
 
         jPanel6.add(jLayeredPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 140, 180, 20));
+
+        barraVida.setForeground(new java.awt.Color(0, 204, 51));
+
+        fieldVida.setEditable(false);
+        fieldVida.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        fieldVida.setText("125");
+        fieldVida.setBorder(null);
+        fieldVida.setOpaque(false);
+
+        fieldVidaActual.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        fieldVidaActual.setText("125");
+        fieldVidaActual.setBorder(null);
+        fieldVidaActual.setOpaque(false);
+        fieldVidaActual.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                fieldVidaActualKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                fieldVidaActualKeyTyped(evt);
+            }
+        });
+
+        jLabel129.setText("/");
+
+        jLayeredPane2.setLayer(barraVida, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.setLayer(fieldVida, javax.swing.JLayeredPane.PALETTE_LAYER);
+        jLayeredPane2.setLayer(fieldVidaActual, javax.swing.JLayeredPane.DRAG_LAYER);
+        jLayeredPane2.setLayer(jLabel129, javax.swing.JLayeredPane.PALETTE_LAYER);
+
+        javax.swing.GroupLayout jLayeredPane2Layout = new javax.swing.GroupLayout(jLayeredPane2);
+        jLayeredPane2.setLayout(jLayeredPane2Layout);
+        jLayeredPane2Layout.setHorizontalGroup(
+            jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane2Layout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addComponent(fieldVidaActual, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addComponent(fieldVida, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(46, Short.MAX_VALUE))
+            .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jLayeredPane2Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(barraVida, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jLayeredPane2Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jLabel129, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        jLayeredPane2Layout.setVerticalGroup(
+            jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(fieldVidaActual, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
+                .addComponent(fieldVida))
+            .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jLayeredPane2Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(barraVida, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jLayeredPane2Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jLabel129)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+
+        jPanel6.add(jLayeredPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, 180, 20));
 
         jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 270, 200));
 
@@ -2706,6 +2775,21 @@ public class Dicer extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_fieldZeonActionPerformed
 
+=======
+        return;
+
+        if (Integer.parseInt(fieldVidaActual.getText()) > Integer.parseInt(fieldVida.getText()))
+        fieldVidaActual.setText(fieldVida.getText());
+        
+        int value = 0;
+        try{
+            value = Integer.parseInt(fieldVidaActual.getText());
+        }
+        catch(Exception ex){value = 0;}
+        finally{barraVida.setValue(value);}
+    }//GEN-LAST:event_fieldVidaActualKeyReleased
+
+>>>>>>> 5a2076e54916d7809f0cbdfcadb1524d8374f815
     private void intTextField(java.awt.event.KeyEvent evt, JTextField field) {
         char vchar = evt.getKeyChar();
         if (!Character.isDigit(vchar) || vchar == KeyEvent.VK_BACK_SPACE || vchar == KeyEvent.VK_DELETE) {
@@ -4587,6 +4671,7 @@ public class Dicer extends javax.swing.JFrame {
         valuesCombate(this.ficha);
     }
     
+
     private void valuesPrincipales(Ficha ficha) {
         fieldNombre.setText(ficha.getNombre());
         fieldCategoria.setText(ficha.getCategoria());
