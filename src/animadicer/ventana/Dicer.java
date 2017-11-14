@@ -47,7 +47,7 @@ public class Dicer extends javax.swing.JFrame {
 
     private final String version;
     private final HashMap<String, String> archivosDireccionCargados;
-    private final ArrayList<File> archivosCargados;
+    private final ArrayList<Ficha> archivosCargados;
     private boolean cambioNombres;
 
     /** Creates new form Dicer
@@ -2522,7 +2522,7 @@ public class Dicer extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_libreCriticoKeyReleased
 
-    private void comprobarExistencia(File archivosSeleccionado) throws CargaException { 
+    private void comprobarExistencia(File archivosSeleccionado, boolean primero) throws CargaException { 
         String path = archivosSeleccionado.getPath();
         System.out.print(path);
         
@@ -2531,21 +2531,21 @@ public class Dicer extends javax.swing.JFrame {
         //Si no estaba en nuestro registro de direcciones lo añadimos al diccionario
         archivosDireccionCargados.put(archivosSeleccionado.getPath(), archivosSeleccionado.getName());
         //Añadimos el nombre a nuestro combo
-        archivosCargados.add(archivosSeleccionado);
+        Ficha ficha;
+        
+        if(primero)
+            ficha = this.ficha;
+        
+        ficha = new Anima(archivosSeleccionado, direccion).cargar();
+        archivosCargados.add(ficha);
         anadirComboNombre(archivosSeleccionado.getName());
     }
     
-    private void carga_inicial(File archivo){ 
-        int primer_nuevo = comboNombre.getSelectedIndex();
-        boolean primer_aceptado = false;
-        
+    private void carga_inicial(File archivo){         
         try{
-            comprobarExistencia(archivo);
-            if(!primer_aceptado){
-                primer_nuevo = archivosCargados.size() - 1;
-                primer_aceptado=true;
-            }
-            cargar(archivosCargados.get(primer_nuevo));
+            comprobarExistencia(archivo, true);
+            cargar(archivosCargados.get(comboNombre.getItemCount() - 1));
+            comboNombre.setSelectedIndex(comboNombre.getItemCount() - 1);
         }catch(CargaException ex){
             String infoMessage = "La ficha cargada ya existe, se ignorará la operación.";
             String titleBar = "Error de Carga";
@@ -2570,7 +2570,7 @@ public class Dicer extends javax.swing.JFrame {
                 public void run() {
                     for (int i = 1; i < archivosSeleccionados.length; i++) {   
                         try{
-                            comprobarExistencia(archivosSeleccionados[i]);
+                            comprobarExistencia(archivosSeleccionados[i], false);
                         }catch(CargaException ex){
                             String infoMessage = "La ficha cargada ya existe, se ignorará la operación.";
                             String titleBar = "Error de Carga";
@@ -2630,6 +2630,7 @@ public class Dicer extends javax.swing.JFrame {
         
         int value = 0;
         try{
+            this.ficha.setVidaActual(Integer.parseInt(fieldVidaActual.getText()));
             value = Integer.parseInt(fieldVidaActual.getText());
         }
         catch(NumberFormatException ex){value = 0;}
@@ -2829,40 +2830,38 @@ public class Dicer extends javax.swing.JFrame {
     }
     
     //muestra una ficha ya cargada
-    private void cargar(File selected_archivo) {      
-        archivo = selected_archivo;
-        darValores(archivo);
+    private void cargar(Ficha ficha) {      
+        this.ficha = ficha;
+        darValores(ficha);
     }
     
-    private void darValores(File archivo) {
-        if(archivo.canRead()) {
-            this.ficha = new Anima(archivo, direccion).cargar();
-            valuesPrincipales();
-            valuesSecundarias();
-            valuesResistencias();
-            valuesArmaduras();
-            valuesArmas();
-            valuesCombate();
-            calculadora();
-            textNotas1.setText(ficha.getNotas());
+    private void darValores(Ficha ficha) 
+    {
+        valuesPrincipales(ficha);
+        valuesSecundarias(ficha);
+        valuesResistencias(ficha);
+        valuesArmaduras(ficha);
+        valuesArmas(ficha);
+        valuesCombate(ficha);
+        calculadora();
+        textNotas1.setText(ficha.getNotas());
 
-            log.resetLog();
-            log.setNotas(ficha.getNotas());
-            
-            resetColors();
-            
-            this.setTitle("Anima Dicer " + this.version + " - " + fieldNombre.getText());
-        }
+        log.resetLog();
+        log.setNotas(ficha.getNotas());
+
+        resetColors();
+
+        this.setTitle("Anima Dicer " + this.version + " - " + fieldNombre.getText());
     }
     
     private void crear() {
         this.ficha = new Anima(archivo, direccion).crear();
-        valuesPrincipales();
-        valuesSecundarias();
-        valuesResistencias();
-        valuesArmaduras();
-        valuesArmas();
-        valuesCombate();
+        valuesPrincipales(this.ficha);
+        valuesSecundarias(this.ficha);
+        valuesResistencias(this.ficha);
+        valuesArmaduras(this.ficha);
+        valuesArmas(this.ficha);
+        valuesCombate(this.ficha);
         calculadora();
         textNotas1.setText(ficha.getNotas());
         this.setTitle("Anima Dicer " + this.version);
@@ -3568,7 +3567,7 @@ public class Dicer extends javax.swing.JFrame {
             jPanel8.add(ki[i], new org.netbeans.lib.awtextra.AbsoluteConstraints(80+(35*i), 110, 25, 20));
         }
         
-        valuesPrincipales();
+        valuesPrincipales(this.ficha);
     }
     
     private void initSecundarias() {
@@ -3655,7 +3654,7 @@ public class Dicer extends javax.swing.JFrame {
             }
         }
         
-        valuesSecundarias();
+        valuesSecundarias(this.ficha);
     }
     
     private void initResistencias() {
@@ -3735,7 +3734,7 @@ public class Dicer extends javax.swing.JFrame {
             jPanel16.add(res_Resistencias[i], new org.netbeans.lib.awtextra.AbsoluteConstraints(202, 50+(i*30), 55, 20));
         }
         
-        valuesResistencias();
+        valuesResistencias(this.ficha);
     }
     
     private void initArmaduras() {
@@ -3951,7 +3950,7 @@ public class Dicer extends javax.swing.JFrame {
 
         }.init(calcPorcentaje));
         
-        valuesArmaduras();
+        valuesArmaduras(this.ficha);
     }
 
     private void initArmas() {
@@ -4056,7 +4055,7 @@ public class Dicer extends javax.swing.JFrame {
         jPanel13.add(armas[3].presenciaDado, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 100, 25, 20));
         jPanel13.add(armas[3].presenciaResultado, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 100, 40, 20));
         
-        valuesArmas();
+        valuesArmas(this.ficha);
     }
     
     private void initCombate() {
@@ -4512,39 +4511,39 @@ public class Dicer extends javax.swing.JFrame {
         
         jPanel22.add(bDadoCritico, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 60, -1, -1));
         
-        valuesCombate();
+        valuesCombate(this.ficha);
     }
     
-    private void valuesPrincipales() {
-        fieldNombre.setText(this.ficha.getNombre());
-        fieldCategoria.setText(this.ficha.getCategoria());
-        fieldNivel.setText(String.valueOf(this.ficha.getNivel()));
-        fieldVida.setText(String.valueOf(this.ficha.getVida()));
-        barraVida.setMaximum(this.ficha.getVida());
+    private void valuesPrincipales(Ficha ficha) {
+        fieldNombre.setText(ficha.getNombre());
+        fieldCategoria.setText(ficha.getCategoria());
+        fieldNivel.setText(String.valueOf(ficha.getNivel()));
+        fieldVida.setText(String.valueOf(ficha.getVida()));
+        barraVida.setMaximum(ficha.getVida());
         barraVida.setMinimum(0);
-        fieldVidaActual.setText(String.valueOf(this.ficha.getVidaActual()));
-        barraVida.setValue(this.ficha.getVidaActual());
-        fieldZeon.setText(String.valueOf(this.ficha.getZeon()));
-        fieldZeonActual.setText(String.valueOf(this.ficha.getZeonActual()));
-        fieldCansancio.setText(String.valueOf(this.ficha.getCansancio()));
-        fieldCansancioActual.setText(String.valueOf(this.ficha.getCansancioActual()));
+        fieldVidaActual.setText(String.valueOf(ficha.getVidaActual()));
+        barraVida.setValue(ficha.getVidaActual());
+        fieldZeon.setText(String.valueOf(ficha.getZeon()));
+        fieldZeonActual.setText(String.valueOf(ficha.getZeonActual()));
+        fieldCansancio.setText(String.valueOf(ficha.getCansancio()));
+        fieldCansancioActual.setText(String.valueOf(ficha.getCansancioActual()));
         
         for (int i = 0; i < 8; i++) {
-            base_Atributos[i].setText(String.valueOf(this.ficha.getAtributo(i)));
+            base_Atributos[i].setText(String.valueOf(ficha.getAtributo(i)));
             libre_Atributos[i].setText(String.valueOf(0));
             dado_Atributos[i].setText(String.valueOf(0));
             res_Atributos[i].setText(String.valueOf(Integer.parseInt(base_Atributos[i].getText()) + Integer.parseInt(libre_Atributos[i].getText()) + Integer.parseInt(dado_Atributos[i].getText())));
         }
         
         for (int i = 0; i < 6; i++) {
-            ki[i].setText(String.valueOf(this.ficha.getKi(i)));
-            kiActual[i].setText(String.valueOf(this.ficha.getKi(i)));
+            ki[i].setText(String.valueOf(ficha.getKi(i)));
+            kiActual[i].setText(String.valueOf(ficha.getKi(i)));
         }
     }
     
-    private void valuesSecundarias() {
+    private void valuesSecundarias(Ficha ficha) {
         for (int i = 0; i < 38; i++) {
-            base_Secundarias[i].setText(String.valueOf(this.ficha.getSecundarias(i)));
+            base_Secundarias[i].setText(String.valueOf(ficha.getSecundarias(i)));
             libre_Secundarias[i].setText(String.valueOf(0));
             dado_Secundarias[i].setText(String.valueOf(0));
             res_Secundarias[i].setText(String.valueOf(Integer.parseInt(base_Secundarias[i].getText()) + Integer.parseInt(libre_Secundarias[i].getText()) + Integer.parseInt(dado_Secundarias[i].getText())));
@@ -4552,18 +4551,18 @@ public class Dicer extends javax.swing.JFrame {
         
     }
     
-    private void valuesResistencias() {
+    private void valuesResistencias(Ficha ficha) {
         for (int i = 0; i < 5; i++) {
-            base_Resistencias[i].setText(String.valueOf(this.ficha.getRes(i)));
+            base_Resistencias[i].setText(String.valueOf(ficha.getRes(i)));
             libre_Resistencias[i].setText(String.valueOf(0));
             dado_Resistencias[i].setText(String.valueOf(0));
             res_Resistencias[i].setText(String.valueOf(Integer.parseInt(base_Resistencias[i].getText()) + Integer.parseInt(libre_Resistencias[i].getText()) + Integer.parseInt(dado_Resistencias[i].getText())));
         }
     }
     
-    private void valuesArmaduras() {        
+    private void valuesArmaduras(Ficha fila) {        
         for (int i = 0; i < 3; i++) {
-            Armadura a = this.ficha.getArmadura(i);
+            Armadura a = ficha.getArmadura(i);
             
             nombreArmadura[i].setText(a.getNombre());
             filArmadura[i].setText(String.valueOf(a.getDefensa(0)));
@@ -4577,9 +4576,9 @@ public class Dicer extends javax.swing.JFrame {
         }
     }
     
-    private void valuesArmas() {
+    private void valuesArmas(Ficha fila) {
         for (int i = 0; i < 4; i++) {
-            Arma a = this.ficha.getArma(i);
+            Arma a = ficha.getArma(i);
             
             this.armas[i].nombre.setText(a.getNombre());
             this.armas[i].damage.setText(String.valueOf(a.getDamage()));
@@ -4591,31 +4590,31 @@ public class Dicer extends javax.swing.JFrame {
             
             this.armas[i].enterezaLibre.setText("0");
             this.armas[i].enterezaDado.setText("0");
-            this.armas[i].enterezaResultado.setText(String.valueOf(Integer.parseInt(this.armas[i].enterezaBase.getText()) + Integer.parseInt(this.armas[i].enterezaLibre.getText()) + Integer.parseInt(this.armas[i].enterezaDado.getText())));
+            this.armas[i].enterezaResultado.setText(String.valueOf(Integer.parseInt(armas[i].enterezaBase.getText()) + Integer.parseInt(this.armas[i].enterezaLibre.getText()) + Integer.parseInt(this.armas[i].enterezaDado.getText())));
             
             this.armas[i].roturaLibre.setText("0");
             this.armas[i].roturaDado.setText("0");
-            this.armas[i].roturaResultado.setText(String.valueOf(Integer.parseInt(this.armas[i].roturaBase.getText()) + Integer.parseInt(this.armas[i].roturaLibre.getText()) + Integer.parseInt(this.armas[i].roturaDado.getText())));
+            this.armas[i].roturaResultado.setText(String.valueOf(Integer.parseInt(armas[i].roturaBase.getText()) + Integer.parseInt(this.armas[i].roturaLibre.getText()) + Integer.parseInt(this.armas[i].roturaDado.getText())));
             
             this.armas[i].presenciaLibre.setText("0");
             this.armas[i].presenciaDado.setText("0");
-            this.armas[i].presenciaResultado.setText(String.valueOf(Integer.parseInt(this.armas[i].presenciaBase.getText()) + Integer.parseInt(this.armas[i].presenciaLibre.getText()) + Integer.parseInt(this.armas[i].presenciaDado.getText())));
+            this.armas[i].presenciaResultado.setText(String.valueOf(Integer.parseInt(armas[i].presenciaBase.getText()) + Integer.parseInt(this.armas[i].presenciaLibre.getText()) + Integer.parseInt(this.armas[i].presenciaDado.getText())));
         }
     }
     
-    private void valuesCombate() {
+    private void valuesCombate(Ficha ficha) {
         for (int i = 0; i < 3; i++){ // Cojo ataque, defensa y esquiva
-            base_combateFisico[i].setText(String.valueOf(this.ficha.getCombate(i)));
+            base_combateFisico[i].setText(String.valueOf(ficha.getCombate(i)));
         }
         
-        base_turno.setText(String.valueOf(this.ficha.getTurno(comboTurno.getSelectedIndex())));
+        base_turno.setText(String.valueOf(ficha.getTurno(comboTurno.getSelectedIndex())));
         
-        base_combateSobrenatural[0].setText(String.valueOf(this.ficha.getCombate(3)));
-        base_combateSobrenatural[1].setText(String.valueOf(this.ficha.getPotencialPsiquico()));
-        base_combateSobrenatural[2].setText(String.valueOf(this.ficha.getCombate(4)));
+        base_combateSobrenatural[0].setText(String.valueOf(ficha.getCombate(3)));
+        base_combateSobrenatural[1].setText(String.valueOf(ficha.getPotencialPsiquico()));
+        base_combateSobrenatural[2].setText(String.valueOf(ficha.getCombate(4)));
         
         for (int i = 0; i < 4; i++) {
-            base_convocatoria[i].setText(String.valueOf(this.ficha.getConvocatoria(i)));
+            base_convocatoria[i].setText(String.valueOf(ficha.getConvocatoria(i)));
         }
         
         
