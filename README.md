@@ -47,7 +47,7 @@
  
  	https://github.com/TheCorPlay
 	
-	Look at the file "LICENSE.md" for more information.
+	Please see [the licence file](LICENCE) for more information.
 ***
  	
 ## FUTURE UPDATES
