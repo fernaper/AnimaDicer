@@ -8,6 +8,7 @@
  	E-Mail: fernaperg@gmail.com
  	Current version: v1.0.5 - RC (Release Candidate)
 ***
+
 ## CONCEPTUAL IDEA
 	
 	The purpouse of this project is to make the rol games faster.
@@ -22,7 +23,7 @@
   
 	FERNANDO PÉREZ GUTIÉRREZ
 		Main programmer, conceptual designer.
-    	Absolutely all the code in java has been written by him.
+    	The vast majority of the code is written by him.
 	
 	ALFREDO PÉREZ GUTIÉRREZ
     	Designer of the excel documents with wich the program works.
@@ -31,7 +32,7 @@
 	JUAN MAS AGUILAR
     	Co-worker to create and make compatible AnimaDicer Mobile and
 		improve the basic multi-load
-    	Tester, and ideas provider.
+    	Programmer, tester, and ideas provider.
 	
 	EDGEE
 		Creators of "Anima Beyond Fantasy" for which our program serves.
