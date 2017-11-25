@@ -4658,8 +4658,8 @@ public class Dicer extends javax.swing.JFrame {
         barraVida.setValue(ficha.getVidaActual());
         fieldZeon.setText(String.valueOf(ficha.getZeon()));
         barraZeon.setMaximum(ficha.getZeon());
-        fieldZeonActual.setText(String.valueOf(ficha.getZeonActual()));
         barraZeon.setMinimum(0);
+        fieldZeonActual.setText(String.valueOf(ficha.getZeonActual()));
         barraZeon.setValue(ficha.getZeonActual());        
         fieldCansancio.setText(String.valueOf(ficha.getCansancio()));
         barraCansancio.setMaximum(ficha.getCansancio());

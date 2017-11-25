@@ -117,7 +117,7 @@ public class Ficha {
     }
 
     public int getZeonActual() {
-        return this.zeon;
+        return this.zeonActual;
     }
     
     public int getCansancio() {
