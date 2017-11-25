@@ -150,9 +150,6 @@ public class Dicer extends javax.swing.JFrame {
         fieldNombre = new javax.swing.JTextField();
         fieldCategoria = new javax.swing.JTextField();
         fieldNivel = new javax.swing.JTextField();
-        fieldZeon = new javax.swing.JTextField();
-        fieldZeonActual = new javax.swing.JTextField();
-        jLabel130 = new javax.swing.JLabel();
         jLabel175 = new javax.swing.JLabel();
         jLabel176 = new javax.swing.JLabel();
         fieldCansancioActual = new javax.swing.JTextField();
@@ -163,6 +160,11 @@ public class Dicer extends javax.swing.JFrame {
         fieldVida = new javax.swing.JTextField();
         fieldVidaActual = new javax.swing.JTextField();
         jLabel129 = new javax.swing.JLabel();
+        jLayeredPane1 = new javax.swing.JLayeredPane();
+        barraZeon = new javax.swing.JProgressBar();
+        fieldZeon = new javax.swing.JTextField();
+        fieldZeonActual = new javax.swing.JTextField();
+        jLabel130 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jLabel132 = new javax.swing.JLabel();
         jLabel133 = new javax.swing.JLabel();
@@ -713,24 +715,6 @@ public class Dicer extends javax.swing.JFrame {
         fieldNivel.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jPanel6.add(fieldNivel, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 80, 180, -1));
 
-        fieldZeon.setEditable(false);
-        fieldZeon.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jPanel6.add(fieldZeon, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 140, 80, -1));
-
-        fieldZeonActual.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        fieldZeonActual.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                fieldZeonActualKeyReleased(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                fieldZeonActualKeyTyped(evt);
-            }
-        });
-        jPanel6.add(fieldZeonActual, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 140, 80, -1));
-
-        jLabel130.setText("/");
-        jPanel6.add(jLabel130, new org.netbeans.lib.awtextra.AbsoluteConstraints(167, 142, -1, -1));
-
         jLabel175.setText("Cansancio:");
         jPanel6.add(jLabel175, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 172, -1, -1));
 
@@ -829,6 +813,79 @@ public class Dicer extends javax.swing.JFrame {
         );
 
         jPanel6.add(jLayeredPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, 180, 20));
+
+        barraZeon.setForeground(new java.awt.Color(51, 102, 255));
+
+        fieldZeon.setEditable(false);
+        fieldZeon.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        fieldZeon.setText("125");
+        fieldZeon.setBorder(null);
+        fieldZeon.setOpaque(false);
+
+        fieldZeonActual.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        fieldZeonActual.setText("125");
+        fieldZeonActual.setBorder(null);
+        fieldZeonActual.setOpaque(false);
+        fieldZeonActual.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fieldZeonActualActionPerformed(evt);
+            }
+        });
+        fieldZeonActual.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                fieldZeonActualKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                fieldZeonActualKeyTyped(evt);
+            }
+        });
+
+        jLabel130.setText("/");
+
+        jLayeredPane1.setLayer(barraZeon, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(fieldZeon, javax.swing.JLayeredPane.PALETTE_LAYER);
+        jLayeredPane1.setLayer(fieldZeonActual, javax.swing.JLayeredPane.PALETTE_LAYER);
+        jLayeredPane1.setLayer(jLabel130, javax.swing.JLayeredPane.PALETTE_LAYER);
+
+        javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
+        jLayeredPane1.setLayout(jLayeredPane1Layout);
+        jLayeredPane1Layout.setHorizontalGroup(
+            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane1Layout.createSequentialGroup()
+                .addGap(0, 47, Short.MAX_VALUE)
+                .addComponent(fieldZeonActual, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
+                .addComponent(fieldZeon, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(43, 43, 43))
+            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(barraZeon, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jLabel130)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        jLayeredPane1Layout.setVerticalGroup(
+            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(fieldZeonActual, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
+                .addComponent(fieldZeon))
+            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(barraZeon, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jLabel130)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+
+        jPanel6.add(jLayeredPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 140, 180, 20));
 
         jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 270, 200));
 
@@ -2411,6 +2468,14 @@ public class Dicer extends javax.swing.JFrame {
         
         if (Integer.parseInt(fieldZeonActual.getText()) > Integer.parseInt(fieldZeon.getText()))
             fieldZeonActual.setText(fieldZeon.getText());
+        
+        int value = 0;
+        try{
+            this.ficha.setVidaActual(Integer.parseInt(fieldZeonActual.getText()));
+            value = Integer.parseInt(fieldZeonActual.getText());
+        }
+        catch(NumberFormatException ex){value = 0;}
+        finally{barraZeon.setValue(value);}
     }//GEN-LAST:event_fieldZeonActualKeyReleased
 
     private void calcBaseKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_calcBaseKeyReleased
@@ -2636,6 +2701,10 @@ public class Dicer extends javax.swing.JFrame {
         catch(NumberFormatException ex){value = 0;}
         finally{barraVida.setValue(value);}
     }//GEN-LAST:event_fieldVidaActualKeyReleased
+
+    private void fieldZeonActualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldZeonActualActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fieldZeonActualActionPerformed
 
     private void intTextField(java.awt.event.KeyEvent evt, JTextField field) {
         char vchar = evt.getKeyChar();
@@ -2973,6 +3042,7 @@ public class Dicer extends javax.swing.JFrame {
     private javax.swing.JTextField armaduraCalcComb;
     private javax.swing.JMenuItem ayuda;
     private javax.swing.JProgressBar barraVida;
+    private javax.swing.JProgressBar barraZeon;
     private javax.swing.JTextField baseCalcComb;
     private javax.swing.JTextField calcBase;
     private javax.swing.JTextField calcFinal;
@@ -3358,6 +3428,7 @@ public class Dicer extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel97;
     private javax.swing.JLabel jLabel98;
     private javax.swing.JLabel jLabel99;
+    private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JLayeredPane jLayeredPane2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
@@ -4524,7 +4595,10 @@ public class Dicer extends javax.swing.JFrame {
         fieldVidaActual.setText(String.valueOf(ficha.getVidaActual()));
         barraVida.setValue(ficha.getVidaActual());
         fieldZeon.setText(String.valueOf(ficha.getZeon()));
+        barraZeon.setMaximum(ficha.getZeon());
         fieldZeonActual.setText(String.valueOf(ficha.getZeonActual()));
+        barraZeon.setMinimum(0);
+        barraZeon.setValue(ficha.getZeonActual());        
         fieldCansancio.setText(String.valueOf(ficha.getCansancio()));
         fieldCansancioActual.setText(String.valueOf(ficha.getCansancioActual()));
         
