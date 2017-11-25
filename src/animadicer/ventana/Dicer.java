@@ -2524,7 +2524,7 @@ public class Dicer extends javax.swing.JFrame {
 
     private void comprobarExistencia(File archivosSeleccionado, boolean primero) throws CargaException { 
         String path = archivosSeleccionado.getPath();
-        System.out.print(path);
+        //System.out.print(path);
         
         if(archivosDireccionCargados.containsKey(path))
             throw new CargaException("Esta ficha ya ha sido cargada con anterioridad");

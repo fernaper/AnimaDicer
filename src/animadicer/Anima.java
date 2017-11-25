@@ -53,10 +53,14 @@ public class Anima {
     }
     
     public Ficha cargar () {
-        
         try {
             Sheet sheet = workbook.getSheetAt(0);
-            this.ficha = cargarGenerico(sheet);
+            if ("Capacidades Físicas".equals(sheet.getRow(10).getCell(CellReference.convertColStringToIndex("G")).getStringCellValue())) {
+                this.ficha = cargarGenericoViejo(sheet);
+            } else {
+                this.ficha = cargarGenericoV105(sheet);
+            }
+            
         } catch (NullPointerException | CargaException ex) {}
         // cerramos el libro excel
         try {
@@ -77,7 +81,7 @@ public class Anima {
         return this.ficha;
     }
     
-    private Ficha cargarGenerico(Sheet sheet) throws CargaException {
+    private Ficha cargarGenericoViejo(Sheet sheet) throws CargaException {
         // Testeo de que está leyendo una ficha y no un documento cualquiera
         if (!"Turno".equals(sheet.getRow(0).getCell(CellReference.convertColStringToIndex("L")).getStringCellValue()) ||
             !"Creativas".equals(sheet.getRow(51).getCell(CellReference.convertColStringToIndex("P")).getStringCellValue())) {
@@ -226,6 +230,140 @@ public class Anima {
         }
 
         ficha.setPotencialPsiquico((int)(sheet.getRow(5).getCell(CellReference.convertColStringToIndex("BH")).getNumericCellValue()));
+        
+        ficha.setNotas(cargarNotas());
+        return ficha;
+    }
+    
+    private Ficha cargarGenericoV105(Sheet sheet) throws CargaException {
+        // Testeo de que está leyendo una ficha y no un documento cualquiera
+        if (!"Turno".equals(sheet.getRow(0).getCell(CellReference.convertColStringToIndex("L")).getStringCellValue()) ||
+            !"Creativas".equals(sheet.getRow(51).getCell(CellReference.convertColStringToIndex("P")).getStringCellValue())) {
+            throw new CargaException("Este documento no es una ficha preparada");
+        }
+        ficha = new Ficha();
+        
+        ficha.setNombre(sheet.getRow(0).getCell(CellReference.convertColStringToIndex("C")).getStringCellValue());
+        ficha.setCategoria(sheet.getRow(1).getCell(CellReference.convertColStringToIndex("C")).getStringCellValue());
+        ficha.setNivel((int)(sheet.getRow(2).getCell(CellReference.convertColStringToIndex("C")).getNumericCellValue()));
+        ficha.setVida((int)(sheet.getRow(6).getCell(CellReference.convertColStringToIndex("W")).getNumericCellValue()));
+        ficha.setZeon((int)(sheet.getRow(8).getCell(CellReference.convertColStringToIndex("BE")).getNumericCellValue()));
+        ficha.setCansancio((int)(sheet.getRow(87).getCell(CellReference.convertColStringToIndex("O")).getNumericCellValue()));
+        
+        ficha.setVidaActual(ficha.getVida());
+        ficha.setZeonActual(ficha.getZeon());
+        ficha.setCansancioActual(ficha.getCansancio());
+        
+        {
+            int [] ki = new int[6];
+            for (int i = 0; i < 6; i++) {
+                ki[i] = (int)(sheet.getRow(2+i).getCell(CellReference.convertColStringToIndex("AG")).getNumericCellValue());
+            }
+            ficha.setKi(ki);
+        }
+        {
+            int[] atributos = new int [8];
+            for (int i = 0; i < 8; i++) {
+                atributos[i] = (int)(sheet.getRow(9+i).getCell(CellReference.convertColStringToIndex("D")).getNumericCellValue());
+            }
+            ficha.setAtributos(atributos);
+        }
+        {
+            int[] combate = new int [5];
+            combate[0] = (int)(sheet.getRow(40).getCell(CellReference.convertColStringToIndex("C")).getNumericCellValue());
+            combate[1] = (int)(sheet.getRow(40).getCell(CellReference.convertColStringToIndex("E")).getNumericCellValue());
+            combate[2] = (int)(sheet.getRow(40).getCell(CellReference.convertColStringToIndex("G")).getNumericCellValue());
+            combate[3] = (int)(sheet.getRow(11).getCell(CellReference.convertColStringToIndex("AS")).getNumericCellValue());
+            combate[4] = (int)(sheet.getRow(21).getCell(CellReference.convertColStringToIndex("BR")).getNumericCellValue());
+
+            ficha.setCombate(combate);
+        }
+        {
+            int[] res = new int [6];
+            for (int i = 0; i < 6; i++) {
+                res[i] = (int)(sheet.getRow(70+i).getCell(CellReference.convertColStringToIndex("H")).getNumericCellValue());
+            }
+            ficha.setRes(res);
+        }
+        {
+            int[] secundarias = new int [38];
+            int j = 0;
+            for (int i = 0; i < 38+6; i++) {
+                if (13+i != 19 && 13+i != 23 && 13+i != 27 && 13+i != 38 && 13+i != 43 && 13+i != 51) {
+                    secundarias[j] = (int)(sheet.getRow(13+i).getCell(CellReference.convertColStringToIndex("W")).getNumericCellValue());
+                    j++;
+                }
+            }
+
+            ficha.setSecundarias(secundarias);
+        }
+        {
+            int[] turno = new int [5];
+            turno[0] = (int)(sheet.getRow(8).getCell(CellReference.convertColStringToIndex("N")).getNumericCellValue());
+            turno[1] = (int)(sheet.getRow(8).getCell(CellReference.convertColStringToIndex("P")).getNumericCellValue());
+            turno[2] = (int)(sheet.getRow(8).getCell(CellReference.convertColStringToIndex("Q")).getNumericCellValue());
+            turno[3] = (int)(sheet.getRow(8).getCell(CellReference.convertColStringToIndex("R")).getNumericCellValue());
+            turno[4] = (int)(sheet.getRow(8).getCell(CellReference.convertColStringToIndex("S")).getNumericCellValue());
+
+            ficha.setTurno(turno);
+        }
+        {
+            Arma[] arma;
+            arma = new Arma[4];
+            
+            for (int i = 0; i < 4; i++) {
+                String [] criticos = new String [2];
+                String nombre = sheet.getRow(44+(6*i)).getCell(CellReference.convertColStringToIndex("C")).getStringCellValue();
+                arma[i] = new Arma();
+                if (!"".equals(nombre)) {
+                    arma[i].setNombre(nombre);
+                    criticos[0] = sheet.getRow(48+(6*i)).getCell(CellReference.convertColStringToIndex("F")).getStringCellValue();
+                    criticos[1] = sheet.getRow(48+(6*i)).getCell(CellReference.convertColStringToIndex("G")).getStringCellValue();
+                    arma[i].setCritico(criticos);
+                    arma[i].setDamage((int)(sheet.getRow(46+(6*i)).getCell(CellReference.convertColStringToIndex("F")).getNumericCellValue()));
+                    arma[i].setEntereza((int)(sheet.getRow(48+(6*i)).getCell(CellReference.convertColStringToIndex("C")).getNumericCellValue()));
+                    arma[i].setRotura((int)(sheet.getRow(48+(6*i)).getCell(CellReference.convertColStringToIndex("D")).getNumericCellValue()));
+                    arma[i].setPresencia((int)(sheet.getRow(48+(6*i)).getCell(CellReference.convertColStringToIndex("E")).getNumericCellValue()));
+                } else {
+                    criticos[0] = "FIL";
+                    criticos[1] = "CON";
+                    arma[i].setCritico(criticos);
+                    arma[i].setDamage(0);
+                    arma[i].setEntereza(0);
+                    arma[i].setNombre("Nada");
+                    arma[i].setRotura(0);
+                    arma[i].setPresencia(0);
+                } 
+            }
+            
+            ficha.setArma(arma);
+        }
+        {
+            Armadura []armadura;
+            armadura = new Armadura[3];
+            for (int i = 0; i < 3; i++) {
+                armadura[i] = new Armadura();
+                armadura[i].setNombre(sheet.getRow(23+i).getCell(CellReference.convertColStringToIndex("B")).getStringCellValue());
+                int []defensa = new int[7];
+                for (int j = 0; j < 7; j++) {
+                    defensa[j] = (int)(sheet.getRow(28+i).getCell(2+j).getNumericCellValue());
+                }
+                
+                armadura[i].setDefensa(defensa);
+                armadura[i].setPosicion(sheet.getRow(28+i).getCell(CellReference.convertColStringToIndex("J")).getStringCellValue());
+            }
+            ficha.setArmadura(armadura);
+        }
+        {
+            int[] convocatoria;
+            convocatoria = new int [4];
+            for (int i = 0; i < 4; i++) {
+                    convocatoria[i] = (int)(sheet.getRow(76+i).getCell(CellReference.convertColStringToIndex("W")).getNumericCellValue());
+            }
+            ficha.setConvocatoria(convocatoria);
+        }
+
+        ficha.setPotencialPsiquico((int)(sheet.getRow(5).getCell(CellReference.convertColStringToIndex("BI")).getNumericCellValue()));
         
         ficha.setNotas(cargarNotas());
         return ficha;
