@@ -151,10 +151,6 @@ public class Dicer extends javax.swing.JFrame {
         fieldCategoria = new javax.swing.JTextField();
         fieldNivel = new javax.swing.JTextField();
         jLabel175 = new javax.swing.JLabel();
-        jLabel176 = new javax.swing.JLabel();
-        fieldCansancioActual = new javax.swing.JTextField();
-        fieldCansancio = new javax.swing.JTextField();
-        comboNombre = new javax.swing.JComboBox<>();
         jLayeredPane2 = new javax.swing.JLayeredPane();
         barraVida = new javax.swing.JProgressBar();
         fieldVida = new javax.swing.JTextField();
@@ -165,6 +161,12 @@ public class Dicer extends javax.swing.JFrame {
         fieldZeon = new javax.swing.JTextField();
         fieldZeonActual = new javax.swing.JTextField();
         jLabel130 = new javax.swing.JLabel();
+        jLayeredPane3 = new javax.swing.JLayeredPane();
+        barraCansancio = new javax.swing.JProgressBar();
+        fieldCansancioActual = new javax.swing.JTextField();
+        jLabel176 = new javax.swing.JLabel();
+        fieldCansancio = new javax.swing.JTextField();
+        comboNombre = new javax.swing.JComboBox<>();
         jPanel7 = new javax.swing.JPanel();
         jLabel132 = new javax.swing.JLabel();
         jLabel133 = new javax.swing.JLabel();
@@ -718,34 +720,6 @@ public class Dicer extends javax.swing.JFrame {
         jLabel175.setText("Cansancio:");
         jPanel6.add(jLabel175, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 172, -1, -1));
 
-        jLabel176.setText("/");
-        jPanel6.add(jLabel176, new org.netbeans.lib.awtextra.AbsoluteConstraints(167, 172, -1, -1));
-
-        fieldCansancioActual.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        fieldCansancioActual.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                fieldCansancioActualKeyReleased(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                fieldCansancioActualKeyTyped(evt);
-            }
-        });
-        jPanel6.add(fieldCansancioActual, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 170, 80, -1));
-
-        fieldCansancio.setEditable(false);
-        fieldCansancio.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jPanel6.add(fieldCansancio, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 170, 80, -1));
-
-        comboNombre.setModel(new javax.swing.DefaultComboBoxModel<>());
-        comboNombre.setEnabled(false);
-        comboNombre.setName("");
-        comboNombre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboNombreActionPerformed(evt);
-            }
-        });
-        jPanel6.add(comboNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, 100, -1));
-
         barraVida.setForeground(new java.awt.Color(0, 204, 51));
 
         fieldVida.setEditable(false);
@@ -886,6 +860,84 @@ public class Dicer extends javax.swing.JFrame {
         );
 
         jPanel6.add(jLayeredPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 140, 180, 20));
+
+        barraCansancio.setForeground(new java.awt.Color(255, 255, 0));
+
+        fieldCansancioActual.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        fieldCansancioActual.setBorder(null);
+        fieldCansancioActual.setOpaque(false);
+        fieldCansancioActual.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                fieldCansancioActualKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                fieldCansancioActualKeyTyped(evt);
+            }
+        });
+
+        jLabel176.setText("/");
+
+        fieldCansancio.setEditable(false);
+        fieldCansancio.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        fieldCansancio.setBorder(null);
+        fieldCansancio.setOpaque(false);
+
+        jLayeredPane3.setLayer(barraCansancio, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane3.setLayer(fieldCansancioActual, javax.swing.JLayeredPane.PALETTE_LAYER);
+        jLayeredPane3.setLayer(jLabel176, javax.swing.JLayeredPane.PALETTE_LAYER);
+        jLayeredPane3.setLayer(fieldCansancio, javax.swing.JLayeredPane.PALETTE_LAYER);
+
+        javax.swing.GroupLayout jLayeredPane3Layout = new javax.swing.GroupLayout(jLayeredPane3);
+        jLayeredPane3.setLayout(jLayeredPane3Layout);
+        jLayeredPane3Layout.setHorizontalGroup(
+            jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane3Layout.createSequentialGroup()
+                .addGap(43, 43, 43)
+                .addComponent(fieldCansancioActual, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addComponent(fieldCansancio, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42))
+            .addGroup(jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jLayeredPane3Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(barraCansancio, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jLayeredPane3Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jLabel176)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        jLayeredPane3Layout.setVerticalGroup(
+            jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane3Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(fieldCansancio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(fieldCansancioActual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addGroup(jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jLayeredPane3Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(barraCansancio, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jLayeredPane3Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jLabel176)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+
+        jPanel6.add(jLayeredPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 170, 180, 20));
+
+        comboNombre.setModel(new javax.swing.DefaultComboBoxModel<>());
+        comboNombre.setEnabled(false);
+        comboNombre.setName("");
+        comboNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboNombreActionPerformed(evt);
+            }
+        });
+        jPanel6.add(comboNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, 100, -1));
 
         jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 270, 200));
 
@@ -2460,6 +2512,14 @@ public class Dicer extends javax.swing.JFrame {
         
         if (Integer.parseInt(fieldCansancioActual.getText()) > Integer.parseInt(fieldCansancio.getText()))
             fieldCansancioActual.setText(fieldCansancio.getText());
+        
+        int value = 0;
+        try{
+            this.ficha.setCansancioActual(Integer.parseInt(fieldCansancioActual.getText()));
+            value = Integer.parseInt(fieldCansancioActual.getText());
+        }
+        catch(NumberFormatException ex){value = 0;}
+        finally{barraCansancio.setValue(value);}
     }//GEN-LAST:event_fieldCansancioActualKeyReleased
 
     private void fieldZeonActualKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fieldZeonActualKeyReleased
@@ -2471,7 +2531,7 @@ public class Dicer extends javax.swing.JFrame {
         
         int value = 0;
         try{
-            this.ficha.setVidaActual(Integer.parseInt(fieldZeonActual.getText()));
+            this.ficha.setZeonActual(Integer.parseInt(fieldZeonActual.getText()));
             value = Integer.parseInt(fieldZeonActual.getText());
         }
         catch(NumberFormatException ex){value = 0;}
@@ -3041,6 +3101,7 @@ public class Dicer extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField armaduraCalcComb;
     private javax.swing.JMenuItem ayuda;
+    private javax.swing.JProgressBar barraCansancio;
     private javax.swing.JProgressBar barraVida;
     private javax.swing.JProgressBar barraZeon;
     private javax.swing.JTextField baseCalcComb;
@@ -3430,6 +3491,7 @@ public class Dicer extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel99;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JLayeredPane jLayeredPane2;
+    private javax.swing.JLayeredPane jLayeredPane3;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -4600,7 +4662,11 @@ public class Dicer extends javax.swing.JFrame {
         barraZeon.setMinimum(0);
         barraZeon.setValue(ficha.getZeonActual());        
         fieldCansancio.setText(String.valueOf(ficha.getCansancio()));
+        barraCansancio.setMaximum(ficha.getCansancio());
         fieldCansancioActual.setText(String.valueOf(ficha.getCansancioActual()));
+        barraCansancio.setMinimum(0);
+        barraCansancio.setValue(ficha.getCansancioActual());        
+
         
         for (int i = 0; i < 8; i++) {
             base_Atributos[i].setText(String.valueOf(ficha.getAtributo(i)));
