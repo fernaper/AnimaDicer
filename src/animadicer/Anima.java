@@ -43,8 +43,7 @@ public class Anima {
             workbook = WorkbookFactory.create(file);
             ficha = new Ficha();
         } catch (FileNotFoundException e) {
-        } catch (IOException e) {
-        } catch (InvalidFormatException | EncryptedDocumentException ex) {
+        } catch (IOException | InvalidFormatException | EncryptedDocumentException e) {
         }
     }
 	
@@ -90,7 +89,7 @@ public class Anima {
         ficha.setCategoria(sheet.getRow(1).getCell(CellReference.convertColStringToIndex("C")).getStringCellValue());
         ficha.setNivel((int)(sheet.getRow(2).getCell(CellReference.convertColStringToIndex("C")).getNumericCellValue()));
         ficha.setVida((int)(sheet.getRow(6).getCell(CellReference.convertColStringToIndex("V")).getNumericCellValue()));
-        ficha.setZeon((int)(sheet.getRow(7).getCell(CellReference.convertColStringToIndex("BD")).getNumericCellValue()));
+        ficha.setZeon((int)(sheet.getRow(8).getCell(CellReference.convertColStringToIndex("BD")).getNumericCellValue()));
         ficha.setCansancio((int)(sheet.getRow(14).getCell(CellReference.convertColStringToIndex("H")).getNumericCellValue()));
         
         ficha.setVidaActual(ficha.getVida());
