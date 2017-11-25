@@ -23,7 +23,7 @@ public class FileJSON {
         
     }
     
-    public Ficha importJason(File file) {
+    public static Ficha importJason(File file) {
         Ficha ficha = new Ficha();
         JSONParser parser = new JSONParser();
         
@@ -111,7 +111,7 @@ public class FileJSON {
                 JSONArray arma = (JSONArray) jsonObj.get("arma");
                 Arma arrayArma[] = new Arma[4];
 
-                for (int i = 0; i < arma.size(); i++) {
+                /*for (int i = 0; i < arma.size(); i++) {
                     JSONObject jsonobject = (JSONObject)arma.get(i);
                     arrayArma[i].setNombre((String)jsonobject.get("nombre"));
                     arrayArma[i].setDamage(Integer.parseInt((String)jsonobject.get("damage")));
@@ -128,14 +128,14 @@ public class FileJSON {
                         j++;
                     }
                     arrayArma[i].setCritico(arrayC);
-                }
+                }*/
                 ficha.setArma(arrayArma);
             }
             {
                 JSONArray armadura = (JSONArray) jsonObj.get("armadura");
                 Armadura arrayArmadura[] = new Armadura[3];
 
-                for (int i = 0; i < armadura.size(); i++) {
+                /*for (int i = 0; i < armadura.size(); i++) {
                     JSONObject jsonobject = (JSONObject)armadura.get(i);
                     arrayArmadura[i].setNombre((String)jsonobject.get("nombre"));
                     arrayArmadura[i].setPosicion((String)jsonobject.get("posicion"));
@@ -149,7 +149,7 @@ public class FileJSON {
                         j++;
                     }
                     arrayArmadura[i].setDefensa(arrayD);
-                }
+                }*/
                 ficha.setArmadura(arrayArmadura);
             }
             {

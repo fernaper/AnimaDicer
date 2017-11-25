@@ -2680,7 +2680,6 @@ public class Dicer extends javax.swing.JFrame {
 
     private void cargar(){
         //Seleccionamos los archivos
-
         seleccionado.setMultiSelectionEnabled(true);
         
         if (seleccionado.showDialog(null, "Abrir fichas") == JFileChooser.APPROVE_OPTION){
@@ -5119,7 +5118,7 @@ public class Dicer extends javax.swing.JFrame {
     private void myInitComponents() {
         seleccionado = new javax.swing.JFileChooser();
         seleccionado.setMultiSelectionEnabled(true);
-        seleccionado.setFileFilter(new FileNameExtensionFilter("xls & xlsx Excel", "xls", "xlsx"));
+        seleccionado.setFileFilter(new FileNameExtensionFilter("xls & xlsx Excel & JSON", "xls", "xlsx", "json"));
     }
     
     private void guardarNotas() {

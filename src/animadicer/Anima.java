@@ -38,12 +38,16 @@ public class Anima {
 
     public Anima(File seleccionado, String dir) {
         this.direccion = dir;
-        try {
-            file = new FileInputStream(seleccionado);
-            workbook = WorkbookFactory.create(file);
-            ficha = new Ficha();
-        } catch (FileNotFoundException e) {
-        } catch (IOException | InvalidFormatException | EncryptedDocumentException e) {
+        if (seleccionado.getName().endsWith("json")) {
+            ficha = FileJSON.importJason(seleccionado);
+        } else {
+            try {
+                file = new FileInputStream(seleccionado);
+                workbook = WorkbookFactory.create(file);
+                ficha = new Ficha();
+            } catch (FileNotFoundException e) {
+            } catch (IOException | InvalidFormatException | EncryptedDocumentException e) {
+            }
         }
     }
 	
