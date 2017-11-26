@@ -12,6 +12,7 @@ import animadicer.Armadura;
 import animadicer.CargaException;
 import animadicer.Dado;
 import animadicer.Ficha;
+import animadicer.FileJSON;
 import animadicer.Log;
 import animadicer.Settings;
 import animadicer.connection.Descargar;
@@ -577,6 +578,7 @@ public class Dicer extends javax.swing.JFrame {
         menuNuevo = new javax.swing.JMenuItem();
         mnuAbrir = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         menuDescargar = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         jMenuItem4 = new javax.swing.JMenuItem();
@@ -2389,6 +2391,15 @@ public class Dicer extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem2);
 
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem1.setText("Exportar");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
         menuDescargar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.CTRL_MASK));
         menuDescargar.setText("Descargar Ficha");
         menuDescargar.addActionListener(new java.awt.event.ActionListener() {
@@ -2656,13 +2667,13 @@ public class Dicer extends javax.swing.JFrame {
         //Si no estaba en nuestro registro de direcciones lo añadimos al diccionario
         archivosDireccionCargados.put(archivosSeleccionado.getPath(), archivosSeleccionado.getName());
         //Añadimos el nombre a nuestro combo
-        Ficha ficha;
+        Ficha fich;
         
         if(primero)
-            ficha = this.ficha;
+            fich = this.ficha;
         
-        ficha = new Anima(archivosSeleccionado, direccion).cargar();
-        archivosCargados.add(ficha);
+        fich = new Anima(archivosSeleccionado, direccion).cargar();
+        archivosCargados.add(fich);
         anadirComboNombre(archivosSeleccionado.getName());
     }
     
@@ -2764,6 +2775,20 @@ public class Dicer extends javax.swing.JFrame {
     private void fieldZeonActualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldZeonActualActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_fieldZeonActualActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        JFileChooser guardarDesc = new JFileChooser();
+        guardarDesc.setFileFilter(new FileNameExtensionFilter("JSON Files", "json"));
+        String ruta; 
+
+        if(guardarDesc.showSaveDialog(null)== JFileChooser.APPROVE_OPTION){ 
+            ruta = guardarDesc.getSelectedFile().getAbsolutePath();
+            if (!ruta.endsWith("json")) {
+                ruta = ruta + ".json";
+            }
+            FileJSON.exportJason(ruta, this.ficha);
+        }
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void intTextField(java.awt.event.KeyEvent evt, JTextField field) {
         char vchar = evt.getKeyChar();
@@ -3495,6 +3520,7 @@ public class Dicer extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem7;
@@ -3678,6 +3704,7 @@ public class Dicer extends javax.swing.JFrame {
                         if (Integer.parseInt(f.getText()) > Integer.parseInt(ki[i].getText())) {
                             f.setText(ki[i].getText());
                         }
+                        ficha.setKiActual(i, Integer.parseInt(f.getText()));
                     } catch (NumberFormatException e) {
                         
                     }
@@ -4676,7 +4703,7 @@ public class Dicer extends javax.swing.JFrame {
         
         for (int i = 0; i < 6; i++) {
             ki[i].setText(String.valueOf(ficha.getKi(i)));
-            kiActual[i].setText(String.valueOf(ficha.getKi(i)));
+            kiActual[i].setText(String.valueOf(ficha.getKiActual(i)));
         }
     }
     

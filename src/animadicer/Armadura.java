@@ -14,7 +14,7 @@ public class Armadura {
     int[]defensa; // FIL, CON, PEN, CAL, ELE, FRI, ENER
     String posicion;
     
-    public void Armadura() {
+    public Armadura() {
         this.nombre = "";
         this.posicion = "";
         this.defensa = new int[7];

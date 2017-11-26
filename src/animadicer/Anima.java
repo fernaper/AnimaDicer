@@ -22,6 +22,7 @@ public class Anima {
     Settings settings;
     Ficha ficha;
     String direccion;
+    File seleccionado;
 
     public Anima (String dir) {
         this.direccion = dir;
@@ -38,16 +39,13 @@ public class Anima {
 
     public Anima(File seleccionado, String dir) {
         this.direccion = dir;
-        if (seleccionado.getName().endsWith("json")) {
-            ficha = FileJSON.importJason(seleccionado);
-        } else {
-            try {
-                file = new FileInputStream(seleccionado);
-                workbook = WorkbookFactory.create(file);
-                ficha = new Ficha();
-            } catch (FileNotFoundException e) {
-            } catch (IOException | InvalidFormatException | EncryptedDocumentException e) {
-            }
+        this.seleccionado = seleccionado;
+        try {
+            file = new FileInputStream(seleccionado);
+            workbook = WorkbookFactory.create(file);
+            ficha = new Ficha();
+        } catch (FileNotFoundException e) {
+        } catch (IOException | InvalidFormatException | EncryptedDocumentException e) {
         }
     }
 	
@@ -57,20 +55,24 @@ public class Anima {
     }
     
     public Ficha cargar () {
-        try {
-            Sheet sheet = workbook.getSheetAt(0);
-            if ("Capacidades Físicas".equals(sheet.getRow(10).getCell(CellReference.convertColStringToIndex("G")).getStringCellValue())) {
-                this.ficha = cargarGenericoViejo(sheet);
-            } else {
-                this.ficha = cargarGenericoV105(sheet);
+        if (this.seleccionado.getName().endsWith("json")) {
+            this.ficha = FileJSON.importJason(this.seleccionado);
+        } else {
+            try {
+                Sheet sheet = workbook.getSheetAt(0);
+                if ("Capacidades Físicas".equals(sheet.getRow(10).getCell(CellReference.convertColStringToIndex("G")).getStringCellValue())) {
+                    this.ficha = cargarGenericoViejo(sheet);
+                } else {
+                    this.ficha = cargarGenericoV105(sheet);
+                }
+
+            } catch (NullPointerException | CargaException ex) {}
+            // cerramos el libro excel
+            try {
+                if (workbook != null)
+                    workbook.close();
+            } catch (IOException e) {
             }
-            
-        } catch (NullPointerException | CargaException ex) {}
-        // cerramos el libro excel
-        try {
-            if (workbook != null)
-                workbook.close();
-        } catch (IOException e) {
         }
         
         return this.ficha;
@@ -110,6 +112,7 @@ public class Anima {
                 ki[i] = (int)(sheet.getRow(2+i).getCell(CellReference.convertColStringToIndex("AN")).getNumericCellValue());
             }
             ficha.setKi(ki);
+            ficha.setKiActual(ki);
         }
         {
             int[] atributos = new int [8];
@@ -264,6 +267,7 @@ public class Anima {
                 ki[i] = (int)(sheet.getRow(2+i).getCell(CellReference.convertColStringToIndex("AG")).getNumericCellValue());
             }
             ficha.setKi(ki);
+            ficha.setKiActual(ki);
         }
         {
             int[] atributos = new int [8];
@@ -425,6 +429,7 @@ public class Anima {
                 ki[i] = 5;
             }
             ficha.setKi(ki);
+            ficha.setKiActual(ki);
         }
         {
             int[] atributos = new int [8];

@@ -12,7 +12,7 @@ public class Ficha {
     int cansancio;
     int cansancioActual;
     int[] ki; // FUE, AGI, DES, CON, VOL, POD
-
+    int[] kiActual;
     // Todos los tipos de armaduras (para saber cu�l es aplicable en cada caso)
     int[]atributos; // AGI, CON, DES, FUE, INT, PER, POD, VOL
 
@@ -30,6 +30,7 @@ public class Ficha {
 
     public Ficha() {
         ki = new int [6];
+        kiActual = new int [6];
         atributos = new int [8];
         combate = new int [5];
         res = new int [6];
@@ -144,6 +145,20 @@ public class Ficha {
 
     public int getKi(int type) {
         return this.ki[type];
+    }
+    
+    public void setKiActual(int[] ki) {
+        for (int i = 0; i < 6; i++) {
+            this.kiActual[i] = ki[i];
+        }
+    }
+    
+    public void setKiActual(int cual, int ki) {
+        this.kiActual[cual] = ki;
+    }
+
+    public int getKiActual(int type) {
+        return this.kiActual[type];
     }
 
     public void setAtributos(int[] atributos) {
