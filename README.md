@@ -46,9 +46,9 @@
  	Example of minimum credits:
  	AnimaDicer made by Fernando Pérez you can find this and more done for him here:
  
- 	https://github.com/TheCorPlay
+	https://github.com/TheCorPlay
 	
-	Please see [the licence file](LICENCE) for more information.
+Please see [the licence file](LICENCE) for more information.
 ***
  	
 ## FUTURE UPDATES
