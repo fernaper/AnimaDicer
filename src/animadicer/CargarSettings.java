@@ -66,7 +66,7 @@ public class CargarSettings {
               if( null != fr ){   
                  fr.close();     
               }                  
-           }catch (Exception e2){ 
+           }catch (IOException e){ 
            }
         }
         

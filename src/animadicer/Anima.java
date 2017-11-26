@@ -404,7 +404,7 @@ public class Anima {
               if( null != fr ){   
                  fr.close();     
               }                  
-           }catch (Exception e2){ 
+           }catch (IOException e2){ 
            }
         }
         
@@ -416,12 +416,12 @@ public class Anima {
         ficha.setNombre("Nombre");
         ficha.setCategoria("Novel");
         ficha.setNivel(1);
-        ficha.setVida(0);
-        ficha.setZeon(0);
+        ficha.setVida(75);
+        ficha.setZeon(80);
         ficha.setCansancio(5);
         ficha.setCansancioActual(5);
-        ficha.setVidaActual(0);
-        ficha.setZeonActual(0);
+        ficha.setVidaActual(75);
+        ficha.setZeonActual(80);
         
         {
             int [] ki = new int[6];

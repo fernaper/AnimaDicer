@@ -138,9 +138,7 @@ public class Ficha {
     }
 
     public void setKi(int[] ki) {
-        for (int i = 0; i < 6; i++) {
-            this.ki[i] = ki[i];
-        }
+        System.arraycopy(ki, 0, this.ki, 0, 6);
     }
 
     public int getKi(int type) {
@@ -148,9 +146,7 @@ public class Ficha {
     }
     
     public void setKiActual(int[] ki) {
-        for (int i = 0; i < 6; i++) {
-            this.kiActual[i] = ki[i];
-        }
+        System.arraycopy(ki, 0, this.kiActual, 0, 6);
     }
     
     public void setKiActual(int cual, int ki) {
@@ -162,9 +158,7 @@ public class Ficha {
     }
 
     public void setAtributos(int[] atributos) {
-        for (int i = 0; i < 8; i++) {
-            this.atributos[i] = atributos[i];
-        }
+        System.arraycopy(atributos, 0, this.atributos, 0, 8);
     }
 
     public int getAtributo(int i) {
@@ -172,9 +166,7 @@ public class Ficha {
     }
 
     public void setCombate(int[] combate) {
-        for (int i = 0; i < 5; i++) {
-            this.combate[i] = combate[i];
-        }
+        System.arraycopy(combate, 0, this.combate, 0, 5);
     }
 
     public int getCombate(int type) {
@@ -182,9 +174,7 @@ public class Ficha {
     }
 
     public void setRes(int[] res) {
-        for (int i = 0; i < 6; i++) {
-            this.res[i] = res[i];
-        }
+        System.arraycopy(res, 0, this.res, 0, 6);
     }
 
     public int getRes(int type) {
@@ -192,9 +182,7 @@ public class Ficha {
     }
 
     public void setSecundarias(int[] secundarias) {
-        for (int i = 0; i < 38; i++) {
-            this.secundarias[i] = secundarias[i];
-        }
+        System.arraycopy(secundarias, 0, this.secundarias, 0, 38);
     }
 
     public int getSecundarias(int type) {
@@ -202,9 +190,7 @@ public class Ficha {
     }
 
     public void setTurno(int[] turno) {
-        for (int i = 0; i < 5; i++) {
-            this.turno[i] = turno[i];
-        }
+        System.arraycopy(turno, 0, this.turno, 0, 5);
     }
 
     public int getTurno(int type) {
@@ -212,9 +198,7 @@ public class Ficha {
     }
 
     public void setConvocatoria(int[] convocatoria) {
-        for (int i = 0; i < 4; i++) {
-            this.convocatoria[i] = convocatoria[i];
-        }
+        System.arraycopy(convocatoria, 0, this.convocatoria, 0, 4);
     }
 
     public int getConvocatoria(int type) {

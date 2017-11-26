@@ -35,7 +35,7 @@ public class Dado {
 		}
 		
 		int parcial;
-		boolean sigo = false;
+		boolean sigo;
 		int countAbiertas = 0;
 		
 		do {

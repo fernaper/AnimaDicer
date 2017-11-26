@@ -53,20 +53,30 @@ public class Log {
     public String queBoton(String tipo, int i) {
         String res = "";
         
-        if ("Atributos".equals(tipo)) {
-            res = queAtributo(i);
-        } else if ("Secundarias".equals(tipo)) {
-            res = queSecundaria(i);
-        } else if ("Resistencias".equals(tipo)) {
-            res = queResistencia(i);
-        } else if ("Arma".equals(tipo)) {
-            res = queArma(i);
-        } else if ("Combate Fisico".equals(tipo)) {
-            res = queCombateFisico(i);
-        } else if ("Combate Sobrenatural".equals(tipo)) {
-            res = queCombateSobrenatural(i);
-        } else if ("Convocatoria".equals(tipo)) {
-            res = queConvocatoria(i);
+        if (null != tipo) switch (tipo) {
+            case "Atributos":
+                res = queAtributo(i);
+                break;
+            case "Secundarias":
+                res = queSecundaria(i);
+                break;
+            case "Resistencias":
+                res = queResistencia(i);
+                break;
+            case "Arma":
+                res = queArma(i);
+                break;
+            case "Combate Fisico":
+                res = queCombateFisico(i);
+                break;
+            case "Combate Sobrenatural":
+                res = queCombateSobrenatural(i);
+                break;
+            case "Convocatoria":
+                res = queConvocatoria(i);
+                break;
+            default:
+                break;
         }
         
         return res;

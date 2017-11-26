@@ -6,12 +6,9 @@
 package animadicer;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -35,7 +32,6 @@ public class FileJSON {
         
         try {
             JSONObject jsonObj = (JSONObject) parser.parse(new FileReader(file));
-            
             ficha.setNombre((String)jsonObj.get("nombre"));
             ficha.setCategoria((String)jsonObj.get("categoria"));
             ficha.setNotas((String)jsonObj.get("notas"));
@@ -148,12 +144,9 @@ public class FileJSON {
             {
                 JSONArray armadura = (JSONArray) jsonObj.get("armadura");
                 Armadura arrayArmadura[] = new Armadura[3];
-
                 for (int i = 0; i < armadura.size(); i++) {
                     arrayArmadura[i] = new Armadura();
                     JSONObject jsonobject = (JSONObject)armadura.get(i);
-                    System.out.println("HOLAAAA");
-                    System.out.println("Nombre: " + jsonobject.get("nombre").toString());
                     arrayArmadura[i].setNombre(jsonobject.get("nombre").toString());
                     arrayArmadura[i].setPosicion(jsonobject.get("posicion").toString());
                     int arrayD[] = new int[7];
@@ -182,10 +175,7 @@ public class FileJSON {
                 }
                 ficha.setConvocatoria(arrayConvocatoria);
             }
-        } catch(IOException | ParseException e) {
-            e.printStackTrace();
-        } catch (NumberFormatException e) {
-            
+        } catch(IOException | ParseException | NumberFormatException e) {
         }
         
         return ficha;
@@ -247,6 +237,7 @@ public class FileJSON {
         for (int i = 0; i < 4; i++) {
             JSONObject arma = new JSONObject();
             arma.put("nombre",ficha.getArma(i).getNombre());
+            arma.put("damage",String.valueOf(ficha.getArma(i).getDamage()));
             arma.put("critico-1",ficha.getArma(i).getCritico(0));
             arma.put("critico-2",ficha.getArma(i).getCritico(1));
             arma.put("entereza",String.valueOf(ficha.getArma(i).getEntereza()));
@@ -278,6 +269,7 @@ public class FileJSON {
         }
         obj.put("convocatoria",convocatoria);
         
+        obj.put("potencialPsiquico",String.valueOf(ficha.getPotencialPsiquico()));
         try (FileWriter file = new FileWriter(path)) {
             file.write(obj.toJSONString());
         } catch (IOException ex) {

@@ -44,7 +44,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  *
  * @author Fernando
  */
-public class Dicer extends javax.swing.JFrame {
+public final class Dicer extends javax.swing.JFrame {
 
     private final String version;
     private final HashMap<String, String> archivosDireccionCargados;
@@ -2667,13 +2667,8 @@ public class Dicer extends javax.swing.JFrame {
         //Si no estaba en nuestro registro de direcciones lo añadimos al diccionario
         archivosDireccionCargados.put(archivosSeleccionado.getPath(), archivosSeleccionado.getName());
         //Añadimos el nombre a nuestro combo
-        Ficha fich;
-        
-        if(primero)
-            fich = this.ficha;
-        
-        fich = new Anima(archivosSeleccionado, direccion).cargar();
-        archivosCargados.add(fich);
+        Ficha f = new Anima(archivosSeleccionado, direccion).cargar();
+        archivosCargados.add(f);
         anadirComboNombre(archivosSeleccionado.getName());
     }
     
@@ -5158,8 +5153,9 @@ public class Dicer extends javax.swing.JFrame {
         } catch (NullPointerException | IOException ex) {}
         finally {
             try {
-                fichero.close();
-            } catch (NullPointerException | IOException ex) {
+                if (fichero!= null)
+                    fichero.close();
+            } catch (IOException ex) {
             }
         }
     }
@@ -5230,8 +5226,9 @@ public class Dicer extends javax.swing.JFrame {
         } catch (NullPointerException | IOException ex) {}
         finally {
             try {
-                fichero.close();
-            } catch (NullPointerException | IOException ex) {
+                if (fichero != null)
+                    fichero.close();
+            } catch (IOException ex) {
             }
         }
     }
@@ -5598,7 +5595,7 @@ public class Dicer extends javax.swing.JFrame {
                                 jDownload.setVisible(true);
                                 Descargar.actualiza(url, ruta);
                                 jDownload.setVisible(false);
-                            } catch (Exception ex) {
+                            } catch (IOException ex) {
                                 Logger.getLogger(Dicer.class.getName()).log(Level.SEVERE, null, ex);
                             }
                         }    
