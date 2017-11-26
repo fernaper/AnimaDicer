@@ -722,7 +722,7 @@ public final class Dicer extends javax.swing.JFrame {
         jLabel175.setText("Cansancio:");
         jPanel6.add(jLabel175, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 172, -1, -1));
 
-        barraVida.setForeground(new java.awt.Color(0, 204, 51));
+        barraVida.setForeground(new java.awt.Color(89, 164, 28));
 
         fieldVida.setEditable(false);
         fieldVida.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -790,7 +790,7 @@ public final class Dicer extends javax.swing.JFrame {
 
         jPanel6.add(jLayeredPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, 180, 20));
 
-        barraZeon.setForeground(new java.awt.Color(51, 102, 255));
+        barraZeon.setForeground(new java.awt.Color(42, 154, 203));
 
         fieldZeon.setEditable(false);
         fieldZeon.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -863,9 +863,10 @@ public final class Dicer extends javax.swing.JFrame {
 
         jPanel6.add(jLayeredPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 140, 180, 20));
 
-        barraCansancio.setForeground(new java.awt.Color(255, 255, 0));
+        barraCansancio.setForeground(new java.awt.Color(204, 234, 75));
 
         fieldCansancioActual.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        fieldCansancioActual.setText("5");
         fieldCansancioActual.setBorder(null);
         fieldCansancioActual.setOpaque(false);
         fieldCansancioActual.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -881,6 +882,7 @@ public final class Dicer extends javax.swing.JFrame {
 
         fieldCansancio.setEditable(false);
         fieldCansancio.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        fieldCansancio.setText("5");
         fieldCansancio.setBorder(null);
         fieldCansancio.setOpaque(false);
 
@@ -912,11 +914,8 @@ public final class Dicer extends javax.swing.JFrame {
         );
         jLayeredPane3Layout.setVerticalGroup(
             jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane3Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(fieldCansancio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(fieldCansancioActual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addComponent(fieldCansancioActual, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
+            .addComponent(fieldCansancio, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jLayeredPane3Layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)

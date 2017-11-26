@@ -676,7 +676,7 @@
                         <Component class="javax.swing.JProgressBar" name="barraVida">
                           <Properties>
                             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                              <Color blue="33" green="cc" red="0" type="rgb"/>
+                              <Color blue="1c" green="a4" red="59" type="rgb"/>
                             </Property>
                           </Properties>
                         </Component>
@@ -781,7 +781,7 @@
                         <Component class="javax.swing.JProgressBar" name="barraZeon">
                           <Properties>
                             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                              <Color blue="ff" green="66" red="33" type="rgb"/>
+                              <Color blue="cb" green="9a" red="2a" type="rgb"/>
                             </Property>
                           </Properties>
                         </Component>
@@ -862,13 +862,8 @@
                         </DimensionLayout>
                         <DimensionLayout dim="1">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="fieldCansancio" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="fieldCansancioActual" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
+                              <Component id="fieldCansancioActual" pref="20" max="32767" attributes="0"/>
+                              <Component id="fieldCansancio" alignment="1" max="32767" attributes="0"/>
                               <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
                                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -890,13 +885,14 @@
                         <Component class="javax.swing.JProgressBar" name="barraCansancio">
                           <Properties>
                             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                              <Color blue="0" green="ff" red="ff" type="rgb"/>
+                              <Color blue="4b" green="ea" red="cc" type="rgb"/>
                             </Property>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JTextField" name="fieldCansancioActual">
                           <Properties>
                             <Property name="horizontalAlignment" type="int" value="0"/>
+                            <Property name="text" type="java.lang.String" value="5"/>
                             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                               <Border info="null"/>
                             </Property>
@@ -922,6 +918,7 @@
                           <Properties>
                             <Property name="editable" type="boolean" value="false"/>
                             <Property name="horizontalAlignment" type="int" value="0"/>
+                            <Property name="text" type="java.lang.String" value="5"/>
                             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                               <Border info="null"/>
                             </Property>
