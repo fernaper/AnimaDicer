@@ -2,7 +2,7 @@
  
 ## INFORMATION
 
- 	Executable: AnimaDicer.jar
+ 	Executable: [AnimaDicer](AnimaDicer.jar)
   
  	By: Fernando Pérez
  	E-Mail: fernaperg@gmail.com
