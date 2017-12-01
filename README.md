@@ -53,15 +53,15 @@ Please see [the licence file](LICENCE) for more information.
  	
 ## FUTURE UPDATES
  	
- 	+	Redesign the interface to make it much more accesible, interactive and intuitive
+ 	+	Redesign the interface to make it much more accesible, interactive and intuitive. [X]
    	+	Change the actual form to open lot of files, now it uses a system based in windows.
-      	It will use a new system based in a multi charge (It will saturate less the interface).
-   	+	Create a search engine that let the user find quickly the atributes, resistences or whatever.
-   	+	Reorganize the interface.
-   	+	Make the interface resizable.
-   	+	Improve the Battle organization.
-	+	Make the program Multilanguage (Right now only in Spanish).
-   	+	Create and make compatible with an Android versión (AnimaDicer Mobile).
+      	It will use a new system based in a multi charge (It will saturate less the interface). [X]
+   	+	Create a search engine that let the user find quickly the atributes, resistences or whatever. [Discarded]
+   	+	Reorganize the interface. [Work in progress]
+   	+	Make the interface resizable. [Discarded]
+   	+	Improve the Battle organization. [Work in progress]
+	+	Make the program Multilanguage (Right now only in Spanish).[ ]
+   	+	Create and make compatible with an Android versión (AnimaDicer Mobile). [ ]
    
 ***
   
