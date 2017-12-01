@@ -16,9 +16,11 @@ import animadicer.FileJSON;
 import animadicer.Log;
 import animadicer.Settings;
 import animadicer.connection.Descargar;
+import java.awt.AWTEvent;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.HeadlessException;
+import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
@@ -734,6 +736,11 @@ public final class Dicer extends javax.swing.JFrame {
         fieldVidaActual.setText("125");
         fieldVidaActual.setBorder(null);
         fieldVidaActual.setOpaque(false);
+        fieldVidaActual.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                fieldVidaActualFocusLost(evt);
+            }
+        });
         fieldVidaActual.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 fieldVidaActualKeyPressed(evt);
@@ -805,6 +812,11 @@ public final class Dicer extends javax.swing.JFrame {
         fieldZeonActual.setText("125");
         fieldZeonActual.setBorder(null);
         fieldZeonActual.setOpaque(false);
+        fieldZeonActual.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                fieldZeonActualFocusLost(evt);
+            }
+        });
         fieldZeonActual.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 fieldZeonActualActionPerformed(evt);
@@ -872,6 +884,11 @@ public final class Dicer extends javax.swing.JFrame {
         fieldCansancioActual.setText("5");
         fieldCansancioActual.setBorder(null);
         fieldCansancioActual.setOpaque(false);
+        fieldCansancioActual.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                fieldCansancioActualFocusLost(evt);
+            }
+        });
         fieldCansancioActual.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 fieldCansancioActualKeyReleased(evt);
@@ -2802,6 +2819,24 @@ public final class Dicer extends javax.swing.JFrame {
         
     }//GEN-LAST:event_fieldVidaActualKeyPressed
 
+    private void fieldVidaActualFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldVidaActualFocusLost
+        if (fieldVidaActual.getText().length() == 0) {
+            fieldVidaActual.setText("0");
+        }
+    }//GEN-LAST:event_fieldVidaActualFocusLost
+
+    private void fieldZeonActualFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldZeonActualFocusLost
+        if (fieldZeonActual.getText().length() == 0) {
+            fieldZeonActual.setText("0");
+        }
+    }//GEN-LAST:event_fieldZeonActualFocusLost
+
+    private void fieldCansancioActualFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldCansancioActualFocusLost
+        if (fieldCansancioActual.getText().length() == 0) {
+            fieldCansancioActual.setText("0");
+        }
+    }//GEN-LAST:event_fieldCansancioActualFocusLost
+
     private void intTextField(java.awt.event.KeyEvent evt, JTextField field) {
         char vchar = evt.getKeyChar();
         if (!Character.isDigit(vchar) || vchar == KeyEvent.VK_BACK_SPACE || vchar == KeyEvent.VK_DELETE) {
@@ -3702,9 +3737,29 @@ public final class Dicer extends javax.swing.JFrame {
             kiActual[i] = new javax.swing.JTextField();
             kiActual[i].setHorizontalAlignment(JTextField.CENTER);
             
+            kiActual[i].addFocusListener(new java.awt.event.FocusAdapter() {
+                int i;
+                JTextField f;
+                
+                @Override
+                public void focusLost(java.awt.event.FocusEvent evt) {                                               
+                    if (f.getText().length() == 0) {
+                        f.setText("0");
+                    }
+                } 
+                
+                public FocusListener init(int i, JTextField f) {
+                    this.i = i;
+                    this.f = f;
+                    return this;
+                }
+            }.init(i,kiActual[i]));
+            
             kiActual[i].addKeyListener(new java.awt.event.KeyAdapter() {
                 int i;
                 JTextField f;
+
+                
                 @Override
                 public void keyTyped(java.awt.event.KeyEvent evt) {
                     if (evt.getKeyChar() == ('-')){
