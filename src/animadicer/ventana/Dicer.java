@@ -735,6 +735,9 @@ public final class Dicer extends javax.swing.JFrame {
         fieldVidaActual.setBorder(null);
         fieldVidaActual.setOpaque(false);
         fieldVidaActual.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                fieldVidaActualKeyPressed(evt);
+            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 fieldVidaActualKeyReleased(evt);
             }
@@ -2509,42 +2512,51 @@ public final class Dicer extends javax.swing.JFrame {
     }//GEN-LAST:event_mnuAbrirActionPerformed
 
     private void fieldZeonActualKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fieldZeonActualKeyTyped
-        intTextField(evt,fieldZeonActual);
+        if (evt.getKeyChar() == ('-')){
+            evt.consume();
+        }else{
+            intTextField(evt,fieldZeonActual);
+        }
     }//GEN-LAST:event_fieldZeonActualKeyTyped
 
     private void fieldCansancioActualKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fieldCansancioActualKeyTyped
-        intTextField(evt,fieldCansancioActual);
+        if (evt.getKeyChar() == ('-')){
+            evt.consume();
+        }else{
+            intTextField(evt,fieldCansancioActual);
+        }
     }//GEN-LAST:event_fieldCansancioActualKeyTyped
 
     private void fieldCansancioActualKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fieldCansancioActualKeyReleased
-        if (fieldCansancioActual.getText().length() == 0 || (fieldCansancioActual.getText().length() == 1 && fieldCansancioActual.getText().charAt(0) == '-'))
-            return;
-        
-        if (Integer.parseInt(fieldCansancioActual.getText()) > Integer.parseInt(fieldCansancio.getText()))
-            fieldCansancioActual.setText(fieldCansancio.getText());
+        try {
+            if (Integer.parseInt(fieldCansancioActual.getText()) > Integer.parseInt(fieldCansancio.getText()))
+                fieldCansancioActual.setText(fieldCansancio.getText());
+        } catch(NumberFormatException ex){}
         
         int value = 0;
         try{
             this.ficha.setCansancioActual(Integer.parseInt(fieldCansancioActual.getText()));
             value = Integer.parseInt(fieldCansancioActual.getText());
         }
-        catch(NumberFormatException ex){value = 0;}
+        catch(NumberFormatException ex){value = 0;this.ficha.setCansancioActual(value);}
         finally{barraCansancio.setValue(value);}
     }//GEN-LAST:event_fieldCansancioActualKeyReleased
 
     private void fieldZeonActualKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fieldZeonActualKeyReleased
-        if (fieldZeonActual.getText().length() == 0 || (fieldZeonActual.getText().length() == 1 && fieldZeonActual.getText().charAt(0) == '-'))
+        if (fieldZeonActual.getText().length() == 1 && fieldZeonActual.getText().charAt(0) == '-')
             return;
         
-        if (Integer.parseInt(fieldZeonActual.getText()) > Integer.parseInt(fieldZeon.getText()))
-            fieldZeonActual.setText(fieldZeon.getText());
+        try {
+            if (Integer.parseInt(fieldZeonActual.getText()) > Integer.parseInt(fieldZeon.getText()))
+                fieldZeonActual.setText(fieldZeon.getText());
+        } catch(NumberFormatException ex){}
         
         int value = 0;
         try{
             this.ficha.setZeonActual(Integer.parseInt(fieldZeonActual.getText()));
             value = Integer.parseInt(fieldZeonActual.getText());
         }
-        catch(NumberFormatException ex){value = 0;}
+        catch(NumberFormatException ex){value = 0;this.ficha.setZeonActual(value);}
         finally{barraZeon.setValue(value);}
     }//GEN-LAST:event_fieldZeonActualKeyReleased
 
@@ -2751,18 +2763,20 @@ public final class Dicer extends javax.swing.JFrame {
     }//GEN-LAST:event_fieldVidaActualKeyTyped
 
     private void fieldVidaActualKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fieldVidaActualKeyReleased
-        if (fieldVidaActual.getText().length() == 0 || (fieldVidaActual.getText().length() == 1 && fieldVidaActual.getText().charAt(0) == '-'))
+        System.out.print("->");
+        if (fieldVidaActual.getText().length() == 1 && fieldVidaActual.getText().charAt(0) == '-')
             return;
-
-        if (Integer.parseInt(fieldVidaActual.getText()) > Integer.parseInt(fieldVida.getText()))
-            fieldVidaActual.setText(fieldVida.getText());
-        
+        try {
+            if (Integer.parseInt(fieldVidaActual.getText()) > Integer.parseInt(fieldVida.getText()))
+                fieldVidaActual.setText(fieldVida.getText());
+        } catch(NumberFormatException ex) {
+        }
         int value = 0;
         try{
             this.ficha.setVidaActual(Integer.parseInt(fieldVidaActual.getText()));
             value = Integer.parseInt(fieldVidaActual.getText());
         }
-        catch(NumberFormatException ex){value = 0;}
+        catch(NumberFormatException ex){value = 0;this.ficha.setVidaActual(value);}
         finally{barraVida.setValue(value);}
     }//GEN-LAST:event_fieldVidaActualKeyReleased
 
@@ -2783,6 +2797,10 @@ public final class Dicer extends javax.swing.JFrame {
             FileJSON.exportJason(ruta, this.ficha);
         }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void fieldVidaActualKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fieldVidaActualKeyPressed
+        
+    }//GEN-LAST:event_fieldVidaActualKeyPressed
 
     private void intTextField(java.awt.event.KeyEvent evt, JTextField field) {
         char vchar = evt.getKeyChar();
@@ -3689,7 +3707,11 @@ public final class Dicer extends javax.swing.JFrame {
                 JTextField f;
                 @Override
                 public void keyTyped(java.awt.event.KeyEvent evt) {
-                    intTextField(evt,f);
+                    if (evt.getKeyChar() == ('-')){
+                        evt.consume();
+                    }else{
+                        intTextField(evt,f);
+                    }
                 }
                 
                 @Override
