@@ -1143,9 +1143,17 @@ public final class Dicer extends javax.swing.JFrame {
         kiVolActual.setText("40");
         kiVolActual.setBorder(null);
         kiVolActual.setOpaque(false);
+        kiVolActual.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                kiVolActualFocusLost(evt);
+            }
+        });
         kiVolActual.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 kiVolActualKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                kiVolActualKeyTyped(evt);
             }
         });
 
@@ -1200,9 +1208,17 @@ public final class Dicer extends javax.swing.JFrame {
         kiFueActual.setText("40");
         kiFueActual.setBorder(null);
         kiFueActual.setOpaque(false);
+        kiFueActual.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                kiFueActualFocusLost(evt);
+            }
+        });
         kiFueActual.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 kiFueActualKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                kiFueActualKeyTyped(evt);
             }
         });
 
@@ -1257,9 +1273,17 @@ public final class Dicer extends javax.swing.JFrame {
         kiPodActual.setText("40");
         kiPodActual.setBorder(null);
         kiPodActual.setOpaque(false);
+        kiPodActual.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                kiPodActualFocusLost(evt);
+            }
+        });
         kiPodActual.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 kiPodActualKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                kiPodActualKeyTyped(evt);
             }
         });
 
@@ -1318,9 +1342,17 @@ public final class Dicer extends javax.swing.JFrame {
         kiAgiActual.setText("40");
         kiAgiActual.setBorder(null);
         kiAgiActual.setOpaque(false);
+        kiAgiActual.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                kiAgiActualFocusLost(evt);
+            }
+        });
         kiAgiActual.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 kiAgiActualKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                kiAgiActualKeyTyped(evt);
             }
         });
 
@@ -1380,9 +1412,17 @@ public final class Dicer extends javax.swing.JFrame {
         kiDesActual.setText("40");
         kiDesActual.setBorder(null);
         kiDesActual.setOpaque(false);
+        kiDesActual.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                kiDesActualFocusLost(evt);
+            }
+        });
         kiDesActual.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 kiDesActualKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                kiDesActualKeyTyped(evt);
             }
         });
 
@@ -1437,9 +1477,17 @@ public final class Dicer extends javax.swing.JFrame {
         kiConActual.setText("40");
         kiConActual.setBorder(null);
         kiConActual.setOpaque(false);
+        kiConActual.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                kiConActualFocusLost(evt);
+            }
+        });
         kiConActual.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 kiConActualKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                kiConActualKeyTyped(evt);
             }
         });
 
@@ -2735,6 +2783,11 @@ public final class Dicer extends javax.swing.JFrame {
         textNotas1.setColumns(20);
         textNotas1.setLineWrap(true);
         textNotas1.setRows(5);
+        textNotas1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                textNotas1FocusLost(evt);
+            }
+        });
         textNotas1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 textNotas1KeyReleased(evt);
@@ -3130,7 +3183,6 @@ public final class Dicer extends javax.swing.JFrame {
     }//GEN-LAST:event_fieldVidaActualKeyTyped
 
     private void fieldVidaActualKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fieldVidaActualKeyReleased
-        System.out.print("->");
         if (fieldVidaActual.getText().length() == 1 && fieldVidaActual.getText().charAt(0) == '-')
             return;
         try {
@@ -3288,6 +3340,94 @@ public final class Dicer extends javax.swing.JFrame {
         catch(NumberFormatException ex){value = 0;this.ficha.setKiActual(5, value);}
         finally{barraPod.setValue(value);}
     }//GEN-LAST:event_kiPodActualKeyReleased
+
+    private void kiFueActualKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kiFueActualKeyTyped
+        if (evt.getKeyChar() == ('-')){
+            evt.consume();
+        }else{
+            intTextField(evt,kiFue);
+        }
+    }//GEN-LAST:event_kiFueActualKeyTyped
+
+    private void kiFueActualFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_kiFueActualFocusLost
+        if (kiFueActual.getText().length() == 0) {
+            kiFueActual.setText("0");
+        }
+    }//GEN-LAST:event_kiFueActualFocusLost
+
+    private void kiAgiActualFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_kiAgiActualFocusLost
+        if (kiAgiActual.getText().length() == 0) {
+            kiAgiActual.setText("0");
+        }
+    }//GEN-LAST:event_kiAgiActualFocusLost
+
+    private void kiDesActualFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_kiDesActualFocusLost
+        if (kiDesActual.getText().length() == 0) {
+            kiDesActual.setText("0");
+        }
+    }//GEN-LAST:event_kiDesActualFocusLost
+
+    private void kiConActualFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_kiConActualFocusLost
+        if (kiConActual.getText().length() == 0) {
+            kiConActual.setText("0");
+        }
+    }//GEN-LAST:event_kiConActualFocusLost
+
+    private void kiVolActualFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_kiVolActualFocusLost
+        if (kiVolActual.getText().length() == 0) {
+            kiVolActual.setText("0");
+        }
+    }//GEN-LAST:event_kiVolActualFocusLost
+
+    private void kiPodActualFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_kiPodActualFocusLost
+        if (kiPodActual.getText().length() == 0) {
+            kiPodActual.setText("0");
+        }
+    }//GEN-LAST:event_kiPodActualFocusLost
+
+    private void kiAgiActualKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kiAgiActualKeyTyped
+        if (evt.getKeyChar() == ('-')){
+            evt.consume();
+        }else{
+            intTextField(evt,kiAgi);
+        }
+    }//GEN-LAST:event_kiAgiActualKeyTyped
+
+    private void kiDesActualKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kiDesActualKeyTyped
+        if (evt.getKeyChar() == ('-')){
+            evt.consume();
+        }else{
+            intTextField(evt,kiDes);
+        }
+    }//GEN-LAST:event_kiDesActualKeyTyped
+
+    private void kiConActualKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kiConActualKeyTyped
+        if (evt.getKeyChar() == ('-')){
+            evt.consume();
+        }else{
+            intTextField(evt,kiCon);
+        }
+    }//GEN-LAST:event_kiConActualKeyTyped
+
+    private void kiVolActualKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kiVolActualKeyTyped
+        if (evt.getKeyChar() == ('-')){
+            evt.consume();
+        }else{
+            intTextField(evt,kiVol);
+        }
+    }//GEN-LAST:event_kiVolActualKeyTyped
+
+    private void kiPodActualKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kiPodActualKeyTyped
+        if (evt.getKeyChar() == ('-')){
+            evt.consume();
+        }else{
+            intTextField(evt,kiPod);
+        }
+    }//GEN-LAST:event_kiPodActualKeyTyped
+
+    private void textNotas1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textNotas1FocusLost
+        this.ficha.setNotas(textNotas1.getText());
+    }//GEN-LAST:event_textNotas1FocusLost
 
     private void intTextField(java.awt.event.KeyEvent evt, JTextField field) {
         char vchar = evt.getKeyChar();
@@ -3498,7 +3638,7 @@ public final class Dicer extends javax.swing.JFrame {
         calculadora();
         textNotas1.setText(ficha.getNotas());
 
-        log.resetLog();
+        log.resetLog(ficha.getLog());
         log.setNotas(ficha.getNotas());
 
         resetColors();
@@ -4140,7 +4280,8 @@ public final class Dicer extends javax.swing.JFrame {
                 int number;
                 @Override
                 public void mouseClicked(java.awt.event.MouseEvent evt) {
-                    log.addLog(log.queBoton("Atributos", number) + ": " + b_MouseClickedAtr(number));
+                    ficha.addLog(log.addLog(log.queBoton("Atributos", number) + ": " + b_MouseClickedAtr(number)));
+                    
                 }
                 @Override
                 public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -4218,7 +4359,7 @@ public final class Dicer extends javax.swing.JFrame {
                 int number;
                 @Override
                 public void mouseClicked(java.awt.event.MouseEvent evt) {
-                    log.addLog(log.queBoton("Secundarias", number) + ": " + b_MouseClicked(number));
+                    ficha.addLog(log.addLog(log.queBoton("Secundarias", number) + ": " + b_MouseClicked(number)));
                 }
                 @Override
                 public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -4306,7 +4447,7 @@ public final class Dicer extends javax.swing.JFrame {
                 int number;
                 @Override
                 public void mouseClicked(java.awt.event.MouseEvent evt) {
-                    log.addLog(log.queBoton("Resistencias", number) + ": " + b_MouseClickedRes(number));
+                    ficha.addLog(log.addLog(log.queBoton("Resistencias", number) + ": " + b_MouseClickedRes(number)));
                 }
                 @Override
                 public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -4722,7 +4863,7 @@ public final class Dicer extends javax.swing.JFrame {
                 int number;
                 @Override
                 public void mouseClicked(java.awt.event.MouseEvent evt) {
-                    log.addLog(log.queBoton("Combate Fisico", number) + ": " + b_MouseClickedFisico(number));
+                    ficha.addLog(log.addLog(log.queBoton("Combate Fisico", number) + ": " + b_MouseClickedFisico(number)));
                 }
                 @Override
                 public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -4790,7 +4931,7 @@ public final class Dicer extends javax.swing.JFrame {
             JLabel j;
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                log.addLog("Turno arma" + String.valueOf(comboTurno.getSelectedIndex()+1) + ": " + b_MouseClickedTurno());
+                ficha.addLog(log.addLog("Turno arma" + String.valueOf(comboTurno.getSelectedIndex()+1) + ": " + b_MouseClickedTurno()));
             }
             @Override
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -4858,7 +4999,7 @@ public final class Dicer extends javax.swing.JFrame {
                 int number;
                 @Override
                 public void mouseClicked(java.awt.event.MouseEvent evt) {
-                    log.addLog(log.queBoton("Combate Sobrenatural", number) + ": " + b_MouseClickedSobrenatural(number));
+                    ficha.addLog(log.addLog(log.queBoton("Combate Sobrenatural", number) + ": " + b_MouseClickedSobrenatural(number)));
                 }
                 @Override
                 public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -4928,7 +5069,7 @@ public final class Dicer extends javax.swing.JFrame {
                 int number;
                 @Override
                 public void mouseClicked(java.awt.event.MouseEvent evt) {
-                    log.addLog(log.queBoton("Convocatoria", number) + ": " + b_MouseClickedConvocatoria(number));
+                    ficha.addLog(log.addLog(log.queBoton("Convocatoria", number) + ": " + b_MouseClickedConvocatoria(number)));
                 }
                 @Override
                 public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -5052,7 +5193,7 @@ public final class Dicer extends javax.swing.JFrame {
                 int number;
                 @Override
                 public void mouseClicked(java.awt.event.MouseEvent evt) {
-                    log.addLog("Critico: " + b_MouseClickedCritico());
+                    ficha.addLog(log.addLog("Critico: " + b_MouseClickedCritico()));
                     
                     String localizacion;
                     int pos = (int)(Math.random()*100) + 1;
@@ -5115,7 +5256,7 @@ public final class Dicer extends javax.swing.JFrame {
                         localizacion = "Cabeza";
                         posCritico.setForeground(Color.RED);
                     }
-                    log.addLog("Localización Crítico: " + localizacion + " ("+String.valueOf(pos)+")");
+                    ficha.addLog(log.addLog("Localización Crítico: " + localizacion + " ("+String.valueOf(pos)+")"));
                     posCritico.setText(localizacion);
                 }
                 

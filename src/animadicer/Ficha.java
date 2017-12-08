@@ -4,6 +4,7 @@ public class Ficha {
     String nombre;
     String categoria;
     String notas;
+    String log;
     int nivel;
     int vida;
     int vidaActual;
@@ -39,6 +40,7 @@ public class Ficha {
         convocatoria = new int [4];
         arma = new Arma[4];
         armadura = new Armadura[3];
+        log = "";
     }
 
     public void setNotas(String notas) {
@@ -213,4 +215,15 @@ public class Ficha {
         return this.potencialPsiquico;
     }
 
+    public String getLog() {
+        return this.log;
+    }
+    
+    public void setLog(String text) {
+        this.log = text;
+    }
+    
+    public void addLog(String text) {
+        this.log += text;
+    }
 }

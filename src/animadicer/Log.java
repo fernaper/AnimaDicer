@@ -25,9 +25,9 @@ public class Log {
         this.notas = "";
     }
     
-    public void resetLog() {
+    public void resetLog(String log) {
         this.info = new ArrayList<>();
-        this.area.setText("");
+        this.area.setText(log);
         this.notas = "";
     }
     
@@ -39,11 +39,12 @@ public class Log {
         this.notas = notas;
     }
     
-    public void addLog(String tirada) {
-        info.add(tirada);
+    public String addLog(String tirada) {
         Calendar calendario = new GregorianCalendar();
-        area.append(("[" + calendario.get(Calendar.HOUR_OF_DAY) + ":" +
-                        calendario.get(Calendar.MINUTE)+"] ") + tirada+"\n");
+        String text = "[" + calendario.get(Calendar.HOUR_OF_DAY) + ":" + calendario.get(Calendar.MINUTE)+"] " + tirada;
+        info.add(text);
+        area.append(text+"\n");
+        return text+"\n";
     }
     
     public ArrayList<String> getLog() {
