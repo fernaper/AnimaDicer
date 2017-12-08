@@ -6,7 +6,7 @@ Executable: [AnimaDicer](AnimaDicer.jar)
   
  	By: Fernando Pérez
  	E-Mail: fernaperg@gmail.com
- 	Current version: v1.0.5 - RC (Release Candidate)
+ 	Current version: v1.0.6 - RC (Release Candidate)
 ***
 
 ## CONCEPTUAL IDEA
