@@ -19,7 +19,6 @@ import animadicer.connection.Descargar;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.HeadlessException;
-import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
@@ -602,7 +601,6 @@ public final class Dicer extends javax.swing.JFrame {
         jLabel174 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        menuNuevo = new javax.swing.JMenuItem();
         mnuAbrir = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
@@ -2816,15 +2814,6 @@ public final class Dicer extends javax.swing.JFrame {
 
         jMenu1.setText("Archivo");
 
-        menuNuevo.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_MASK));
-        menuNuevo.setText("Nuevo");
-        menuNuevo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuNuevoActionPerformed(evt);
-            }
-        });
-        jMenu1.add(menuNuevo);
-
         mnuAbrir.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
         mnuAbrir.setText("Abrir");
         mnuAbrir.addActionListener(new java.awt.event.ActionListener() {
@@ -3060,10 +3049,6 @@ public final class Dicer extends javax.swing.JFrame {
     private void checkCapicuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkCapicuaActionPerformed
         settings.setCapicua(checkCapicua.isSelected());
     }//GEN-LAST:event_checkCapicuaActionPerformed
-
-    private void menuNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuNuevoActionPerformed
-        crear();
-    }//GEN-LAST:event_menuNuevoActionPerformed
 
     private void checkTiradasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkTiradasActionPerformed
         settings.setTiradas(checkTiradas.isSelected());
@@ -3422,7 +3407,11 @@ public final class Dicer extends javax.swing.JFrame {
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         if (((String)comboNombre.getSelectedItem()).endsWith("json")) { // Actualiza
-            FileJSON.exportJason(this.ficha.getPath(), this.ficha);
+            String mensaje = "¿Desea guardar los cambios de\n" + this.ficha.getPath() + "?";
+                        
+            if (JOptionPane.showConfirmDialog(null, mensaje, "Guardar JSON", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                FileJSON.exportJason(this.ficha.getPath(), this.ficha);
+            }
         } else {
             JFileChooser guardarDesc = new JFileChooser(this.ficha.getPath());
             guardarDesc.setFileFilter(new FileNameExtensionFilter("JSON Files", "json"));
@@ -4259,7 +4248,6 @@ public final class Dicer extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_titulo;
     private javax.swing.JTextField libreCritico;
     private javax.swing.JMenuItem menuDescargar;
-    private javax.swing.JMenuItem menuNuevo;
     private javax.swing.JMenuItem mnuAbrir;
     private javax.swing.JLayeredPane paneAgi;
     private javax.swing.JLayeredPane paneCon;
@@ -6246,26 +6234,34 @@ public final class Dicer extends javax.swing.JFrame {
         if ((url = Descargar.actualizar(version)) != null) {
             int respuesta = JOptionPane.showConfirmDialog(null, "Se han encontrado nuevas versiones de AnimaDicer\n¿Deseas descargarla?","¿Actualizar AnimaDicer?", JOptionPane.YES_NO_OPTION);
             if (respuesta == JOptionPane.YES_OPTION) {
+                
+                File miDir = new File (".");                
                 new Thread () {
                     @Override
                     public void run() {
-                        JFileChooser guardarDesc = new JFileChooser();
-                        guardarDesc.setFileFilter(new FileNameExtensionFilter("jar - Java Files", "jar"));
-                        String ruta; 
+                        try {
+                            jDownload.setVisible(true);
+                            Descargar.actualiza(url, miDir.getCanonicalPath()+"\\AnimaDicer.jar");
+                            jDownload.setVisible(false);
+                        } catch (IOException ex) {
+                            JFileChooser guardarDesc = new JFileChooser();
+                            guardarDesc.setFileFilter(new FileNameExtensionFilter("jar - Java Files", "jar"));
 
-                        if(guardarDesc.showSaveDialog(null)== JFileChooser.APPROVE_OPTION){ 
-                            ruta = guardarDesc.getSelectedFile().getAbsolutePath();
-                            if (!ruta.endsWith("jar")) {
-                                ruta = ruta + ".jar";
+                            if(guardarDesc.showSaveDialog(null)== JFileChooser.APPROVE_OPTION){ 
+                                String path = guardarDesc.getSelectedFile().getAbsolutePath();
+                                if (!path.endsWith("jar")) {
+                                    path = path + ".jar";
+                                }
+                                try {
+                                    Descargar.actualiza(url, path);
+                                    jDownload.setVisible(false);
+                                } catch (IOException ex1) {
+                                }
                             }
-                            try {
-                                jDownload.setVisible(true);
-                                Descargar.actualiza(url, ruta);
-                                jDownload.setVisible(false);
-                            } catch (IOException ex) {
-                                Logger.getLogger(Dicer.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                        }    
+                        } finally {
+                            JOptionPane.showMessageDialog(null, "Actualización completada.\nEjecute nuevamente AnimaDicer.");
+                            exit();
+                        }  
                     }
                 }.start();
             }
