@@ -78,6 +78,8 @@ public final class Dicer extends javax.swing.JFrame {
         dadosFisicos();
         listenerFisicos();
         
+        menuGuardar.setEnabled(false);
+
         checkAbiertas.setSelected(settings.getAbiertas());
         checkCapicua.setSelected(settings.getCapicua());
         checkTiradas.setSelected(settings.getTiradas());
@@ -603,7 +605,7 @@ public final class Dicer extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         mnuAbrir = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
+        menuGuardar = new javax.swing.JMenuItem();
         menuDescargar = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         jMenuItem4 = new javax.swing.JMenuItem();
@@ -2832,14 +2834,14 @@ public final class Dicer extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem2);
 
-        jMenuItem5.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem5.setText("Guardar");
-        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+        menuGuardar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.CTRL_MASK));
+        menuGuardar.setText("Guardar");
+        menuGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem5ActionPerformed(evt);
+                menuGuardarActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem5);
+        jMenu1.add(menuGuardar);
 
         menuDescargar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.CTRL_MASK));
         menuDescargar.setText("Descargar Ficha");
@@ -2914,6 +2916,11 @@ public final class Dicer extends javax.swing.JFrame {
         jMenu3.add(jSeparator2);
 
         jMenuItem7.setText("Sobre nosotros");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem7);
 
         jMenuBar1.add(jMenu3);
@@ -3114,7 +3121,8 @@ public final class Dicer extends javax.swing.JFrame {
             
             this.comboNombre.setEnabled(true);
             carga_inicial(archivosSeleccionados[0]);
-
+            menuGuardar.setEnabled(true);
+            
             new Thread () {
                 @Override
                 public void run() {
@@ -3131,6 +3139,8 @@ public final class Dicer extends javax.swing.JFrame {
             }.start();   
         }
         labelCargar.setVisible(false);
+        
+        
     }
   
     private void menuDescargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuDescargarActionPerformed
@@ -3405,7 +3415,7 @@ public final class Dicer extends javax.swing.JFrame {
         this.ficha.setNotas(textNotas1.getText());
     }//GEN-LAST:event_textNotas1FocusLost
 
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+    private void menuGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuGuardarActionPerformed
         if (((String)comboNombre.getSelectedItem()).endsWith("json")) { // Actualiza
             String mensaje = "¿Desea guardar los cambios de\n" + this.ficha.getPath() + "?";
                         
@@ -3425,7 +3435,15 @@ public final class Dicer extends javax.swing.JFrame {
                 FileJSON.exportJason(ruta, this.ficha);
             }
         }
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
+    }//GEN-LAST:event_menuGuardarActionPerformed
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        JOptionPane.showMessageDialog(null, "Programa realizado por:\n"
+                + "Fernando Pérez Gutiérrez: Creador y programador principal.\n"
+                + "Alfredo Pérez Gutiérrez: Tester y creador de las fichas.\n"
+                + "Juan Mas Aguilar: Tester y programador secundario.\n"
+                + "GitHub: https://github.com/TheCorPlay/AnimaDicer");
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void intTextField(java.awt.event.KeyEvent evt, JTextField field) {
         char vchar = evt.getKeyChar();
@@ -4162,7 +4180,6 @@ public final class Dicer extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
@@ -4248,6 +4265,7 @@ public final class Dicer extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_titulo;
     private javax.swing.JTextField libreCritico;
     private javax.swing.JMenuItem menuDescargar;
+    private javax.swing.JMenuItem menuGuardar;
     private javax.swing.JMenuItem mnuAbrir;
     private javax.swing.JLayeredPane paneAgi;
     private javax.swing.JLayeredPane paneCon;

@@ -27,6 +27,7 @@ public class Log {
     
     public void resetLog(String log) {
         this.info = new ArrayList<>();
+        this.info.add(log);
         this.area.setText(log);
         this.notas = "";
     }
