@@ -5,6 +5,7 @@ public class Ficha {
     String categoria;
     String notas;
     String log;
+    String path;
     int nivel;
     int vida;
     int vidaActual;
@@ -29,7 +30,7 @@ public class Ficha {
 
     int potencialPsiquico;
 
-    public Ficha() {
+    public Ficha(String path) {
         ki = new int [6];
         kiActual = new int [6];
         atributos = new int [8];
@@ -41,8 +42,13 @@ public class Ficha {
         arma = new Arma[4];
         armadura = new Armadura[3];
         log = "";
+        this.path = path;
     }
-
+    
+    public String getPath() {
+        return this.path;
+    }
+    
     public void setNotas(String notas) {
        this.notas = notas; 
     }

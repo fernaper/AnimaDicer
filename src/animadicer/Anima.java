@@ -29,7 +29,7 @@ public class Anima {
         try {
             file = new FileInputStream(new File("test.xlsx"));
             workbook = WorkbookFactory.create(file);
-            ficha = new Ficha();
+            ficha = new Ficha("");
         } catch (FileNotFoundException e) {
         } catch (IOException e) {
         } catch (InvalidFormatException | EncryptedDocumentException ex) {
@@ -43,7 +43,7 @@ public class Anima {
         try {
             file = new FileInputStream(seleccionado);
             workbook = WorkbookFactory.create(file);
-            ficha = new Ficha();
+            ficha = new Ficha(seleccionado.getAbsolutePath());
         } catch (FileNotFoundException e) {
         } catch (IOException | InvalidFormatException | EncryptedDocumentException e) {
         }
@@ -56,14 +56,14 @@ public class Anima {
     
     public Ficha cargar () {
         if (this.seleccionado.getName().endsWith("json")) {
-            this.ficha = FileJSON.importJason(this.seleccionado);
+            this.ficha = FileJSON.importJason(this.seleccionado, this.seleccionado.getAbsolutePath());
         } else {
             try {
                 Sheet sheet = workbook.getSheetAt(0);
                 if ("Capacidades Físicas".equals(sheet.getRow(10).getCell(CellReference.convertColStringToIndex("G")).getStringCellValue())) {
-                    this.ficha = cargarGenericoViejo(sheet);
+                    this.ficha = cargarGenericoViejo(sheet, this.seleccionado.getAbsolutePath());
                 } else {
-                    this.ficha = cargarGenericoV105(sheet);
+                    this.ficha = cargarGenericoV105(sheet, this.seleccionado.getAbsolutePath());
                 }
 
             } catch (NullPointerException | CargaException ex) {}
@@ -87,13 +87,13 @@ public class Anima {
         return this.ficha;
     }
     
-    private Ficha cargarGenericoViejo(Sheet sheet) throws CargaException {
+    private Ficha cargarGenericoViejo(Sheet sheet, String path) throws CargaException {
         // Testeo de que está leyendo una ficha y no un documento cualquiera
         if (!"Turno".equals(sheet.getRow(0).getCell(CellReference.convertColStringToIndex("L")).getStringCellValue()) ||
             !"Creativas".equals(sheet.getRow(51).getCell(CellReference.convertColStringToIndex("P")).getStringCellValue())) {
             throw new CargaException("Este documento no es una ficha preparada");
         }
-        ficha = new Ficha();
+        ficha = new Ficha(path);
         
         ficha.setNombre(sheet.getRow(0).getCell(CellReference.convertColStringToIndex("C")).getStringCellValue());
         ficha.setCategoria(sheet.getRow(1).getCell(CellReference.convertColStringToIndex("C")).getStringCellValue());
@@ -242,13 +242,13 @@ public class Anima {
         return ficha;
     }
     
-    private Ficha cargarGenericoV105(Sheet sheet) throws CargaException {
+    private Ficha cargarGenericoV105(Sheet sheet, String path) throws CargaException {
         // Testeo de que está leyendo una ficha y no un documento cualquiera
         if (!"Turno".equals(sheet.getRow(0).getCell(CellReference.convertColStringToIndex("L")).getStringCellValue()) ||
             !"Creativas".equals(sheet.getRow(51).getCell(CellReference.convertColStringToIndex("P")).getStringCellValue())) {
             throw new CargaException("Este documento no es una ficha preparada");
         }
-        ficha = new Ficha();
+        ficha = new Ficha(path);
         
         ficha.setNombre(sheet.getRow(0).getCell(CellReference.convertColStringToIndex("C")).getStringCellValue());
         ficha.setCategoria(sheet.getRow(1).getCell(CellReference.convertColStringToIndex("C")).getStringCellValue());
@@ -412,7 +412,7 @@ public class Anima {
     }
     
     private Ficha crearGenerico () {
-        ficha = new Ficha();
+        ficha = new Ficha("");
         ficha.setNombre("Nombre");
         ficha.setCategoria("Novel");
         ficha.setNivel(1);

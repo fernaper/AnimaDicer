@@ -26,8 +26,8 @@ public class FileJSON {
         
     }
     
-    public static Ficha importJason(File file) {
-        Ficha ficha = new Ficha();
+    public static Ficha importJason(File file, String path) {
+        Ficha ficha = new Ficha(path);
         JSONParser parser = new JSONParser();
         
         try {
@@ -175,6 +175,8 @@ public class FileJSON {
                 }
                 ficha.setConvocatoria(arrayConvocatoria);
             }
+            ficha.setLog((String)jsonObj.get("log"));
+            ficha.setNotas((String)jsonObj.get("notas"));
         } catch(IOException | ParseException | NumberFormatException e) {
         }
         
@@ -193,6 +195,8 @@ public class FileJSON {
         obj.put("zeonActual",String.valueOf(ficha.getZeonActual()));
         obj.put("cansancio",String.valueOf(ficha.getCansancio()));
         obj.put("cansancioActual",String.valueOf(ficha.getCansancioActual()));
+        obj.put("log", ficha.getLog());
+        obj.put("notas", ficha.getNotas());
         
         JSONArray ki = new JSONArray();
         JSONArray kiActual = new JSONArray();

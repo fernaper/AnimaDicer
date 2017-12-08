@@ -67,6 +67,7 @@ public final class Dicer extends javax.swing.JFrame {
         myInitComponents();
         initComponents();
         jDownload.setVisible(false);
+        labelCargar.setVisible(false);
         this.log = new Log(textNotas);
         initPrincipales();
         initSecundarias();
@@ -596,6 +597,7 @@ public final class Dicer extends javax.swing.JFrame {
         jPanel23 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         textNotas1 = new javax.swing.JTextArea();
+        labelCargar = new javax.swing.JLabel();
         jDownload = new javax.swing.JLabel();
         jLabel174 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -603,7 +605,7 @@ public final class Dicer extends javax.swing.JFrame {
         menuNuevo = new javax.swing.JMenuItem();
         mnuAbrir = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
         menuDescargar = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         jMenuItem4 = new javax.swing.JMenuItem();
@@ -2803,6 +2805,9 @@ public final class Dicer extends javax.swing.JFrame {
 
         jPanel5.add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 200, 620, -1));
 
+        labelCargar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/load.png"))); // NOI18N
+        jPanel5.add(labelCargar, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 170, -1, -1));
+
         jDownload.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/download.png"))); // NOI18N
         jPanel5.add(jDownload, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 170, 50, 50));
 
@@ -2838,14 +2843,14 @@ public final class Dicer extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem2);
 
-        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem1.setText("Exportar");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItem5.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem5.setText("Guardar");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                jMenuItem5ActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        jMenu1.add(jMenuItem5);
 
         menuDescargar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.CTRL_MASK));
         menuDescargar.setText("Descargar Ficha");
@@ -3091,7 +3096,6 @@ public final class Dicer extends javax.swing.JFrame {
 
     private void comprobarExistencia(File archivosSeleccionado, boolean primero) throws CargaException { 
         String path = archivosSeleccionado.getPath();
-        //System.out.print(path);
         
         if(archivosDireccionCargados.containsKey(path))
             throw new CargaException("Esta ficha ya ha sido cargada con anterioridad");
@@ -3116,11 +3120,11 @@ public final class Dicer extends javax.swing.JFrame {
     }
 
     private void cargar(){
+        labelCargar.setVisible(true);
         //Seleccionamos los archivos
         seleccionado.setMultiSelectionEnabled(true);
         
         if (seleccionado.showDialog(null, "Abrir fichas") == JFileChooser.APPROVE_OPTION){
-            
             File[] archivosSeleccionados = seleccionado.getSelectedFiles();
             
             this.comboNombre.setEnabled(true);
@@ -3141,6 +3145,7 @@ public final class Dicer extends javax.swing.JFrame {
                 }
             }.start();   
         }
+        labelCargar.setVisible(false);
     }
   
     private void menuDescargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuDescargarActionPerformed
@@ -3202,20 +3207,6 @@ public final class Dicer extends javax.swing.JFrame {
     private void fieldZeonActualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldZeonActualActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_fieldZeonActualActionPerformed
-
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        JFileChooser guardarDesc = new JFileChooser();
-        guardarDesc.setFileFilter(new FileNameExtensionFilter("JSON Files", "json"));
-        String ruta; 
-
-        if(guardarDesc.showSaveDialog(null)== JFileChooser.APPROVE_OPTION){ 
-            ruta = guardarDesc.getSelectedFile().getAbsolutePath();
-            if (!ruta.endsWith("json")) {
-                ruta = ruta + ".json";
-            }
-            FileJSON.exportJason(ruta, this.ficha);
-        }
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void fieldVidaActualKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fieldVidaActualKeyPressed
         
@@ -3428,6 +3419,24 @@ public final class Dicer extends javax.swing.JFrame {
     private void textNotas1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textNotas1FocusLost
         this.ficha.setNotas(textNotas1.getText());
     }//GEN-LAST:event_textNotas1FocusLost
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        if (((String)comboNombre.getSelectedItem()).endsWith("json")) { // Actualiza
+            FileJSON.exportJason(this.ficha.getPath(), this.ficha);
+        } else {
+            JFileChooser guardarDesc = new JFileChooser(this.ficha.getPath());
+            guardarDesc.setFileFilter(new FileNameExtensionFilter("JSON Files", "json"));
+            String ruta; 
+
+            if(guardarDesc.showSaveDialog(null)== JFileChooser.APPROVE_OPTION){ 
+                ruta = guardarDesc.getSelectedFile().getAbsolutePath();
+                if (!ruta.endsWith("json")) {
+                    ruta = ruta + ".json";
+                }
+                FileJSON.exportJason(ruta, this.ficha);
+            }
+        }
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void intTextField(java.awt.event.KeyEvent evt, JTextField field) {
         char vchar = evt.getKeyChar();
@@ -4162,9 +4171,9 @@ public final class Dicer extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
@@ -4246,6 +4255,7 @@ public final class Dicer extends javax.swing.JFrame {
     private javax.swing.JLabel l_Acrobacias8;
     private javax.swing.JLabel l_Acrobacias9;
     private javax.swing.JLabel l_Atletismo;
+    private javax.swing.JLabel labelCargar;
     private javax.swing.JLabel lbl_titulo;
     private javax.swing.JTextField libreCritico;
     private javax.swing.JMenuItem menuDescargar;
