@@ -241,6 +241,18 @@ public final class Dicer extends javax.swing.JFrame {
         barraCon = new javax.swing.JProgressBar();
         kiConActual = new javax.swing.JTextField();
         kiCon = new javax.swing.JTextField();
+        jLabel359 = new javax.swing.JLabel();
+        paneiTotal = new javax.swing.JLayeredPane();
+        barraKiTotal = new javax.swing.JProgressBar();
+        kiTotalActual = new javax.swing.JTextField();
+        jLabel360 = new javax.swing.JLabel();
+        kiTotal = new javax.swing.JTextField();
+        paneGEN = new javax.swing.JLayeredPane();
+        barraGen = new javax.swing.JProgressBar();
+        kiGenActual = new javax.swing.JTextField();
+        kiGen = new javax.swing.JTextField();
+        jLabel361 = new javax.swing.JLabel();
+        InfoKi = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         l_Acrobacias = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -1112,28 +1124,28 @@ public final class Dicer extends javax.swing.JFrame {
         jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel4.setText("Máximo:");
-        jPanel8.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
+        jPanel8.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, -1, -1));
 
         jLabel131.setText("Actual:");
-        jPanel8.add(jLabel131, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 75, -1, -1));
+        jPanel8.add(jLabel131, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, -1));
 
         jLabel168.setText("FUE");
-        jPanel8.add(jLabel168, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40, -1, -1));
+        jPanel8.add(jLabel168, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, -1, -1));
 
         jLabel169.setText("AGI");
-        jPanel8.add(jLabel169, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, -1, -1));
+        jPanel8.add(jLabel169, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 60, -1, -1));
 
         jLabel170.setText("DES");
-        jPanel8.add(jLabel170, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 40, -1, -1));
+        jPanel8.add(jLabel170, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, -1, -1));
 
         jLabel171.setText("CON");
-        jPanel8.add(jLabel171, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 40, -1, -1));
+        jPanel8.add(jLabel171, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, -1, -1));
 
         jLabel172.setText("VOL");
-        jPanel8.add(jLabel172, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 40, -1, -1));
+        jPanel8.add(jLabel172, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 60, -1, -1));
 
         jLabel173.setText("POD");
-        jPanel8.add(jLabel173, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 40, -1, -1));
+        jPanel8.add(jLabel173, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 60, -1, -1));
 
         paneVol.setPreferredSize(new java.awt.Dimension(20, 70));
 
@@ -1200,7 +1212,7 @@ public final class Dicer extends javax.swing.JFrame {
                     .addContainerGap()))
         );
 
-        jPanel8.add(paneVol, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 60, 20, -1));
+        jPanel8.add(paneVol, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 80, 20, -1));
 
         barraFue.setForeground(new java.awt.Color(220, 215, 0));
         barraFue.setOrientation(1);
@@ -1263,7 +1275,7 @@ public final class Dicer extends javax.swing.JFrame {
                     .addContainerGap()))
         );
 
-        jPanel8.add(paneFue, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, 20, 70));
+        jPanel8.add(paneFue, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 80, 20, 70));
 
         panePod.setPreferredSize(new java.awt.Dimension(20, 70));
 
@@ -1332,7 +1344,7 @@ public final class Dicer extends javax.swing.JFrame {
                     .addContainerGap(39, Short.MAX_VALUE)))
         );
 
-        jPanel8.add(panePod, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 60, 20, -1));
+        jPanel8.add(panePod, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 80, 20, -1));
 
         paneAgi.setPreferredSize(new java.awt.Dimension(20, 70));
 
@@ -1402,7 +1414,7 @@ public final class Dicer extends javax.swing.JFrame {
                     .addContainerGap()))
         );
 
-        jPanel8.add(paneAgi, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, 20, -1));
+        jPanel8.add(paneAgi, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 80, 20, -1));
 
         paneDes.setPreferredSize(new java.awt.Dimension(20, 70));
 
@@ -1467,7 +1479,7 @@ public final class Dicer extends javax.swing.JFrame {
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
-        jPanel8.add(paneDes, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, 20, -1));
+        jPanel8.add(paneDes, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 80, 20, -1));
 
         paneCon.setPreferredSize(new java.awt.Dimension(20, 70));
 
@@ -1533,7 +1545,161 @@ public final class Dicer extends javax.swing.JFrame {
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
-        jPanel8.add(paneCon, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 60, 20, -1));
+        jPanel8.add(paneCon, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, 20, -1));
+
+        jLabel359.setText("Total:");
+        jPanel8.add(jLabel359, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
+
+        kiTotalActual.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        kiTotalActual.setText("40");
+        kiTotalActual.setBorder(null);
+        kiTotalActual.setOpaque(false);
+        kiTotalActual.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                kiTotalActualFocusLost(evt);
+            }
+        });
+        kiTotalActual.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                kiTotalActualKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                kiTotalActualKeyTyped(evt);
+            }
+        });
+
+        jLabel360.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel360.setText("/");
+        jLabel360.setAlignmentX(0.5F);
+
+        kiTotal.setEditable(false);
+        kiTotal.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        kiTotal.setText("40");
+        kiTotal.setBorder(null);
+        kiTotal.setOpaque(false);
+
+        paneiTotal.setLayer(barraKiTotal, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        paneiTotal.setLayer(kiTotalActual, javax.swing.JLayeredPane.PALETTE_LAYER);
+        paneiTotal.setLayer(jLabel360, javax.swing.JLayeredPane.PALETTE_LAYER);
+        paneiTotal.setLayer(kiTotal, javax.swing.JLayeredPane.PALETTE_LAYER);
+
+        javax.swing.GroupLayout paneiTotalLayout = new javax.swing.GroupLayout(paneiTotal);
+        paneiTotal.setLayout(paneiTotalLayout);
+        paneiTotalLayout.setHorizontalGroup(
+            paneiTotalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(paneiTotalLayout.createSequentialGroup()
+                .addComponent(barraKiTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 2, Short.MAX_VALUE))
+            .addGroup(paneiTotalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(paneiTotalLayout.createSequentialGroup()
+                    .addGap(57, 57, 57)
+                    .addComponent(kiTotalActual, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(122, Short.MAX_VALUE)))
+            .addGroup(paneiTotalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(paneiTotalLayout.createSequentialGroup()
+                    .addGap(85, 85, 85)
+                    .addComponent(jLabel360, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(81, Short.MAX_VALUE)))
+            .addGroup(paneiTotalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(paneiTotalLayout.createSequentialGroup()
+                    .addGap(107, 107, 107)
+                    .addComponent(kiTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(27, Short.MAX_VALUE)))
+        );
+        paneiTotalLayout.setVerticalGroup(
+            paneiTotalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(barraKiTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(paneiTotalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(paneiTotalLayout.createSequentialGroup()
+                    .addComponent(kiTotalActual, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap()))
+            .addGroup(paneiTotalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(paneiTotalLayout.createSequentialGroup()
+                    .addComponent(jLabel360, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap()))
+            .addGroup(paneiTotalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(paneiTotalLayout.createSequentialGroup()
+                    .addComponent(kiTotal, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
+                    .addContainerGap()))
+        );
+
+        jPanel8.add(paneiTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 25, 200, 20));
+
+        paneGEN.setPreferredSize(new java.awt.Dimension(20, 70));
+
+        barraGen.setForeground(new java.awt.Color(220, 215, 0));
+        barraGen.setOrientation(1);
+        barraGen.setPreferredSize(new java.awt.Dimension(20, 70));
+
+        kiGenActual.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        kiGenActual.setText("40");
+        kiGenActual.setBorder(null);
+        kiGenActual.setOpaque(false);
+        kiGenActual.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                kiGenActualFocusLost(evt);
+            }
+        });
+        kiGenActual.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                kiGenActualKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                kiGenActualKeyTyped(evt);
+            }
+        });
+
+        kiGen.setEditable(false);
+        kiGen.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        kiGen.setText("40");
+        kiGen.setBorder(null);
+        kiGen.setOpaque(false);
+
+        paneGEN.setLayer(barraGen, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        paneGEN.setLayer(kiGenActual, javax.swing.JLayeredPane.PALETTE_LAYER);
+        paneGEN.setLayer(kiGen, javax.swing.JLayeredPane.PALETTE_LAYER);
+
+        javax.swing.GroupLayout paneGENLayout = new javax.swing.GroupLayout(paneGEN);
+        paneGEN.setLayout(paneGENLayout);
+        paneGENLayout.setHorizontalGroup(
+            paneGENLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(paneGENLayout.createSequentialGroup()
+                .addComponent(kiGen, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(paneGENLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(paneGENLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(barraGen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(paneGENLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(kiGenActual, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE))
+        );
+        paneGENLayout.setVerticalGroup(
+            paneGENLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paneGENLayout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addComponent(kiGen, javax.swing.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(paneGENLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(paneGENLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(barraGen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(paneGENLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(paneGENLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(kiGenActual, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(39, Short.MAX_VALUE)))
+        );
+
+        jPanel8.add(paneGEN, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 80, 20, -1));
+
+        jLabel361.setText("GEN");
+        jPanel8.add(jLabel361, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 60, -1, -1));
+
+        InfoKi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ico-info.png"))); // NOI18N
+        InfoKi.setToolTipText("Enter para confirmar cambios.");
+        jPanel8.add(InfoKi, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 20, 20, 30));
 
         jPanel1.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 260, 320, 160));
 
@@ -3239,7 +3405,11 @@ public final class Dicer extends javax.swing.JFrame {
             value = Integer.parseInt(kiFueActual.getText());
         }
         catch(NumberFormatException ex){value = 0;this.ficha.setKiActual(0, value);}
-        finally{barraFue.setValue(value);}
+        finally{
+            kiTotalActual.setText(String.valueOf(this.ficha.getKiTotalActual()));
+            barraKiTotal.setValue(this.ficha.getKiTotalActual());
+            barraFue.setValue(value);
+        }
     }//GEN-LAST:event_kiFueActualKeyReleased
 
     private void kiAgiActualKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kiAgiActualKeyReleased
@@ -3251,12 +3421,17 @@ public final class Dicer extends javax.swing.JFrame {
         } catch(NumberFormatException ex) {
         }
         int value = 0;
+        
         try{
             this.ficha.setKiActual(1, Integer.parseInt(kiAgiActual.getText()));
             value = Integer.parseInt(kiAgiActual.getText());
         }
         catch(NumberFormatException ex){value = 0;this.ficha.setKiActual(1, value);}
-        finally{barraAgi.setValue(value);}
+        finally{
+            barraAgi.setValue(value);
+            kiTotalActual.setText(String.valueOf(this.ficha.getKiTotalActual()));
+            barraKiTotal.setValue(this.ficha.getKiTotalActual());
+        }
     }//GEN-LAST:event_kiAgiActualKeyReleased
 
     private void kiDesActualKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kiDesActualKeyReleased
@@ -3273,7 +3448,11 @@ public final class Dicer extends javax.swing.JFrame {
             value = Integer.parseInt(kiDesActual.getText());
         }
         catch(NumberFormatException ex){value = 0;this.ficha.setKiActual(2, value);}
-        finally{barraDes.setValue(value);}
+        finally{
+            kiTotalActual.setText(String.valueOf(this.ficha.getKiTotalActual()));
+            barraKiTotal.setValue(this.ficha.getKiTotalActual());
+            barraDes.setValue(value);
+        }
     }//GEN-LAST:event_kiDesActualKeyReleased
 
     private void kiConActualKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kiConActualKeyReleased
@@ -3290,7 +3469,11 @@ public final class Dicer extends javax.swing.JFrame {
             value = Integer.parseInt(kiConActual.getText());
         }
         catch(NumberFormatException ex){value = 0;this.ficha.setKiActual(3, value);}
-        finally{barraCon.setValue(value);}
+        finally{
+            kiTotalActual.setText(String.valueOf(this.ficha.getKiTotalActual()));
+            barraKiTotal.setValue(this.ficha.getKiTotalActual());
+            barraCon.setValue(value);
+        }
     }//GEN-LAST:event_kiConActualKeyReleased
 
     private void kiVolActualKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kiVolActualKeyReleased
@@ -3307,7 +3490,11 @@ public final class Dicer extends javax.swing.JFrame {
             value = Integer.parseInt(kiVolActual.getText());
         }
         catch(NumberFormatException ex){value = 0;this.ficha.setKiActual(4, value);}
-        finally{barraVol.setValue(value);}
+        finally{
+            barraVol.setValue(value);
+            kiTotalActual.setText(String.valueOf(this.ficha.getKiTotalActual()));
+            barraKiTotal.setValue(this.ficha.getKiTotalActual());
+        }
     }//GEN-LAST:event_kiVolActualKeyReleased
 
     private void kiPodActualKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kiPodActualKeyReleased
@@ -3324,7 +3511,11 @@ public final class Dicer extends javax.swing.JFrame {
             value = Integer.parseInt(kiPodActual.getText());
         }
         catch(NumberFormatException ex){value = 0;this.ficha.setKiActual(5, value);}
-        finally{barraPod.setValue(value);}
+        finally{
+            barraPod.setValue(value);
+            kiTotalActual.setText(String.valueOf(this.ficha.getKiTotalActual()));
+            barraKiTotal.setValue(this.ficha.getKiTotalActual());
+        }
     }//GEN-LAST:event_kiPodActualKeyReleased
 
     private void kiFueActualKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kiFueActualKeyTyped
@@ -3444,6 +3635,94 @@ public final class Dicer extends javax.swing.JFrame {
                 + "Juan Mas Aguilar: Tester y programador secundario.\n"
                 + "GitHub: https://github.com/TheCorPlay/AnimaDicer");
     }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void kiTotalActualFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_kiTotalActualFocusLost
+        kiTotalActual.setText(String.valueOf(this.ficha.getKiTotalActual()));
+        barraKiTotal.setValue(this.ficha.getKiTotalActual());
+        if (kiDesActual.getText().length() == 0) {
+            kiDesActual.setText("0");
+        }
+    }//GEN-LAST:event_kiTotalActualFocusLost
+
+    private void kiTotalActualKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kiTotalActualKeyReleased
+        
+        String kiTAct = kiTotalActual.getText();
+        String kiT = kiTotal.getText();
+        if (kiTAct.length() == 1 && kiTAct.charAt(0) == '-')
+            return;
+        try{
+            if (Integer.parseInt(kiTAct) > Integer.parseInt(kiT))
+                kiTotalActual.setText(kiTotal.getText());
+        } catch(NumberFormatException ex) {
+        }
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            int value = 0;
+            try{
+                this.ficha.setKiTotalActual( Integer.parseInt(kiTAct) - this.ficha.getKiTotalActual());
+                value = Integer.parseInt(kiTotalActual.getText());
+            }
+            catch(NumberFormatException ex){value = 0;this.ficha.rstKi();}
+            finally{
+                barraKiTotal.setValue(value); 
+                actualizarBarrasKi();
+            }
+        }
+    }//GEN-LAST:event_kiTotalActualKeyReleased
+    
+    private void actualizarBarrasKi()
+    {
+        kiFueActual.setText(String.valueOf(ficha.getKiActual(0)));
+        barraFue.setValue(ficha.getKiActual(0));
+        kiAgiActual.setText(String.valueOf(ficha.getKiActual(1)));		
+        barraAgi.setValue(ficha.getKiActual(1));
+        kiDesActual.setText(String.valueOf(ficha.getKiActual(2)));		
+        barraDes.setValue(ficha.getKiActual(2));
+        kiConActual.setText(String.valueOf(ficha.getKiActual(3)));
+        barraCon.setValue(ficha.getKiActual(3));
+        kiVolActual.setText(String.valueOf(ficha.getKiActual(4)));
+        barraVol.setValue(ficha.getKiActual(4));
+        kiPodActual.setText(String.valueOf(ficha.getKiActual(5)));
+        barraPod.setValue(ficha.getKiActual(5));
+        kiGenActual.setText(String.valueOf(ficha.getKiGenericoActual()));
+        barraGen.setValue(ficha.getKiGenericoActual());
+    }
+    
+    private void kiTotalActualKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kiTotalActualKeyTyped
+        if (evt.getKeyChar() == ('-')){
+            evt.consume();
+        }else{
+            intTextField(evt,kiPod);
+        }
+    }//GEN-LAST:event_kiTotalActualKeyTyped
+
+    private void kiGenActualFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_kiGenActualFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_kiGenActualFocusLost
+
+    private void kiGenActualKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kiGenActualKeyReleased
+        if (kiGenActual.getText().length() == 1 && kiGenActual.getText().charAt(0) == '-')
+            return;
+        try {
+            if (Integer.parseInt(kiGenActual.getText()) > Integer.parseInt(kiGen.getText()))
+                kiGenActual.setText(kiGen.getText());
+        } catch(NumberFormatException ex) {
+        }
+        int value = 0;
+        try{
+            this.ficha.setKiGenericoActual(Integer.parseInt(kiGenActual.getText()));
+            value = Integer.parseInt(kiGenActual.getText());
+        }
+        catch(NumberFormatException ex){value = 0;this.ficha.setKiGenericoActual(value);}
+        finally{
+            barraGen.setValue(value);
+            kiTotalActual.setText(String.valueOf(this.ficha.getKiTotalActual()));
+            barraKiTotal.setValue(this.ficha.getKiTotalActual());
+        }
+    }//GEN-LAST:event_kiGenActualKeyReleased
+
+    private void kiGenActualKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kiGenActualKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_kiGenActualKeyTyped
 
     private void intTextField(java.awt.event.KeyEvent evt, JTextField field) {
         char vchar = evt.getKeyChar();
@@ -3775,6 +4054,7 @@ public final class Dicer extends javax.swing.JFrame {
     private javax.swing.JFileChooser seleccionado;
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel InfoKi;
     private javax.swing.JTextField armaduraCalcComb;
     private javax.swing.JMenuItem ayuda;
     private javax.swing.JProgressBar barraAgi;
@@ -3782,6 +4062,8 @@ public final class Dicer extends javax.swing.JFrame {
     private javax.swing.JProgressBar barraCon;
     private javax.swing.JProgressBar barraDes;
     private javax.swing.JProgressBar barraFue;
+    private javax.swing.JProgressBar barraGen;
+    private javax.swing.JProgressBar barraKiTotal;
     private javax.swing.JProgressBar barraPod;
     private javax.swing.JProgressBar barraVida;
     private javax.swing.JProgressBar barraVol;
@@ -4101,7 +4383,10 @@ public final class Dicer extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel356;
     private javax.swing.JLabel jLabel357;
     private javax.swing.JLabel jLabel358;
+    private javax.swing.JLabel jLabel359;
     private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel360;
+    private javax.swing.JLabel jLabel361;
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel39;
@@ -4219,8 +4504,12 @@ public final class Dicer extends javax.swing.JFrame {
     private javax.swing.JTextField kiDesActual;
     private javax.swing.JTextField kiFue;
     private javax.swing.JTextField kiFueActual;
+    private javax.swing.JTextField kiGen;
+    private javax.swing.JTextField kiGenActual;
     private javax.swing.JTextField kiPod;
     private javax.swing.JTextField kiPodActual;
+    private javax.swing.JTextField kiTotal;
+    private javax.swing.JTextField kiTotalActual;
     private javax.swing.JTextField kiVol;
     private javax.swing.JTextField kiVolActual;
     private javax.swing.JLabel l_Acrobacias;
@@ -4271,8 +4560,10 @@ public final class Dicer extends javax.swing.JFrame {
     private javax.swing.JLayeredPane paneCon;
     private javax.swing.JLayeredPane paneDes;
     private javax.swing.JLayeredPane paneFue;
+    private javax.swing.JLayeredPane paneGEN;
     private javax.swing.JLayeredPane panePod;
     private javax.swing.JLayeredPane paneVol;
+    private javax.swing.JLayeredPane paneiTotal;
     private javax.swing.JTextField posCritico;
     private javax.swing.JTextField resCritico;
     private javax.swing.JTextArea textNotas;
@@ -5340,38 +5631,39 @@ public final class Dicer extends javax.swing.JFrame {
         kiFue.setText(String.valueOf(ficha.getKi(0)));     
         barraFue.setMaximum(ficha.getKi(0));
         barraFue.setMinimum(0);
-        kiFueActual.setText(String.valueOf(ficha.getKiActual(0)));
-        barraFue.setValue(ficha.getKiActual(0));
         //---------------------Ki AGI------------------------------
         kiAgi.setText(String.valueOf(ficha.getKi(1)));     
         barraAgi.setMaximum(ficha.getKi(1));
         barraAgi.setMinimum(0);
-        kiAgiActual.setText(String.valueOf(ficha.getKiActual(1)));
-        barraAgi.setValue(ficha.getKiActual(1));
         //---------------------Ki DES------------------------------
         kiDes.setText(String.valueOf(ficha.getKi(2)));     
         barraDes.setMaximum(ficha.getKi(2));
         barraDes.setMinimum(0);
-        kiDesActual.setText(String.valueOf(ficha.getKiActual(2)));
-        barraDes.setValue(ficha.getKiActual(2));
         //---------------------Ki CON------------------------------
         kiCon.setText(String.valueOf(ficha.getKi(3)));     
         barraCon.setMaximum(ficha.getKi(3));
         barraCon.setMinimum(0);
-        kiConActual.setText(String.valueOf(ficha.getKiActual(3)));
-        barraCon.setValue(ficha.getKiActual(3));
         //---------------------Ki VOL------------------------------
         kiVol.setText(String.valueOf(ficha.getKi(4)));     
         barraVol.setMaximum(ficha.getKi(4));
         barraVol.setMinimum(0);
-        kiVolActual.setText(String.valueOf(ficha.getKiActual(4)));
-        barraVol.setValue(ficha.getKiActual(4));
         //---------------------Ki POD------------------------------
         kiPod.setText(String.valueOf(ficha.getKi(5)));     
         barraPod.setMaximum(ficha.getKi(5));
         barraPod.setMinimum(0);
-        kiPodActual.setText(String.valueOf(ficha.getKiActual(5)));
-        barraPod.setValue(ficha.getKiActual(5));
+        //---------------------Ki Generico------------------------------
+        kiGen.setText(String.valueOf(ficha.getKiGenerico()));     
+        barraGen.setMaximum(ficha.getKiGenerico());
+        barraGen.setMinimum(0);
+
+        //---------------------Ki Total------------------------------
+        kiTotal.setText(String.valueOf(ficha.getKiTotalActual()));     
+        barraKiTotal.setMaximum(ficha.getKiTotal());
+        barraKiTotal.setMinimum(0);
+        kiTotalActual.setText(String.valueOf(ficha.getKiTotalActual()));
+        barraKiTotal.setValue(ficha.getKiTotalActual());
+        
+        actualizarBarrasKi();
         
     }
     
