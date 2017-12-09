@@ -43,28 +43,8 @@ public class FileJSON {
             ficha.setCansancio(Integer.parseInt((String)jsonObj.get("cansancio")));
             ficha.setCansancioActual(Integer.parseInt((String)jsonObj.get("cansancioActual")));
             ficha.setPotencialPsiquico(Integer.parseInt((String)jsonObj.get("potencialPsiquico")));
-            {
-                JSONArray ki = (JSONArray) jsonObj.get("ki");
-                Iterator<String> it = ki.iterator();
-                int i = 0;
-                int arrayKi[] = new int[6];
-                while (it.hasNext()) {
-                    arrayKi[i] = Integer.parseInt(it.next());
-                    i++;
-                }
-                ficha.setKi(arrayKi);
-            }
-            {
-                JSONArray ki = (JSONArray) jsonObj.get("kiActual");
-                Iterator<String> it = ki.iterator();
-                int i = 0;
-                int arrayKi[] = new int[6];
-                while (it.hasNext()) {
-                    arrayKi[i] = Integer.parseInt(it.next());
-                    i++;
-                }
-                ficha.setKiActual(arrayKi);
-            }
+            ficha.setKi(Integer.parseInt((String)jsonObj.get("ki")));
+            ficha.setKiActual(Integer.parseInt((String)jsonObj.get("kiActual")));
             {
                 JSONArray atributos = (JSONArray) jsonObj.get("atributos");
                 Iterator<String> it = atributos.iterator();
@@ -197,15 +177,8 @@ public class FileJSON {
         obj.put("cansancioActual",String.valueOf(ficha.getCansancioActual()));
         obj.put("log", ficha.getLog());
         obj.put("notas", ficha.getNotas());
-        
-        JSONArray ki = new JSONArray();
-        JSONArray kiActual = new JSONArray();
-        for (int i = 0; i < 6; i++) {
-            ki.add(String.valueOf(ficha.getKi(i)));
-            kiActual.add(String.valueOf(ficha.getKiActual(i)));
-        }
-        obj.put("ki", ki);
-        obj.put("kiActual", kiActual);
+        obj.put("ki", String.valueOf(ficha.getKi()));
+        obj.put("kiActual", String.valueOf(ficha.getKi()));
         
         JSONArray atributos = new JSONArray();
         for (int i = 0; i < 8; i++) {

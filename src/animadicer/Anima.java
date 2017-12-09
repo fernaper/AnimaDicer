@@ -107,9 +107,9 @@ public class Anima {
         ficha.setCansancioActual(ficha.getCansancio());
         
         {
-            int [] ki = new int[6];
-            for (int i = 0; i < 6; i++) {
-                ki[i] = (int)(sheet.getRow(2+i).getCell(CellReference.convertColStringToIndex("AN")).getNumericCellValue());
+            int ki = 0;
+            for (int i = 0; i < 7; i++) {
+                ki += (int)(sheet.getRow(2+i).getCell(CellReference.convertColStringToIndex("AN")).getNumericCellValue());
             }
             ficha.setKi(ki);
             ficha.setKiActual(ki);
@@ -262,9 +262,9 @@ public class Anima {
         ficha.setCansancioActual(ficha.getCansancio());
         
         {
-            int [] ki = new int[6];
-            for (int i = 0; i < 6; i++) {
-                ki[i] = (int)(sheet.getRow(2+i).getCell(CellReference.convertColStringToIndex("AG")).getNumericCellValue());
+            int ki = 0;
+            for (int i = 0; i < 7; i++) {
+                ki += (int)(sheet.getRow(2+i).getCell(CellReference.convertColStringToIndex("AG")).getNumericCellValue());
             }
             ficha.setKi(ki);
             ficha.setKiActual(ki);
@@ -424,12 +424,8 @@ public class Anima {
         ficha.setZeonActual(80);
         
         {
-            int [] ki = new int[6];
-            for (int i = 0; i < 6; i++) {
-                ki[i] = 5;
-            }
-            ficha.setKi(ki);
-            ficha.setKiActual(ki);
+            ficha.setKi(30);
+            ficha.setKiActual(30);
         }
         {
             int[] atributos = new int [8];

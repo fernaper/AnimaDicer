@@ -1,8 +1,5 @@
 package animadicer;
 
-import java.util.Arrays;
-import java.util.List;
-
 public class Ficha {
     String nombre;
     String categoria;
@@ -16,10 +13,9 @@ public class Ficha {
     int zeonActual;
     int cansancio;
     int cansancioActual;
-    int[] ki; // FUE, AGI, DES, CON, VOL, POD
-    int[] kiActual;
-    int kiGenerico;
-    int kiGenericoActual;
+    int ki;
+    int kiActual;
+    
     // Todos los tipos de armaduras (para saber cu�l es aplicable en cada caso)
     int[]atributos; // AGI, CON, DES, FUE, INT, PER, POD, VOL
 
@@ -36,8 +32,6 @@ public class Ficha {
     int potencialPsiquico;
 
     public Ficha(String path) {
-        ki = new int [6];
-        kiActual = new int [6];
         atributos = new int [8];
         combate = new int [5];
         res = new int [6];
@@ -47,9 +41,6 @@ public class Ficha {
         arma = new Arma[4];
         armadura = new Armadura[3];
         log = "";
-        kiGenerico = 5;
-        kiGenericoActual = 5;
-
         this.path = path;
     }
     
@@ -153,121 +144,20 @@ public class Ficha {
         this.cansancioActual = cansancio;
     }
     
-
-    private int maxKi()
-    {
-        int index = 0;
-        int max = -1;
-        
-        for(int i = 0; i < 6; i++){
-            if(kiActual[i] > max && kiActual[i] > 0){
-                max = kiActual[i];
-                index = i;
-            }
-        }
-        
-        return index;
-    }
-    
-    private int minKi()
-    {
-        int index = 0;
-        int min = Integer.MAX_VALUE;
-        
-        for(int i = 0; i < 6; i++){
-            if(kiActual[i] < min && kiActual[i] < ki[i]){
-                min = kiActual[i];
-                index = i;
-            }
-        }
-        
-        if(kiActual[index] == ki[index])
-            index = -1;
-        
-        return index;
-    }
-    
-    private int repartirKi(int a_repartir, boolean sumar){
-        if(sumar){
-            while(a_repartir > 0){
-                int min = minKi();
-                
-                if(min == -1)
-                    return a_repartir;
-                
-                kiActual[min]++;
-                a_repartir--;
-            }
-        }
-        else{
-            while(a_repartir > 0){
-                kiActual[maxKi()]--;
-                a_repartir--;
-            } 
-        }
-        return a_repartir;
-    }
-    
-    public void rstKi()
-    {
-        for(int i = 0; i < 6; i++)
-            kiActual[i] = 0;
-        
-        kiGenericoActual = 0;
-    }
-    
-    public void setKiTotalActual(int a_repartir)
-    {
-        //Sumar
-        if(a_repartir > 0){
-            int queda = repartirKi(a_repartir, true);
-            if(queda > 0)
-                kiGenericoActual = Math.min(queda + kiGenericoActual, kiGenerico);
-        }
-        //Restar
-        else if(a_repartir < 0){
-            a_repartir = Math.abs(a_repartir);
-            if(a_repartir > kiGenericoActual){
-                a_repartir -= kiGenericoActual;
-                kiGenericoActual = 0;
-            }
-            else{
-                kiGenericoActual -= a_repartir;
-                return;
-            }
-            repartirKi(a_repartir, false);
-        } 
-    }
-    
-    
-    public void setKi(int[] ki) {
-        System.arraycopy(ki, 0, this.ki, 0, 6);
+    public void setKi(int ki) {
+        this.ki = ki;
     }
 
-    public int getKi(int type) {
-        return this.ki[type];
+    public int getKi() {
+        return this.ki;
     }
     
-    public int getKiTotalActual()
-    {
-        int suma = 0;
-        
-        for(int i = 0; i < 6; i++)
-            suma += kiActual[i];
-        
-        return suma + kiGenericoActual;
-    }
-    
-    public void setKiActual(int[] ki) {
-        System.arraycopy(ki, 0, this.kiActual, 0, 6);
-    }
-    
-    public void setKiActual(int cual, int ki) {
-        this.kiActual[cual] = ki;
+    public void setKiActual(int ki) {
+        this.kiActual = ki;
     }
 
-    public int getKiActual(int type) {
-        return this.kiActual[type];
+    public int getKiActual() {
+        return this.kiActual;
     }
 
     public void setAtributos(int[] atributos) {
@@ -336,26 +226,5 @@ public class Ficha {
     
     public void addLog(String text) {
         this.log += text;
-    }
-
-    public int getKiTotal() {
-        int suma = 0;
-        
-        for(int i = 0; i < 6; i++)
-            suma += ki[i];
-        
-        return suma + kiGenerico;
-    }
-
-    public void setKiGenericoActual(int value) {
-        this.kiGenericoActual = value;
-    }
-
-    public int getKiGenerico() {
-        return this.kiGenerico;
-    }
-    
-    public int getKiGenericoActual() {
-        return this.kiGenericoActual;
     }
 }
