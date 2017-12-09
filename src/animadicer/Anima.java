@@ -112,7 +112,18 @@ public class Anima {
 
             if ("v1.0.6".equals(vExcel)) {
                 //v1.0.6
-                
+                try {
+                    sheet.getRow(8).getCell(CellReference.convertColStringToIndex("U")).setCellValue(ficha.getVidaActual());
+                } catch (NullPointerException ex) {throw new GuardaException("Error al guardar la vida actual");}
+                try {
+                    sheet.getRow(10).getCell(CellReference.convertColStringToIndex("BD")).setCellValue(ficha.getZeonActual());
+                } catch (NullPointerException ex) {throw new GuardaException("Error al guardar el zeon actual");}
+                try {
+                    sheet.getRow(16).getCell(CellReference.convertColStringToIndex("AG")).setCellValue(ficha.getKiActual());
+                } catch (NullPointerException ex) {throw new GuardaException("Error al guardar el ki actual");}
+                try {
+                    sheet.getRow(96).getCell(CellReference.convertColStringToIndex("B")).setCellValue(ficha.getNotas());
+                } catch (NullPointerException ex) {throw new GuardaException("Error al guardar el zeon actual");}
             } else if ("Capacidades Físicas".equals(sheet.getRow(10).getCell(CellReference.convertColStringToIndex("G")).getStringCellValue())) {
                 // v1.0.0
                 try {
@@ -314,7 +325,7 @@ public class Anima {
 
         ficha.setPotencialPsiquico((int)(sheet.getRow(5).getCell(CellReference.convertColStringToIndex("BH")).getNumericCellValue()));
         
-        ficha.setNotas(cargarNotas());
+        ficha.setNotas("");
         return ficha;
     }
     
@@ -344,7 +355,7 @@ public class Anima {
             ficha.setZeonActual(this.ficha.getZeon());
         }
         try {
-            ficha.setCansancioActual((int)(sheet.getRow(87).getCell(CellReference.convertColStringToIndex("O")).getNumericCellValue()));
+            ficha.setCansancioActual((int)(sheet.getRow(85).getCell(CellReference.convertColStringToIndex("O")).getNumericCellValue()));
         } catch (NullPointerException ex) {
             ficha.setCansancioActual(ficha.getCansancio());
         }
@@ -461,36 +472,39 @@ public class Anima {
 
         ficha.setPotencialPsiquico((int)(sheet.getRow(5).getCell(CellReference.convertColStringToIndex("BI")).getNumericCellValue()));
         
-        ficha.setNotas(cargarNotas());
+        ficha.setNotas("");
         return ficha;
     }
     
     private Ficha cargarGenericoV106(Sheet sheet, String path) throws CargaException {
-        // Testeo de que está leyendo una ficha y no un documento cualquiera
-        if (!"Turno".equals(sheet.getRow(0).getCell(CellReference.convertColStringToIndex("L")).getStringCellValue()) ||
-            !"Creativas".equals(sheet.getRow(51).getCell(CellReference.convertColStringToIndex("P")).getStringCellValue())) {
-            throw new CargaException("Este documento no es una ficha preparada");
-        }
         ficha = new Ficha(path);
         
         ficha.setNombre(sheet.getRow(0).getCell(CellReference.convertColStringToIndex("C")).getStringCellValue());
         ficha.setCategoria(sheet.getRow(1).getCell(CellReference.convertColStringToIndex("C")).getStringCellValue());
         ficha.setNivel((int)(sheet.getRow(2).getCell(CellReference.convertColStringToIndex("C")).getNumericCellValue()));
         ficha.setVida((int)(sheet.getRow(6).getCell(CellReference.convertColStringToIndex("W")).getNumericCellValue()));
-        ficha.setZeon((int)(sheet.getRow(8).getCell(CellReference.convertColStringToIndex("BE")).getNumericCellValue()));
-        ficha.setCansancio((int)(sheet.getRow(87).getCell(CellReference.convertColStringToIndex("O")).getNumericCellValue()));
+        ficha.setZeon((int)(sheet.getRow(8).getCell(CellReference.convertColStringToIndex("BF")).getNumericCellValue()));
+        ficha.setCansancio((int)(sheet.getRow(85).getCell(CellReference.convertColStringToIndex("O")).getNumericCellValue()));
         
-        ficha.setVidaActual(ficha.getVida());
-        ficha.setZeonActual(ficha.getZeon());
-        ficha.setCansancioActual(ficha.getCansancio());
+        try {
+            ficha.setVidaActual((int)(sheet.getRow(8).getCell(CellReference.convertColStringToIndex("U")).getNumericCellValue()));
+        } catch (NullPointerException ex) {
+            ficha.setVidaActual(ficha.getVida());
+        }
+        try {
+            ficha.setZeonActual((int)(sheet.getRow(10).getCell(CellReference.convertColStringToIndex("BD")).getNumericCellValue()));
+        } catch (NullPointerException ex) {
+            ficha.setZeonActual(this.ficha.getZeon());
+        }
+        try {
+            ficha.setCansancioActual((int)(sheet.getRow(87).getCell(CellReference.convertColStringToIndex("O")).getNumericCellValue()));
+        } catch (NullPointerException ex) {
+            ficha.setCansancioActual(ficha.getCansancio());
+        }
         
         {
-            int ki = 0;
-            for (int i = 0; i < 7; i++) {
-                ki += (int)(sheet.getRow(2+i).getCell(CellReference.convertColStringToIndex("AG")).getNumericCellValue());
-            }
-            ficha.setKi(ki);
-            ficha.setKiActual(ki);
+            ficha.setKi((int)(sheet.getRow(15).getCell(CellReference.convertColStringToIndex("AG")).getNumericCellValue()));
+            ficha.setKiActual((int)(sheet.getRow(16).getCell(CellReference.convertColStringToIndex("AG")).getNumericCellValue()));
         }
         {
             int[] atributos = new int [8];
@@ -505,7 +519,7 @@ public class Anima {
             combate[1] = (int)(sheet.getRow(40).getCell(CellReference.convertColStringToIndex("E")).getNumericCellValue());
             combate[2] = (int)(sheet.getRow(40).getCell(CellReference.convertColStringToIndex("G")).getNumericCellValue());
             combate[3] = (int)(sheet.getRow(11).getCell(CellReference.convertColStringToIndex("AS")).getNumericCellValue());
-            combate[4] = (int)(sheet.getRow(21).getCell(CellReference.convertColStringToIndex("BR")).getNumericCellValue());
+            combate[4] = (int)(sheet.getRow(21).getCell(CellReference.convertColStringToIndex("BS")).getNumericCellValue());
 
             ficha.setCombate(combate);
         }
@@ -594,45 +608,10 @@ public class Anima {
             ficha.setConvocatoria(convocatoria);
         }
 
-        ficha.setPotencialPsiquico((int)(sheet.getRow(5).getCell(CellReference.convertColStringToIndex("BI")).getNumericCellValue()));
+        ficha.setPotencialPsiquico((int)(sheet.getRow(5).getCell(CellReference.convertColStringToIndex("BJ")).getNumericCellValue()));
         
-        ficha.setNotas(cargarNotas());
+        ficha.setNotas(sheet.getRow(96).getCell(CellReference.convertColStringToIndex("B")).getStringCellValue());
         return ficha;
-    }
-    
-    
-    private String cargarNotas() {
-        String s = "";
-        FileReader fr = null;
-        BufferedReader br;
-
-        try {
-           fr = new FileReader (direccion+"\\notas\\"+ficha.getNombre()+".txt");
-           br = new BufferedReader(fr);
-           
-           // Lectura del fichero
-           String linea;
-           while((linea=br.readLine())!=null) {
-                if (!"".equals(s))
-                    s += "\n" + linea;
-                else
-                    s = linea;
-           }
-        }
-        catch(IOException e){
-        }finally{
-           // En el finally cerramos el fichero, para asegurarnos
-           // que se cierra tanto si todo va bien como si salta 
-           // una excepcion.
-           try{                    
-              if( null != fr ){   
-                 fr.close();     
-              }                  
-           }catch (IOException e2){ 
-           }
-        }
-        
-        return s;
     }
     
     private Ficha crearGenerico () {

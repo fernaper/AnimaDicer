@@ -155,7 +155,7 @@ public class FileJSON {
                 }
                 ficha.setConvocatoria(arrayConvocatoria);
             }
-            ficha.setLog((String)jsonObj.get("log"));
+            //ficha.setLog((String)jsonObj.get("log"));
             ficha.setNotas((String)jsonObj.get("notas"));
         } catch(IOException | ParseException | NumberFormatException e) {
         }
@@ -175,7 +175,7 @@ public class FileJSON {
         obj.put("zeonActual",String.valueOf(ficha.getZeonActual()));
         obj.put("cansancio",String.valueOf(ficha.getCansancio()));
         obj.put("cansancioActual",String.valueOf(ficha.getCansancioActual()));
-        obj.put("log", ficha.getLog());
+        //obj.put("log", ficha.getLog());
         obj.put("notas", ficha.getNotas());
         obj.put("ki", String.valueOf(ficha.getKi()));
         obj.put("kiActual", String.valueOf(ficha.getKi()));

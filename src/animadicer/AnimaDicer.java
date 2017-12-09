@@ -15,7 +15,7 @@ import java.io.InputStream;
  * @author Fernando
  */
 public class AnimaDicer {
-    private static final String VERSION = "v1.0.6";
+    private static final String VERSION = "v1.0.7";
     /**
      * @param args the command line arguments
      */
@@ -49,10 +49,6 @@ public class AnimaDicer {
         }
         
         File folder = new File(myDocuments + "\\AnimaDicer");
-        if (!folder.exists())
-            folder.mkdir();
-        
-        folder = new File(myDocuments + "\\AnimaDicer\\notas");
         if (!folder.exists())
             folder.mkdir();
         

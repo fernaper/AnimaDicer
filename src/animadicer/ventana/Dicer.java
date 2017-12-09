@@ -2462,7 +2462,7 @@ public final class Dicer extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem2);
 
-        menuGuardar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.CTRL_MASK));
+        menuGuardar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
         menuGuardar.setText("Guardar");
         menuGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2471,7 +2471,7 @@ public final class Dicer extends javax.swing.JFrame {
         });
         jMenu1.add(menuGuardar);
 
-        menuGuardarComo.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        menuGuardarComo.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         menuGuardarComo.setText("Guardar como");
         menuGuardarComo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2868,29 +2868,47 @@ public final class Dicer extends javax.swing.JFrame {
     }//GEN-LAST:event_textNotas1FocusLost
 
     private void menuGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuGuardarActionPerformed
+        labelCargar.setVisible(true);
+        String mensaje = "¿Desea guardar los cambios de\n" + this.ficha.getPath() + "?";
+        
         if (((String)comboNombre.getSelectedItem()).endsWith("json")) { // Actualiza
-            String mensaje = "¿Desea guardar los cambios de\n" + this.ficha.getPath() + "?";
-                        
             if (JOptionPane.showConfirmDialog(null, mensaje, "Guardar JSON", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                FileJSON.exportJason(this.ficha.getPath(), this.ficha);
+                 new Thread() {
+                        @Override
+                        public void run() {
+                            FileJSON.exportJason(ficha.getPath(), ficha);
+                        }
+                 }.start();
             }
         } else {
             try {
-                Anima.guardar(ficha);
+                if (JOptionPane.showConfirmDialog(null, mensaje, "Guardar Excel", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                     new Thread() {
+                        @Override
+                        public void run() {
+                            Anima.guardar(ficha);
+                        }
+                     }.start();
+                }
             } catch (GuardaException ex) {
                 JFileChooser guardarDesc = new JFileChooser(this.ficha.getPath());
-                guardarDesc.setFileFilter(new FileNameExtensionFilter("JSON Files", "json"));
-                String ruta; 
+                guardarDesc.setFileFilter(new FileNameExtensionFilter("JSON Files", "json")); 
 
                 if(guardarDesc.showSaveDialog(null)== JFileChooser.APPROVE_OPTION){ 
-                    ruta = guardarDesc.getSelectedFile().getAbsolutePath();
-                    if (!ruta.endsWith("json")) {
-                        ruta = ruta + ".json";
-                    }
-                    FileJSON.exportJason(ruta, this.ficha);
+                    new Thread() {
+                        @Override
+                        public void run() {
+                            String ruta = guardarDesc.getSelectedFile().getAbsolutePath();
+                            if (!ruta.endsWith("json")) {
+                                ruta = ruta + ".json";
+                            }
+                            FileJSON.exportJason(ruta, ficha);
+                        }
+                    }.start();
                 }
             }
         }
+        labelCargar.setVisible(false);
     }//GEN-LAST:event_menuGuardarActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
@@ -2938,6 +2956,7 @@ public final class Dicer extends javax.swing.JFrame {
     }//GEN-LAST:event_fieldKiActualKeyTyped
 
     private void menuGuardarComoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuGuardarComoActionPerformed
+        labelCargar.setVisible(true);
         JFileChooser guardarDesc = new JFileChooser(this.ficha.getPath());
         guardarDesc.setFileFilter(new FileNameExtensionFilter("JSON Files", "json"));
         String ruta; 
@@ -2949,6 +2968,7 @@ public final class Dicer extends javax.swing.JFrame {
             }
             FileJSON.exportJason(ruta, this.ficha);
         }
+        labelCargar.setVisible(false);
     }//GEN-LAST:event_menuGuardarComoActionPerformed
 
     private void intTextField(java.awt.event.KeyEvent evt, JTextField field) {
@@ -5263,7 +5283,7 @@ public final class Dicer extends javax.swing.JFrame {
         seleccionado.setFileFilter(new FileNameExtensionFilter("xls & xlsx Excel & JSON", "xls", "xlsx", "json"));
     }
     
-    private void guardarNotas() {
+    /*private void guardarNotas() {
         FileWriter fichero = null;
         try {
             //s = new File (getClass().getResource("/opciones/settings.txt").toURI());
@@ -5278,7 +5298,7 @@ public final class Dicer extends javax.swing.JFrame {
             } catch (IOException ex) {
             }
         }
-    }
+    }*/
     
     @SuppressWarnings("static-access")
     private boolean guardarLog () {
@@ -5357,14 +5377,10 @@ public final class Dicer extends javax.swing.JFrame {
         if (settings.getTiradas()) {
             if (guardarLog()) {
                 this.dispose();
-                if (!"Nombre".equals(ficha.getNombre()))
-                    guardarNotas();
                 guardarSettings();
             }
         } else {
             this.dispose();
-            if (!"Nombre".equals(ficha.getNombre()))
-                guardarNotas();
             guardarSettings();
         }
     }
