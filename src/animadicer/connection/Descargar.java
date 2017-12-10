@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package animadicer.connection;
 
 import java.io.BufferedReader;
@@ -22,8 +17,6 @@ import java.util.logging.Logger;
  */
 public class Descargar {
     private static final String URL = "https://raw.githubusercontent.com/TheCorPlay/AnimaDicer/master/Downloader";
-
-    public Descargar() {}
     
     public static void descargar(String ficheroDestino) throws Exception {
         try {
@@ -39,11 +32,9 @@ public class Descargar {
                     outputStream.write(b, 0, longitud);
                 }
                 // Cerramos la conexión entrada
-            } // path y nombre del nuevo fichero creado
+            }   // path y nombre del nuevo fichero creado
             outputStream.close(); // Cerramos la conexión salida
-        } catch (java.net.MalformedURLException ex) {
-            System.err.println("Error. URL mal formado.");
-        }
+        } catch (java.net.MalformedURLException ex) {}
     }
     
     public static void actualiza(URL ficheroUrl, String ficheroDestino) throws IOException {
@@ -56,7 +47,7 @@ public class Descargar {
                 outputStream.write(b, 0, longitud);
             }
             // Cerramos la conexión entrada
-        } // path y nombre del nuevo fichero creado
+        }   // path y nombre del nuevo fichero creado
         outputStream.close(); // Cerramos la conexión salida
     }
     
@@ -71,7 +62,6 @@ public class Descargar {
             System.err.println("Error. URL mal formado.");
             return null;
         } catch (IOException ex) {
-            Logger.getLogger(Descargar.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
     }
@@ -82,7 +72,7 @@ public class Descargar {
         uc.connect();
         String contenido;
         try ( //Creamos el objeto con el que vamos a leer
-                BufferedReader in = new BufferedReader(new InputStreamReader(uc.getInputStream()))) {
+            BufferedReader in = new BufferedReader(new InputStreamReader(uc.getInputStream()))) {
             contenido = in.readLine();
         }
 
@@ -95,7 +85,7 @@ public class Descargar {
         uc.connect();
         String contenido;
         try ( //Creamos el objeto con el que vamos a leer
-                BufferedReader in = new BufferedReader(new InputStreamReader(uc.getInputStream()))) {
+            BufferedReader in = new BufferedReader(new InputStreamReader(uc.getInputStream()))) {
             // Ahora compruebo si la versión es mejor
             in.readLine();
             contenido = in.readLine();

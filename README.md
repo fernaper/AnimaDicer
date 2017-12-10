@@ -6,7 +6,8 @@ Executable: [AnimaDicer](AnimaDicer.jar)
   
  	By: Fernando Pérez
  	E-Mail: fernaperg@gmail.com
- 	Current version: v1.0.6 - RC (Release Candidate)
+ 	Current program version: v1.0.7 - Release
+	Current excel version: v1.0.6 - RC
 ***
 
 ## CONCEPTUAL IDEA
@@ -57,16 +58,21 @@ Please see [the licence file](LICENCE) for more information.
    	+	Change the actual form to open lot of files, now it uses a system based in windows.
       	It will use a new system based in a multi charge (It will saturate less the interface). [X]
    	+	Create a search engine that let the user find quickly the atributes, resistences or whatever. [Discarded]
-   	+	Reorganize the interface. [Work in progress]
+   	+	Reorganize the interface. [X]
    	+	Make the interface resizable. [Discarded]
-   	+	Improve the Battle organization. [Work in progress]
-	+	Make the program Multilanguage (Right now only in Spanish).[ ]
-   	+	Create and make compatible with an Android versión (AnimaDicer Mobile). [ ]
+   	+	Improve the Battle organization. [X]
+	+	Make the program Multilanguage (Right now only in Spanish).[Discarded]
+	+	Improve the excel files to make them much more comfortable [Work in progress]
+	+	Make the program campatible with other excel files [ ]
+   	+	Create and make compatible with an Android versión (AnimaDicer Mobile). [Work in progress]
    
 ***
   
 ## HELP
-  
+	
+	Since version 1.0.7 is a release, therefore it is fully functional and complies with the requirements and
+	proposed standards, however if there is something you do not understand or do not like how it is, please contact us.
+	
 	If you want to help to create or change somthing send me an e-mail with some code you want to see here.
 	Of course all credits for these changes will be yours.
 	Also you could contact me if you find some bugs.

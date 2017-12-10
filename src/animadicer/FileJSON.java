@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package animadicer;
 
 import java.io.File;
@@ -22,10 +17,6 @@ import org.json.simple.parser.ParseException;
  * @author Fernando
  */
 public class FileJSON {
-    public FileJSON () {
-        
-    }
-    
     public static Ficha importJason(File file, String path) {
         Ficha ficha = new Ficha(path);
         JSONParser parser = new JSONParser();

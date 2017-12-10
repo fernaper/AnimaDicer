@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package animadicer.ventana;
 
 import animadicer.Anima;
@@ -559,6 +553,7 @@ public final class Dicer extends javax.swing.JFrame {
         checkArmadura1 = new javax.swing.JCheckBox();
         checkArmadura2 = new javax.swing.JCheckBox();
         checkArmadura3 = new javax.swing.JCheckBox();
+        checkArmadura4 = new javax.swing.JCheckBox();
         jPanel15 = new javax.swing.JPanel();
         jLabel190 = new javax.swing.JLabel();
         jLabel192 = new javax.swing.JLabel();
@@ -743,9 +738,6 @@ public final class Dicer extends javax.swing.JFrame {
             }
         });
         fieldVidaActual.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                fieldVidaActualKeyPressed(evt);
-            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 fieldVidaActualKeyReleased(evt);
             }
@@ -816,11 +808,6 @@ public final class Dicer extends javax.swing.JFrame {
         fieldZeonActual.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 fieldZeonActualFocusLost(evt);
-            }
-        });
-        fieldZeonActual.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fieldZeonActualActionPerformed(evt);
             }
         });
         fieldZeonActual.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -976,11 +963,6 @@ public final class Dicer extends javax.swing.JFrame {
         fieldKiActual.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 fieldKiActualFocusLost(evt);
-            }
-        });
-        fieldKiActual.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fieldKiActualActionPerformed(evt);
             }
         });
         fieldKiActual.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -2349,6 +2331,14 @@ public final class Dicer extends javax.swing.JFrame {
         });
         jPanel14.add(checkArmadura3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, -1, -1));
 
+        checkArmadura4.setText("Casco");
+        checkArmadura4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                checkArmadura4MouseReleased(evt);
+            }
+        });
+        jPanel14.add(checkArmadura4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, -1, -1));
+
         jPanel15.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Daño Recibido", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
         jPanel15.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -2399,7 +2389,7 @@ public final class Dicer extends javax.swing.JFrame {
         jPanel14.add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 20, 160, 180));
 
         jLabel229.setText("Modificadores");
-        jPanel14.add(jLabel229, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 155, -1, -1));
+        jPanel14.add(jLabel229, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, -1));
 
         jPanel3.add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 610, 210));
 
@@ -2712,7 +2702,7 @@ public final class Dicer extends javax.swing.JFrame {
             try {
                 resCritico.setText(String.valueOf(Integer.parseInt(damageCritico.getText()) + Integer.parseInt(libreCritico.getText()) + Integer.parseInt(dadoCritico.getText())));
             } catch (NumberFormatException ex){}
-        }// TODO add your handling code here:
+        }
     }//GEN-LAST:event_damageCriticoKeyReleased
 
     private void libreCriticoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_libreCriticoKeyReleased
@@ -2811,7 +2801,6 @@ public final class Dicer extends javax.swing.JFrame {
     }//GEN-LAST:event_comboTurnoItemStateChanged
 
     private void comboNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboNombreActionPerformed
-        // TODO add your handling code here:
         if(!cambioNombres)
             cargar(archivosCargados.get(comboNombre.getSelectedIndex()));
     }//GEN-LAST:event_comboNombreActionPerformed
@@ -2836,14 +2825,6 @@ public final class Dicer extends javax.swing.JFrame {
         catch(NumberFormatException ex){value = 0;this.ficha.setVidaActual(value);}
         finally{barraVida.setValue(value);}
     }//GEN-LAST:event_fieldVidaActualKeyReleased
-
-    private void fieldZeonActualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldZeonActualActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_fieldZeonActualActionPerformed
-
-    private void fieldVidaActualKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fieldVidaActualKeyPressed
-        
-    }//GEN-LAST:event_fieldVidaActualKeyPressed
 
     private void fieldVidaActualFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldVidaActualFocusLost
         if (fieldVidaActual.getText().length() == 0) {
@@ -2925,10 +2906,6 @@ public final class Dicer extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_fieldKiActualFocusLost
 
-    private void fieldKiActualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldKiActualActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_fieldKiActualActionPerformed
-
     private void fieldKiActualKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fieldKiActualKeyReleased
         if (fieldKiActual.getText().length() == 1 && fieldKiActual.getText().charAt(0) == '-')
             return;
@@ -2970,6 +2947,10 @@ public final class Dicer extends javax.swing.JFrame {
         }
         labelCargar.setVisible(false);
     }//GEN-LAST:event_menuGuardarComoActionPerformed
+
+    private void checkArmadura4MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_checkArmadura4MouseReleased
+        calculadora();
+    }//GEN-LAST:event_checkArmadura4MouseReleased
 
     private void intTextField(java.awt.event.KeyEvent evt, JTextField field) {
         char vchar = evt.getKeyChar();
@@ -3017,30 +2998,33 @@ public final class Dicer extends javax.swing.JFrame {
         if (checkArmadura3.isSelected()) {
             armadura += this.ficha.getArmadura(2).getDefensa(critico);
         }
+        if (checkArmadura4.isSelected()) {
+            armadura += this.ficha.getArmadura(3).getDefensa(critico);
+        }
         
         try {
             // coje las armaduras que no estan
             switch (comboCritico.getSelectedIndex()) {
                 case 0:
-                    armadura += Integer.parseInt(filArmadura[3].getText());
+                    armadura += Integer.parseInt(filArmadura[4].getText());
                     break;
                 case 1:
-                    armadura += Integer.parseInt(conArmadura[3].getText());
+                    armadura += Integer.parseInt(conArmadura[4].getText());
                     break;
                 case 2:
-                    armadura += Integer.parseInt(penArmadura[3].getText());
+                    armadura += Integer.parseInt(penArmadura[4].getText());
                     break;
                 case 3:
-                    armadura += Integer.parseInt(calArmadura[3].getText());
+                    armadura += Integer.parseInt(calArmadura[4].getText());
                     break;
                 case 4:
-                    armadura += Integer.parseInt(eleArmadura[3].getText());
+                    armadura += Integer.parseInt(eleArmadura[4].getText());
                     break;
                 case 5:
-                    armadura += Integer.parseInt(friArmadura[3].getText());
+                    armadura += Integer.parseInt(friArmadura[4].getText());
                     break;
                 case 6:
-                    armadura += Integer.parseInt(enerArmadura[3].getText());
+                    armadura += Integer.parseInt(enerArmadura[4].getText());
                     break;
                 default:
                     break;
@@ -3169,13 +3153,12 @@ public final class Dicer extends javax.swing.JFrame {
         darValores(ficha);
     }
     
-    private void darValores(Ficha ficha) 
-    {
+    private void darValores(Ficha ficha) {
         valuesPrincipales(ficha);
         valuesSecundarias(ficha);
         valuesResistencias(ficha);
-        valuesArmaduras(ficha);
-        valuesArmas(ficha);
+        valuesArmaduras();
+        valuesArmas();
         valuesCombate(ficha);
         calculadora();
         textNotas1.setText(ficha.getNotas());
@@ -3193,47 +3176,12 @@ public final class Dicer extends javax.swing.JFrame {
         valuesPrincipales(this.ficha);
         valuesSecundarias(this.ficha);
         valuesResistencias(this.ficha);
-        valuesArmaduras(this.ficha);
-        valuesArmas(this.ficha);
+        valuesArmaduras();
+        valuesArmas();
         valuesCombate(this.ficha);
         calculadora();
         textNotas1.setText(ficha.getNotas());
         this.setTitle("Anima Dicer " + this.version);
-    }
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Dicer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        /* Create and display the form */
-        /*java.awt.EventQueue.invokeLater(new Runnable() {
-        public void run() {
-        new Dicer(settings).setVisible(true);
-        }
-        });*/
-        //</editor-fold>
-
-        /* Create and display the form */
-        /*java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Dicer(settings).setVisible(true);
-            }
-        });*/
     }
 
     private final Settings settings;
@@ -3315,6 +3263,7 @@ public final class Dicer extends javax.swing.JFrame {
     private javax.swing.JCheckBox checkArmadura1;
     private javax.swing.JCheckBox checkArmadura2;
     private javax.swing.JCheckBox checkArmadura3;
+    private javax.swing.JCheckBox checkArmadura4;
     private javax.swing.JCheckBoxMenuItem checkCapicua;
     private javax.swing.JCheckBoxMenuItem checkDadosFisicos;
     private javax.swing.JCheckBoxMenuItem checkTiradas;
@@ -4028,17 +3977,17 @@ public final class Dicer extends javax.swing.JFrame {
     }
     
     private void initArmaduras() {
-        nombreArmadura = new JTextField[4];
-        filArmadura = new JTextField[4];
-        conArmadura = new JTextField[4];
-        penArmadura = new JTextField[4];
-        calArmadura = new JTextField[4];
-        eleArmadura = new JTextField[4];
-        friArmadura = new JTextField[4];
-        enerArmadura = new JTextField[4];
-        posArmadura = new JTextField[4];
+        nombreArmadura = new JTextField[5];
+        filArmadura = new JTextField[5];
+        conArmadura = new JTextField[5];
+        penArmadura = new JTextField[5];
+        calArmadura = new JTextField[5];
+        eleArmadura = new JTextField[5];
+        friArmadura = new JTextField[5];
+        enerArmadura = new JTextField[5];
+        posArmadura = new JTextField[5];
         
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 5; i++) {
             nombreArmadura[i] = new JTextField();
             filArmadura[i] = new JTextField();
             conArmadura[i] = new JTextField();
@@ -4062,7 +4011,7 @@ public final class Dicer extends javax.swing.JFrame {
             nombreArmadura[i].setFont(new java.awt.Font("Tahoma", 1, 8));
             posArmadura[i].setFont(new java.awt.Font("Tahoma", 1, 8));
             
-            if (i != 3) {
+            if (i != 4) {
                 nombreArmadura[i].setEditable(false);
                 filArmadura[i].setEditable(false);
                 conArmadura[i].setEditable(false);
@@ -4200,7 +4149,7 @@ public final class Dicer extends javax.swing.JFrame {
 
                 }.init(enerArmadura[i]));
             }
-            if (i != 3) {
+            if (i != 4) {
                 jPanel14.add(nombreArmadura[i], new org.netbeans.lib.awtextra.AbsoluteConstraints(105, 60+(i*30), 58, 20));
                 jPanel14.add(posArmadura[i], new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 60+(i*30), 45, 20));
             }
@@ -4240,7 +4189,7 @@ public final class Dicer extends javax.swing.JFrame {
 
         }.init(calcPorcentaje));
         
-        valuesArmaduras(this.ficha);
+        valuesArmaduras();
     }
 
     private void initArmas() {
@@ -4345,7 +4294,7 @@ public final class Dicer extends javax.swing.JFrame {
         jPanel13.add(armas[3].presenciaDado, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 100, 25, 20));
         jPanel13.add(armas[3].presenciaResultado, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 100, 40, 20));
         
-        valuesArmas(this.ficha);
+        valuesArmas();
     }
     
     private void initCombate() {
@@ -4820,19 +4769,19 @@ public final class Dicer extends javax.swing.JFrame {
         barraZeon.setMaximum(ficha.getZeon());
         barraZeon.setMinimum(0);
         fieldZeonActual.setText(String.valueOf(ficha.getZeonActual()));
-        barraZeon.setValue(ficha.getZeonActual()); 
-        //---------------------Cansancio------------------------------
-        fieldCansancio.setText(String.valueOf(ficha.getCansancio()));
-        barraCansancio.setMaximum(ficha.getCansancio());
-        fieldCansancioActual.setText(String.valueOf(ficha.getCansancioActual()));
-        barraCansancio.setMinimum(0);
-        barraCansancio.setValue(ficha.getCansancioActual());
+        barraZeon.setValue(ficha.getZeonActual());
         //---------------------Ki------------------------------
         fieldKi.setText(String.valueOf(ficha.getKi()));
         barraKi.setMaximum(ficha.getKi());
         fieldKiActual.setText(String.valueOf(ficha.getKiActual()));
         barraKi.setMinimum(0);
         barraKi.setValue(ficha.getKiActual());
+        //---------------------Cansancio------------------------------
+        fieldCansancio.setText(String.valueOf(ficha.getCansancio()));
+        barraCansancio.setMaximum(ficha.getCansancio());
+        fieldCansancioActual.setText(String.valueOf(ficha.getCansancioActual()));
+        barraCansancio.setMinimum(0);
+        barraCansancio.setValue(ficha.getCansancioActual());
         
         for (int i = 0; i < 8; i++) {
             base_Atributos[i].setText(String.valueOf(ficha.getAtributo(i)));
@@ -4849,7 +4798,6 @@ public final class Dicer extends javax.swing.JFrame {
             dado_Secundarias[i].setText(String.valueOf(0));
             res_Secundarias[i].setText(String.valueOf(Integer.parseInt(base_Secundarias[i].getText()) + Integer.parseInt(libre_Secundarias[i].getText()) + Integer.parseInt(dado_Secundarias[i].getText())));
         }
-        
     }
     
     private void valuesResistencias(Ficha ficha) {
@@ -4861,8 +4809,8 @@ public final class Dicer extends javax.swing.JFrame {
         }
     }
     
-    private void valuesArmaduras(Ficha fila) {        
-        for (int i = 0; i < 3; i++) {
+    private void valuesArmaduras() {        
+        for (int i = 0; i < 4; i++) {
             Armadura a = ficha.getArmadura(i);
             
             nombreArmadura[i].setText(a.getNombre());
@@ -4877,7 +4825,7 @@ public final class Dicer extends javax.swing.JFrame {
         }
     }
     
-    private void valuesArmas(Ficha fila) {
+    private void valuesArmas() {
         for (int i = 0; i < 4; i++) {
             Arma a = ficha.getArma(i);
             
@@ -4917,8 +4865,6 @@ public final class Dicer extends javax.swing.JFrame {
         for (int i = 0; i < 4; i++) {
             base_convocatoria[i].setText(String.valueOf(ficha.getConvocatoria(i)));
         }
-        
-        
     }
     
     private String b_MouseClicked(int i) {                                           
@@ -5283,23 +5229,6 @@ public final class Dicer extends javax.swing.JFrame {
         seleccionado.setFileFilter(new FileNameExtensionFilter("xls & xlsx Excel & JSON", "xls", "xlsx", "json"));
     }
     
-    /*private void guardarNotas() {
-        FileWriter fichero = null;
-        try {
-            //s = new File (getClass().getResource("/opciones/settings.txt").toURI());
-            fichero = new FileWriter(this.direccion+"\\notas\\"+ficha.getNombre()+".txt");
-            PrintWriter pw = new PrintWriter(fichero);
-            pw.println(log.getNotas());
-        } catch (NullPointerException | IOException ex) {}
-        finally {
-            try {
-                if (fichero!= null)
-                    fichero.close();
-            } catch (IOException ex) {
-            }
-        }
-    }*/
-    
     @SuppressWarnings("static-access")
     private boolean guardarLog () {
         JFileChooser guardarLog = new JFileChooser();
@@ -5341,10 +5270,8 @@ public final class Dicer extends javax.swing.JFrame {
     }
     
     private void guardarSettings() {
-        //File s; 
         FileWriter fichero = null;
         try {
-            //s = new File (getClass().getResource("/opciones/settings.txt").toURI());
             fichero = new FileWriter(this.direccion + "\\settings.txt");
             PrintWriter pw = new PrintWriter(fichero);
             if (settings.getAbiertas())
@@ -5663,16 +5590,7 @@ public final class Dicer extends javax.swing.JFrame {
         
     }
     
-    /*
-    private void borrarComboNombre()
-    {
-        cambioNombres = true;
-        comboNombre.removeAllItems();
-        cambioNombres = false;
-    }
-    */
-    private void anadirComboNombre(String str)
-    {
+    private void anadirComboNombre(String str) {
         cambioNombres = true;
         comboNombre.addItem(str);
         cambioNombres = false;

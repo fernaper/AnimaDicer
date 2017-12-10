@@ -1,11 +1,9 @@
 package animadicer;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -300,7 +298,7 @@ public class Anima {
         }
         {
             Armadura []armadura;
-            armadura = new Armadura[3];
+            armadura = new Armadura[4];
             for (int i = 0; i < 3; i++) {
                 armadura[i] = new Armadura();
                 armadura[i].setNombre(sheet.getRow(20+i).getCell(CellReference.convertColStringToIndex("B")).getStringCellValue());
@@ -312,6 +310,17 @@ public class Anima {
                 armadura[i].setDefensa(defensa);
                 armadura[i].setPosicion(sheet.getRow(24+i).getCell(CellReference.convertColStringToIndex("J")).getStringCellValue());
             }
+            
+            armadura[3] = new Armadura();
+            armadura[3].setNombre("Nada");
+            int []defensa = new int[7];
+            for (int j = 0; j < 7; j++) {
+                defensa[j] = 0;
+            }
+
+            armadura[3].setDefensa(defensa);
+            armadura[3].setPosicion("Ninguna");
+            
             ficha.setArmadura(armadura);
         }
         {
@@ -447,8 +456,8 @@ public class Anima {
         }
         {
             Armadura []armadura;
-            armadura = new Armadura[3];
-            for (int i = 0; i < 3; i++) {
+            armadura = new Armadura[4];
+            for (int i = 0; i < 4; i++) {
                 armadura[i] = new Armadura();
                 armadura[i].setNombre(sheet.getRow(23+i).getCell(CellReference.convertColStringToIndex("B")).getStringCellValue());
                 int []defensa = new int[7];
@@ -585,8 +594,8 @@ public class Anima {
         }
         {
             Armadura []armadura;
-            armadura = new Armadura[3];
-            for (int i = 0; i < 3; i++) {
+            armadura = new Armadura[4];
+            for (int i = 0; i < 4; i++) {
                 armadura[i] = new Armadura();
                 armadura[i].setNombre(sheet.getRow(23+i).getCell(CellReference.convertColStringToIndex("B")).getStringCellValue());
                 int []defensa = new int[7];
@@ -689,9 +698,9 @@ public class Anima {
         }
         {
             Armadura[] armadura;
-            armadura = new Armadura[3];
+            armadura = new Armadura[4];
             
-            for (int i = 0; i < 3; i++) {
+            for (int i = 0; i < 4; i++) {
                 armadura[i] = new Armadura();
                 
                 armadura[i].setNombre("Nada");

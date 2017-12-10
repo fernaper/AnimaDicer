@@ -25,7 +25,7 @@ public class Ficha {
 
     int[]turno; // 5 turnos, dependiendo del arma que use
     Arma[]arma; // 4 armas puede usar
-    Armadura[] armadura;
+    Armadura[] armadura; // 3 armaduras y 1 casco
 
     int[] convocatoria; // CONVOCAR, DOMINAR, ATAR, DESCONVOCAR
 
@@ -39,7 +39,7 @@ public class Ficha {
         turno = new int [5];
         convocatoria = new int [4];
         arma = new Arma[4];
-        armadura = new Armadura[3];
+        armadura = new Armadura[4];
         log = "";
         this.path = path;
     }
@@ -57,7 +57,7 @@ public class Ficha {
     }
     
     public void setArma(Arma[] arma) {
-        this.arma = arma;
+        System.arraycopy(arma, 0, this.arma, 0, 4);
     }
     
     public Arma getArma(int i){
@@ -65,7 +65,7 @@ public class Ficha {
     }
     
     public void setArmadura(Armadura[] armadura) {
-        this.armadura = armadura;
+        System.arraycopy(armadura, 0, this.armadura, 0, 4);
     }
     
     public Armadura getArmadura(int i) {
