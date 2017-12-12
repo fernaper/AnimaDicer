@@ -4,6 +4,7 @@ import animadicer.Anima;
 import animadicer.Arma;
 import animadicer.Armadura;
 import animadicer.CargaException;
+import animadicer.CargarSettings;
 import animadicer.Dado;
 import animadicer.Ficha;
 import animadicer.FileJSON;
@@ -78,7 +79,6 @@ public final class Dicer extends javax.swing.JFrame {
 
         checkAbiertas.setSelected(settings.getAbiertas());
         checkCapicua.setSelected(settings.getCapicua());
-        checkTiradas.setSelected(settings.getTiradas());
         checkDadosFisicos.setSelected(settings.getFisicos());
         
         this.addWindowListener(new WindowAdapter() {
@@ -584,7 +584,6 @@ public final class Dicer extends javax.swing.JFrame {
         checkAbiertas = new javax.swing.JCheckBoxMenuItem();
         checkCapicua = new javax.swing.JCheckBoxMenuItem();
         jSeparator3 = new javax.swing.JPopupMenu.Separator();
-        checkTiradas = new javax.swing.JCheckBoxMenuItem();
         checkDadosFisicos = new javax.swing.JCheckBoxMenuItem();
         jMenu3 = new javax.swing.JMenu();
         ayuda = new javax.swing.JMenuItem();
@@ -2512,15 +2511,6 @@ public final class Dicer extends javax.swing.JFrame {
         jMenu2.add(checkCapicua);
         jMenu2.add(jSeparator3);
 
-        checkTiradas.setSelected(true);
-        checkTiradas.setText("Autoguardado de tiradas");
-        checkTiradas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                checkTiradasActionPerformed(evt);
-            }
-        });
-        jMenu2.add(checkTiradas);
-
         checkDadosFisicos.setSelected(true);
         checkDadosFisicos.setText("Dados Físicos");
         checkDadosFisicos.addActionListener(new java.awt.event.ActionListener() {
@@ -2704,10 +2694,6 @@ public final class Dicer extends javax.swing.JFrame {
     private void checkCapicuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkCapicuaActionPerformed
         settings.setCapicua(checkCapicua.isSelected());
     }//GEN-LAST:event_checkCapicuaActionPerformed
-
-    private void checkTiradasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkTiradasActionPerformed
-        settings.setTiradas(checkTiradas.isSelected());
-    }//GEN-LAST:event_checkTiradasActionPerformed
 
     private void textNotas1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textNotas1KeyReleased
         log.setNotas(textNotas1.getText());
@@ -3346,7 +3332,6 @@ public final class Dicer extends javax.swing.JFrame {
     private javax.swing.JCheckBox checkArmadura4;
     private javax.swing.JCheckBoxMenuItem checkCapicua;
     private javax.swing.JCheckBoxMenuItem checkDadosFisicos;
-    private javax.swing.JCheckBoxMenuItem checkTiradas;
     private javax.swing.JComboBox<String> comboCritico;
     private javax.swing.JComboBox<String> comboNombre;
     private javax.swing.JComboBox<String> comboTurno;
@@ -5350,46 +5335,12 @@ public final class Dicer extends javax.swing.JFrame {
     }
     
     private void guardarSettings() {
-        FileWriter fichero = null;
-        try {
-            fichero = new FileWriter(this.direccion + "\\settings.txt");
-            PrintWriter pw = new PrintWriter(fichero);
-            if (settings.getAbiertas())
-                pw.println("true");
-            else
-                pw.println("false");
-            if (settings.getCapicua())
-                pw.println("true");
-            else
-                pw.println("false");
-            if (settings.getTiradas())
-                pw.println("true");
-            else
-                pw.println("false");
-            if (settings.getFisicos())
-                pw.println("true");
-            else
-                pw.println("false");
-        } catch (NullPointerException | IOException ex) {}
-        finally {
-            try {
-                if (fichero != null)
-                    fichero.close();
-            } catch (IOException ex) {
-            }
-        }
+        CargarSettings.exportJason(this.direccion + "\\settings.json", this.settings);
     }
     
     private void exit() {
-        if (settings.getTiradas()) {
-            if (guardarLog()) {
-                this.dispose();
-                guardarSettings();
-            }
-        } else {
-            this.dispose();
-            guardarSettings();
-        }
+        this.dispose();
+        guardarSettings();
     }
     
     private void dadosFisicos() {

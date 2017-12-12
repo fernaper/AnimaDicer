@@ -1,71 +1,49 @@
 package animadicer;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 /**
  *
  * @author Fernando
  */
 public class CargarSettings {
-    private final String direccion;
     
-    public CargarSettings (String direccion) {
-        this.direccion = direccion;
-    }
-    
-    public Settings cargar() {
-        Settings s = new Settings();
-        //File archivo;
-        FileReader fr = null;
-        BufferedReader br;
-
+    public static Settings importJason(File file, String path) {
+        JSONParser parser = new JSONParser();
+        Settings settings = new Settings();
+        
         try {
-           // Apertura del fichero y creacion de BufferedReader para poder
-           // hacer una lectura comoda (disponer del metodo readLine()).
-           //archivo = new File (getClass().getResource("/opciones/settings.txt").toURI());
-           fr = new FileReader (direccion+"\\settings.txt");
-           br = new BufferedReader(fr);
-
-           // Lectura del fichero
-           String linea;
-           //while((linea=br.readLine())!=null) {
-           //    System.out.println(linea);
-           //}
-           for (int i = 0; i < 4; i++) {
-               linea = br.readLine();
-               switch (i) {
-                   case 0:
-                       s.setAbiertas("true".equals(linea));
-                       break;
-                   case 1:
-                       s.setCapicua("true".equals(linea));
-                       break;
-                   case 2:
-                       s.setTiradas("true".equals(linea));
-                       break;
-                   case 3:
-                       s.setFisicos("true".equals(linea));
-                       break;
-                   default:
-                       break;
-               }
-           }
-        }
-        catch(IOException e){
-        }finally{
-           // En el finally cerramos el fichero, para asegurarnos
-           // que se cierra tanto si todo va bien como si salta 
-           // una excepcion.
-           try{                    
-              if( null != fr ){   
-                 fr.close();     
-              }                  
-           }catch (IOException e){ 
-           }
+            JSONObject jsonObj = (JSONObject) parser.parse(new FileReader(file));
+            settings.setAbiertas(((String)jsonObj.get("abiertas")).equals("true"));
+            settings.setCapicua(((String)jsonObj.get("capicua")).equals("true"));
+            settings.setFisicos(((String)jsonObj.get("fisicos")).equals("true"));
+        } catch(IOException | ParseException | NumberFormatException e) {
         }
         
-        return s;
+        return settings;
+    }
+    
+    public static void exportJason(String path, Settings settings){
+        JSONObject obj = new JSONObject(); //(condicion)?valor1:valor2;
+        obj.put("abiertas",(settings.getAbiertas())?"true":"false");
+        obj.put("capicua",(settings.getCapicua())?"true":"false");
+        obj.put("fisicos",(settings.getFisicos())?"true":"false");
+        
+        try (FileWriter file = new FileWriter(path)) {
+            file.write(obj.toJSONString());
+        } catch (IOException ex) {
+            Logger.getLogger(FileJSON.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

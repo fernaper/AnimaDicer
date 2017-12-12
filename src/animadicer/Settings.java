@@ -3,13 +3,11 @@ package animadicer;
 public class Settings {
     boolean abiertas; // Si esta a true las abiertas son cada vez m�s dif�ciles
     boolean capicua;
-    boolean tiradas;
     boolean fisicos;
 
     public Settings() {
         abiertas = true;
         capicua = false;
-        tiradas = false;
         fisicos = false;
     }
 
@@ -19,10 +17,6 @@ public class Settings {
 
     public boolean getCapicua() {
         return capicua;
-    }
-    
-    public boolean getTiradas () {
-        return tiradas;
     }
     
     public boolean getFisicos(){
@@ -35,10 +29,6 @@ public class Settings {
 
     public void setCapicua(boolean capicua) {
         this.capicua = capicua;
-    }
-    
-    public void setTiradas(boolean tiradas) {
-        this.tiradas = tiradas;
     }
     
     public void setFisicos(boolean fisicos) {

@@ -19,7 +19,7 @@ public class AnimaDicer {
             @Override
             public void run() {
                 String dir = direccionCargaGuardado();
-                Dicer d = new Dicer(VERSION, new CargarSettings(dir).cargar(),new Anima(dir).start(), dir);
+                Dicer d = new Dicer(VERSION, CargarSettings.importJason(new File(dir+"\\settings.json"), dir),new Anima(dir).start(), dir);
             }
         }.start();
     }
