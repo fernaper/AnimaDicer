@@ -703,7 +703,7 @@ public final class Dicer extends javax.swing.JFrame {
         jPanel6.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 97, -1, -1));
 
         jLabel16.setText("Ki:");
-        jPanel6.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 152, -1, -1));
+        jPanel6.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 147, -1, -1));
 
         fieldNombre.setEditable(false);
         fieldNombre.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -718,7 +718,7 @@ public final class Dicer extends javax.swing.JFrame {
         jPanel6.add(fieldNivel, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, 180, -1));
 
         jLabel175.setText("Cansancio:");
-        jPanel6.add(jLabel175, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 177, -1, -1));
+        jPanel6.add(jLabel175, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 172, -1, -1));
 
         barraVida.setForeground(new java.awt.Color(200, 0, 0));
 
@@ -731,6 +731,7 @@ public final class Dicer extends javax.swing.JFrame {
         fieldVidaActual.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         fieldVidaActual.setText("125");
         fieldVidaActual.setBorder(null);
+        fieldVidaActual.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         fieldVidaActual.setOpaque(false);
         fieldVidaActual.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -864,7 +865,7 @@ public final class Dicer extends javax.swing.JFrame {
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
-        jPanel6.add(jLayeredPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 125, 180, 20));
+        jPanel6.add(jLayeredPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, 180, 20));
 
         barraCansancio.setForeground(new java.awt.Color(0, 110, 0));
 
@@ -936,7 +937,7 @@ public final class Dicer extends javax.swing.JFrame {
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
-        jPanel6.add(jLayeredPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 175, 180, 20));
+        jPanel6.add(jLayeredPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 170, 180, 20));
 
         comboNombre.setModel(new javax.swing.DefaultComboBoxModel<>());
         comboNombre.setEnabled(false);
@@ -1019,10 +1020,10 @@ public final class Dicer extends javax.swing.JFrame {
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
-        jPanel6.add(jLayeredPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 150, 180, 20));
+        jPanel6.add(jLayeredPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 145, 180, 20));
 
         jLabel363.setText("Zeon:");
-        jPanel6.add(jLabel363, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 127, -1, -1));
+        jPanel6.add(jLabel363, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 122, -1, -1));
 
         jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 270, 210));
 
@@ -2590,6 +2591,14 @@ public final class Dicer extends javax.swing.JFrame {
         }else{
             intTextField(evt,fieldZeonActual);
         }
+        
+        try {
+            if (Integer.parseInt(fieldZeonActual.getText()) > this.ficha.getZeon()) {
+                fieldZeonActual.setText(String.valueOf(this.ficha.getZeon()));
+            }
+        } catch(NumberFormatException ex) {
+            fieldZeonActual.setText(String.valueOf(this.ficha.getZeon()));
+        }
     }//GEN-LAST:event_fieldZeonActualKeyTyped
 
     private void fieldCansancioActualKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fieldCansancioActualKeyTyped
@@ -2598,13 +2607,23 @@ public final class Dicer extends javax.swing.JFrame {
         }else{
             intTextField(evt,fieldCansancioActual);
         }
+        
+        try {
+            if (Integer.parseInt(fieldCansancioActual.getText()) > this.ficha.getCansancio()) {
+                fieldCansancioActual.setText(String.valueOf(this.ficha.getCansancio()));
+            }
+        } catch(NumberFormatException ex) {
+            fieldCansancioActual.setText(String.valueOf(this.ficha.getCansancio()));
+        }
     }//GEN-LAST:event_fieldCansancioActualKeyTyped
 
     private void fieldCansancioActualKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fieldCansancioActualKeyReleased
         try {
             if (Integer.parseInt(fieldCansancioActual.getText()) > Integer.parseInt(fieldCansancio.getText()))
                 fieldCansancioActual.setText(fieldCansancio.getText());
-        } catch(NumberFormatException ex){}
+        } catch(NumberFormatException ex){
+            fieldCansancioActual.setText(fieldCansancio.getText());
+        }
         
         int value = 0;
         try{
@@ -2622,7 +2641,9 @@ public final class Dicer extends javax.swing.JFrame {
         try {
             if (Integer.parseInt(fieldZeonActual.getText()) > Integer.parseInt(fieldZeon.getText()))
                 fieldZeonActual.setText(fieldZeon.getText());
-        } catch(NumberFormatException ex){}
+        } catch(NumberFormatException ex){
+            fieldZeonActual.setText(fieldZeon.getText());
+        }
         
         int value = 0;
         try{
@@ -2807,16 +2828,28 @@ public final class Dicer extends javax.swing.JFrame {
 
     private void fieldVidaActualKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fieldVidaActualKeyTyped
         intTextField(evt,fieldVidaActual);
+        
+        try {
+            if (Integer.parseInt(fieldVidaActual.getText()) > this.ficha.getVida()) {
+                fieldVidaActual.setText(String.valueOf(this.ficha.getVida()));
+            }
+        } catch(NumberFormatException ex) {
+            fieldVidaActual.setText(String.valueOf(this.ficha.getVida()));
+        }
     }//GEN-LAST:event_fieldVidaActualKeyTyped
 
     private void fieldVidaActualKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fieldVidaActualKeyReleased
         if (fieldVidaActual.getText().length() == 1 && fieldVidaActual.getText().charAt(0) == '-')
             return;
+        
         try {
-            if (Integer.parseInt(fieldVidaActual.getText()) > Integer.parseInt(fieldVida.getText()))
+            if (Integer.parseInt(fieldVidaActual.getText()) > Integer.parseInt(fieldVida.getText())) {
                 fieldVidaActual.setText(fieldVida.getText());
+            }
         } catch(NumberFormatException ex) {
+            fieldVidaActual.setText(fieldVida.getText());
         }
+        
         int value = 0;
         try{
             this.ficha.setVidaActual(Integer.parseInt(fieldVidaActual.getText()));
@@ -2829,6 +2862,16 @@ public final class Dicer extends javax.swing.JFrame {
     private void fieldVidaActualFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldVidaActualFocusLost
         if (fieldVidaActual.getText().length() == 0) {
             fieldVidaActual.setText("0");
+            return;
+        }
+        
+        try {
+            if (Integer.parseInt(fieldVidaActual.getText()) > this.ficha.getVida()) {
+                fieldVidaActual.setText(String.valueOf(this.ficha.getVida()));
+            }
+        } catch(NumberFormatException ex) {
+            fieldVidaActual.setText(String.valueOf(this.ficha.getVida()));
+            barraVida.setValue(this.ficha.getVida());
         }
     }//GEN-LAST:event_fieldVidaActualFocusLost
 
@@ -2836,11 +2879,29 @@ public final class Dicer extends javax.swing.JFrame {
         if (fieldZeonActual.getText().length() == 0) {
             fieldZeonActual.setText("0");
         }
+        
+        try {
+            if (Integer.parseInt(fieldZeonActual.getText()) > this.ficha.getZeon()) {
+                fieldZeonActual.setText(String.valueOf(this.ficha.getZeon()));
+            }
+        } catch(NumberFormatException ex) {
+            fieldZeonActual.setText(String.valueOf(this.ficha.getZeon()));
+            barraZeon.setValue(this.ficha.getZeon());
+        }
     }//GEN-LAST:event_fieldZeonActualFocusLost
 
     private void fieldCansancioActualFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldCansancioActualFocusLost
         if (fieldCansancioActual.getText().length() == 0) {
             fieldCansancioActual.setText("0");
+        }
+        
+        try {
+            if (Integer.parseInt(fieldCansancioActual.getText()) > this.ficha.getCansancio()) {
+                fieldCansancioActual.setText(String.valueOf(this.ficha.getCansancio()));
+            }
+        } catch(NumberFormatException ex) {
+            fieldCansancioActual.setText(String.valueOf(this.ficha.getCansancio()));
+            barraCansancio.setValue(this.ficha.getCansancio());
         }
     }//GEN-LAST:event_fieldCansancioActualFocusLost
 
@@ -2904,6 +2965,15 @@ public final class Dicer extends javax.swing.JFrame {
         if (fieldKiActual.getText().length() == 0) {
             fieldKiActual.setText("0");
         }
+        
+        try {
+            if (Integer.parseInt(fieldKiActual.getText()) > this.ficha.getKi()) {
+                fieldKiActual.setText(String.valueOf(this.ficha.getKi()));
+            }
+        } catch(NumberFormatException ex) {
+            fieldKiActual.setText(String.valueOf(this.ficha.getKi()));
+            barraKi.setValue(this.ficha.getKi());
+        }
     }//GEN-LAST:event_fieldKiActualFocusLost
 
     private void fieldKiActualKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fieldKiActualKeyReleased
@@ -2913,7 +2983,9 @@ public final class Dicer extends javax.swing.JFrame {
         try {
             if (Integer.parseInt(fieldKiActual.getText()) > Integer.parseInt(fieldKi.getText()))
                 fieldKiActual.setText(fieldKi.getText());
-        } catch(NumberFormatException ex){}
+        } catch(NumberFormatException ex){
+            fieldKiActual.setText(fieldKi.getText());
+        }
         
         int value = 0;
         try{
@@ -2929,6 +3001,14 @@ public final class Dicer extends javax.swing.JFrame {
             evt.consume();
         }else{
             intTextField(evt,fieldKiActual);
+        }
+        
+        try {
+            if (Integer.parseInt(fieldKiActual.getText()) > this.ficha.getKi()) {
+                fieldKiActual.setText(String.valueOf(this.ficha.getKi()));
+            }
+        } catch(NumberFormatException ex) {
+            fieldKiActual.setText(String.valueOf(this.ficha.getKi()));
         }
     }//GEN-LAST:event_fieldKiActualKeyTyped
 

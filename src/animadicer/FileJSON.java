@@ -114,7 +114,7 @@ public class FileJSON {
             }
             {
                 JSONArray armadura = (JSONArray) jsonObj.get("armadura");
-                Armadura arrayArmadura[] = new Armadura[3];
+                Armadura arrayArmadura[] = new Armadura[4];
                 for (int i = 0; i < armadura.size(); i++) {
                     arrayArmadura[i] = new Armadura();
                     JSONObject jsonobject = (JSONObject)armadura.get(i);
@@ -216,7 +216,7 @@ public class FileJSON {
         obj.put("arma",armas);
         
         JSONArray armaduras = new JSONArray();
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 4; i++) {
             JSONObject armadura = new JSONObject();
             armadura.put("nombre",ficha.getArmadura(i).getNombre());
             armadura.put("posicion",ficha.getArmadura(i).getPosicion());
