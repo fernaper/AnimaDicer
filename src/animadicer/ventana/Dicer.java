@@ -79,6 +79,7 @@ public final class Dicer extends javax.swing.JFrame {
         
         menuGuardar.setEnabled(false);
         menuGuardarComo.setEnabled(false);
+        menuGuardarTodo.setEnabled(false);
 
         checkAbiertas.setSelected(settings.getAbiertas());
         checkCapicua.setSelected(settings.getCapicua());
@@ -612,6 +613,7 @@ public final class Dicer extends javax.swing.JFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
         menuGuardar = new javax.swing.JMenuItem();
         menuGuardarComo = new javax.swing.JMenuItem();
+        menuGuardarTodo = new javax.swing.JMenuItem();
         menuDescargar = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         jMenuItem4 = new javax.swing.JMenuItem();
@@ -2507,6 +2509,14 @@ public final class Dicer extends javax.swing.JFrame {
         });
         jMenu1.add(menuGuardarComo);
 
+        menuGuardarTodo.setText("Guardar todas las fichas");
+        menuGuardarTodo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuGuardarTodoActionPerformed(evt);
+            }
+        });
+        jMenu1.add(menuGuardarTodo);
+
         menuDescargar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.CTRL_MASK));
         menuDescargar.setText("Descargar Ficha");
         menuDescargar.addActionListener(new java.awt.event.ActionListener() {
@@ -2820,6 +2830,7 @@ public final class Dicer extends javax.swing.JFrame {
             carga_inicial(archivosSeleccionados[0]);
             menuGuardar.setEnabled(true);
             menuGuardarComo.setEnabled(true);
+            menuGuardarTodo.setEnabled(true);
             
             new Thread () {
                 @Override
@@ -3057,6 +3068,14 @@ public final class Dicer extends javax.swing.JFrame {
     private void checkAutoguardadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkAutoguardadoActionPerformed
         this.settings.setAutoguardado(checkAutoguardado.isSelected());
     }//GEN-LAST:event_checkAutoguardadoActionPerformed
+
+    private void menuGuardarTodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuGuardarTodoActionPerformed
+        int i = 0;
+        for (Ficha ficha: archivosCargados) {
+            guardar(ficha,i);
+            i++;
+        }
+    }//GEN-LAST:event_menuGuardarTodoActionPerformed
 
     private void intTextField(java.awt.event.KeyEvent evt, JTextField field) {
         char vchar = evt.getKeyChar();
@@ -3828,6 +3847,7 @@ public final class Dicer extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuDescargar;
     private javax.swing.JMenuItem menuGuardar;
     private javax.swing.JMenuItem menuGuardarComo;
+    private javax.swing.JMenuItem menuGuardarTodo;
     private javax.swing.JMenuItem mnuAbrir;
     private javax.swing.JTextField posCritico;
     private javax.swing.JTextField resCritico;
