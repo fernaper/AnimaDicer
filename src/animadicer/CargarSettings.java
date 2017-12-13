@@ -1,14 +1,11 @@
 package animadicer;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -28,7 +25,8 @@ public class CargarSettings {
             settings.setAbiertas(((String)jsonObj.get("abiertas")).equals("true"));
             settings.setCapicua(((String)jsonObj.get("capicua")).equals("true"));
             settings.setFisicos(((String)jsonObj.get("fisicos")).equals("true"));
-        } catch(IOException | ParseException | NumberFormatException e) {
+            settings.setAutoguardado(((String)jsonObj.get("autoGuardado")).equals("true"));
+        } catch(NullPointerException | IOException | ParseException | NumberFormatException e) {
         }
         
         return settings;
@@ -39,6 +37,7 @@ public class CargarSettings {
         obj.put("abiertas",(settings.getAbiertas())?"true":"false");
         obj.put("capicua",(settings.getCapicua())?"true":"false");
         obj.put("fisicos",(settings.getFisicos())?"true":"false");
+        obj.put("autoGuardado",(settings.getAutoguardado())?"true":"false");
         
         try (FileWriter file = new FileWriter(path)) {
             file.write(obj.toJSONString());

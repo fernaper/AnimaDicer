@@ -14,19 +14,18 @@ import animadicer.Settings;
 import animadicer.connection.Descargar;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.HeadlessException;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -45,7 +44,9 @@ public final class Dicer extends javax.swing.JFrame {
     private final String version;
     private final HashMap<String, String> archivosDireccionCargados;
     private final ArrayList<Ficha> archivosCargados;
+    private final ArrayList<Boolean> guardarSinPreguntar;
     private boolean cambioNombres;
+    private final Timer timer;
 
     /** Creates new form Dicer
      * @param version
@@ -53,12 +54,14 @@ public final class Dicer extends javax.swing.JFrame {
      * @param ficha
      * @param direccion */
     public Dicer(String version, Settings settings, Ficha ficha, String direccion) {
+        timer = new Timer();
         this.version = version;
         this.settings = settings;
         this.ficha = ficha;
         this.direccion = direccion;
         this.archivosDireccionCargados = new HashMap();
         this.archivosCargados = new ArrayList();
+        this.guardarSinPreguntar = new ArrayList();
         myInitComponents();
         initComponents();
         jDownload.setVisible(false);
@@ -95,8 +98,40 @@ public final class Dicer extends javax.swing.JFrame {
         
         doTask();
         actualizarVersion();
+        
+        lanzarTimer();
+    }
+    
+    private void lanzarTimer() {
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                if (settings.getAutoguardado() && menuGuardar.isEnabled()) {
+                    if (preguntarGuardar()) {
+                        int i = 0;
+                        for (Ficha ficha : archivosCargados) {
+                            guardar(ficha,i);
+                            i++;
+                        }
+                    } else {
+                        if (JOptionPane.showConfirmDialog(null, "¿Deseas guardar todas las fichas cargadas?", "Autoguardado Excel/JSON", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                            int i = 0;
+                            for (Ficha ficha : archivosCargados) {
+                                guardar(ficha,i);
+                                i++;
+                            }
+                        }                        
+                    }
+                }
+            }
+        }, 10*60*1000, 10*60*1000);
     }
 
+    private void stopTimer() {
+        this.timer.cancel();
+        this.timer.purge();
+    }
+    
     private void doTask() {
         this.setVisible(true);
         this.setTitle("Anima Dicer " + this.version);
@@ -581,6 +616,8 @@ public final class Dicer extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        checkAutoguardado = new javax.swing.JCheckBoxMenuItem();
+        jSeparator4 = new javax.swing.JPopupMenu.Separator();
         checkAbiertas = new javax.swing.JCheckBoxMenuItem();
         checkCapicua = new javax.swing.JCheckBoxMenuItem();
         jSeparator3 = new javax.swing.JPopupMenu.Separator();
@@ -2492,6 +2529,16 @@ public final class Dicer extends javax.swing.JFrame {
 
         jMenu2.setText("Opciones");
 
+        checkAutoguardado.setSelected(true);
+        checkAutoguardado.setText("Autoguardado");
+        checkAutoguardado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkAutoguardadoActionPerformed(evt);
+            }
+        });
+        jMenu2.add(checkAutoguardado);
+        jMenu2.add(jSeparator4);
+
         checkAbiertas.setSelected(true);
         checkAbiertas.setText("Tiradas Abiertas");
         checkAbiertas.addActionListener(new java.awt.event.ActionListener() {
@@ -2587,7 +2634,13 @@ public final class Dicer extends javax.swing.JFrame {
                 fieldZeonActual.setText(String.valueOf(this.ficha.getZeon()));
             }
         } catch(NumberFormatException ex) {
-            fieldZeonActual.setText(String.valueOf(this.ficha.getZeon()));
+            if (fieldZeonActual.getText().length() == 0) {
+                this.ficha.setZeonActual(0);
+                barraZeon.setValue(0);
+            } else {
+                fieldZeonActual.setText(String.valueOf(this.ficha.getZeon()));
+                barraZeon.setValue(this.ficha.getZeon());
+            }
         }
     }//GEN-LAST:event_fieldZeonActualKeyTyped
 
@@ -2603,11 +2656,20 @@ public final class Dicer extends javax.swing.JFrame {
                 fieldCansancioActual.setText(String.valueOf(this.ficha.getCansancio()));
             }
         } catch(NumberFormatException ex) {
-            fieldCansancioActual.setText(String.valueOf(this.ficha.getCansancio()));
+            if (fieldCansancioActual.getText().length() == 0) {
+                this.ficha.setCansancioActual(0);
+                barraCansancio.setValue(0);
+            } else {
+                fieldCansancioActual.setText(String.valueOf(this.ficha.getCansancio()));
+                barraCansancio.setValue(this.ficha.getCansancio());
+            }
         }
     }//GEN-LAST:event_fieldCansancioActualKeyTyped
 
     private void fieldCansancioActualKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fieldCansancioActualKeyReleased
+        if (fieldCansancioActual.getText().length() == 0)
+            return;
+        
         try {
             if (Integer.parseInt(fieldCansancioActual.getText()) > Integer.parseInt(fieldCansancio.getText()))
                 fieldCansancioActual.setText(fieldCansancio.getText());
@@ -2625,7 +2687,7 @@ public final class Dicer extends javax.swing.JFrame {
     }//GEN-LAST:event_fieldCansancioActualKeyReleased
 
     private void fieldZeonActualKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fieldZeonActualKeyReleased
-        if (fieldZeonActual.getText().length() == 1 && fieldZeonActual.getText().charAt(0) == '-')
+        if (fieldZeonActual.getText().length() == 0)
             return;
         
         try {
@@ -2730,6 +2792,7 @@ public final class Dicer extends javax.swing.JFrame {
         //Añadimos el nombre a nuestro combo
         Ficha f = new Anima(archivosSeleccionado, direccion).cargar();
         archivosCargados.add(f);
+        guardarSinPreguntar.add(false);
         anadirComboNombre(archivosSeleccionado.getName());
     }
     
@@ -2808,8 +2871,9 @@ public final class Dicer extends javax.swing.JFrame {
     }//GEN-LAST:event_comboTurnoItemStateChanged
 
     private void comboNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboNombreActionPerformed
-        if(!cambioNombres)
+        if(!cambioNombres) {
             cargar(archivosCargados.get(comboNombre.getSelectedIndex()));
+        }
     }//GEN-LAST:event_comboNombreActionPerformed
 
     private void fieldVidaActualKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fieldVidaActualKeyTyped
@@ -2820,12 +2884,18 @@ public final class Dicer extends javax.swing.JFrame {
                 fieldVidaActual.setText(String.valueOf(this.ficha.getVida()));
             }
         } catch(NumberFormatException ex) {
-            fieldVidaActual.setText(String.valueOf(this.ficha.getVida()));
+            if (fieldVidaActual.getText().length() == 0 || fieldVidaActual.getText().length() == 1 && fieldVidaActual.getText().charAt(0) == '-') {
+                this.ficha.setVidaActual(0);
+                barraVida.setValue(0);
+            } else {
+                fieldVidaActual.setText(String.valueOf(this.ficha.getVida()));
+                barraVida.setValue(this.ficha.getVida());
+            }
         }
     }//GEN-LAST:event_fieldVidaActualKeyTyped
 
     private void fieldVidaActualKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fieldVidaActualKeyReleased
-        if (fieldVidaActual.getText().length() == 1 && fieldVidaActual.getText().charAt(0) == '-')
+        if (fieldVidaActual.getText().length() == 0 || fieldVidaActual.getText().length() == 1 && fieldVidaActual.getText().charAt(0) == '-')
             return;
         
         try {
@@ -2896,49 +2966,9 @@ public final class Dicer extends javax.swing.JFrame {
     }//GEN-LAST:event_textNotas1FocusLost
 
     private void menuGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuGuardarActionPerformed
-        labelCargar.setVisible(true);
-        String mensaje = "¿Desea guardar los cambios de\n" + this.ficha.getPath() + "?";
-        
-        if (((String)comboNombre.getSelectedItem()).endsWith("json")) { // Actualiza
-            if (JOptionPane.showConfirmDialog(null, mensaje, "Guardar JSON", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                 new Thread() {
-                        @Override
-                        public void run() {
-                            FileJSON.exportJason(ficha.getPath(), ficha);
-                        }
-                 }.start();
-            }
-        } else {
-            try {
-                if (JOptionPane.showConfirmDialog(null, mensaje, "Guardar Excel", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                     new Thread() {
-                        @Override
-                        public void run() {
-                            Anima.guardar(ficha);
-                        }
-                     }.start();
-                }
-            } catch (GuardaException ex) {
-                JFileChooser guardarDesc = new JFileChooser(this.ficha.getPath());
-                guardarDesc.setFileFilter(new FileNameExtensionFilter("JSON Files", "json")); 
-
-                if(guardarDesc.showSaveDialog(null)== JFileChooser.APPROVE_OPTION){ 
-                    new Thread() {
-                        @Override
-                        public void run() {
-                            String ruta = guardarDesc.getSelectedFile().getAbsolutePath();
-                            if (!ruta.endsWith("json")) {
-                                ruta = ruta + ".json";
-                            }
-                            FileJSON.exportJason(ruta, ficha);
-                        }
-                    }.start();
-                }
-            }
-        }
-        labelCargar.setVisible(false);
+        guardar();
     }//GEN-LAST:event_menuGuardarActionPerformed
-
+    
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
         JOptionPane.showMessageDialog(null, "Programa realizado por:\n"
                 + "Fernando Pérez Gutiérrez: Creador y programador principal.\n"
@@ -2963,7 +2993,7 @@ public final class Dicer extends javax.swing.JFrame {
     }//GEN-LAST:event_fieldKiActualFocusLost
 
     private void fieldKiActualKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fieldKiActualKeyReleased
-        if (fieldKiActual.getText().length() == 1 && fieldKiActual.getText().charAt(0) == '-')
+        if (fieldKiActual.getText().length() == 0)
             return;
         
         try {
@@ -2994,7 +3024,13 @@ public final class Dicer extends javax.swing.JFrame {
                 fieldKiActual.setText(String.valueOf(this.ficha.getKi()));
             }
         } catch(NumberFormatException ex) {
-            fieldKiActual.setText(String.valueOf(this.ficha.getKi()));
+            if (fieldKiActual.getText().length() == 0) {
+                this.ficha.setKiActual(0);
+                barraKi.setValue(0);
+            } else {
+                fieldKiActual.setText(String.valueOf(this.ficha.getKi()));
+                barraKi.setValue(this.ficha.getKi());
+            }
         }
     }//GEN-LAST:event_fieldKiActualKeyTyped
 
@@ -3017,6 +3053,10 @@ public final class Dicer extends javax.swing.JFrame {
     private void checkArmadura4MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_checkArmadura4MouseReleased
         calculadora();
     }//GEN-LAST:event_checkArmadura4MouseReleased
+
+    private void checkAutoguardadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkAutoguardadoActionPerformed
+        this.settings.setAutoguardado(checkAutoguardado.isSelected());
+    }//GEN-LAST:event_checkAutoguardadoActionPerformed
 
     private void intTextField(java.awt.event.KeyEvent evt, JTextField field) {
         char vchar = evt.getKeyChar();
@@ -3330,6 +3370,7 @@ public final class Dicer extends javax.swing.JFrame {
     private javax.swing.JCheckBox checkArmadura2;
     private javax.swing.JCheckBox checkArmadura3;
     private javax.swing.JCheckBox checkArmadura4;
+    private javax.swing.JCheckBoxMenuItem checkAutoguardado;
     private javax.swing.JCheckBoxMenuItem checkCapicua;
     private javax.swing.JCheckBoxMenuItem checkDadosFisicos;
     private javax.swing.JComboBox<String> comboCritico;
@@ -3740,6 +3781,7 @@ public final class Dicer extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
+    private javax.swing.JPopupMenu.Separator jSeparator4;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JLabel l_Acrobacias;
@@ -5294,52 +5336,13 @@ public final class Dicer extends javax.swing.JFrame {
         seleccionado.setFileFilter(new FileNameExtensionFilter("xls & xlsx Excel & JSON", "xls", "xlsx", "json"));
     }
     
-    @SuppressWarnings("static-access")
-    private boolean guardarLog () {
-        JFileChooser guardarLog = new JFileChooser();
-        String ruta; 
-        try{ 
-            if(guardarLog.showSaveDialog(null)==guardarLog.APPROVE_OPTION){ 
-                ruta = guardarLog.getSelectedFile().getAbsolutePath();
-                if (!ruta.endsWith("txt")) {
-                    ruta = ruta + ".txt";
-                }
-                //Aqui ya tiens la ruta,,,ahora puedes crear un fichero n esa ruta y escribir lo k kieras... 
-                FileWriter fichero = null;
-                PrintWriter pw;
-                try
-                {
-                    fichero = new FileWriter(ruta);
-                    pw = new PrintWriter(fichero);
-                    
-                    ArrayList<String> info = log.getLog();
-                    for (int i = 0; i < info.size(); i++)
-                        pw.println(info.get(i));
-
-                } catch (IOException e) {
-                } finally {
-                   try {
-                   // Nuevamente aprovechamos el finally para 
-                   // asegurarnos que se cierra el fichero.
-                   if (null != fichero)
-                      fichero.close();
-                   } catch (IOException e2) {
-                   }
-                }
-                
-                return true;
-            } 
-        }catch (HeadlessException ex){ 
-        }
-        return false;
-    }
-    
     private void guardarSettings() {
         CargarSettings.exportJason(this.direccion + "\\settings.json", this.settings);
     }
     
     private void exit() {
         this.dispose();
+        stopTimer();
         guardarSettings();
     }
     
@@ -5657,6 +5660,101 @@ public final class Dicer extends javax.swing.JFrame {
             this.armas[i].roturaResultado.setForeground(Color.BLACK);
             this.armas[i].presenciaResultado.setForeground(Color.BLACK);
         }
+    }
+    
+    private void guardar() {
+        labelCargar.setVisible(true);
+        String mensaje = "¿Desea guardar los cambios de\n" + this.ficha.getPath() + "?";
+        
+        if (((String)comboNombre.getSelectedItem()).endsWith("json")) { // Actualiza
+            if (guardarSinPreguntar.get(comboNombre.getSelectedIndex()) || JOptionPane.showConfirmDialog(null, mensaje, "Guardar JSON", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                guardarSinPreguntar.set(comboNombre.getSelectedIndex(), true);
+                
+                new Thread() {
+                        @Override
+                        public void run() {
+                            FileJSON.exportJason(ficha.getPath(), ficha);
+                        }
+                 }.start();
+            }
+        } else {
+            try {
+                if (guardarSinPreguntar.get(comboNombre.getSelectedIndex()) || JOptionPane.showConfirmDialog(null, mensaje, "Guardar Excel", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                    guardarSinPreguntar.set(comboNombre.getSelectedIndex(), true);
+                    new Thread() {
+                        @Override
+                        public void run() {
+                            Anima.guardar(ficha);
+                        }
+                     }.start();
+                }
+            } catch (GuardaException ex) {
+                JFileChooser guardarDesc = new JFileChooser(this.ficha.getPath());
+                guardarDesc.setFileFilter(new FileNameExtensionFilter("JSON Files", "json")); 
+
+                if(guardarDesc.showSaveDialog(null)== JFileChooser.APPROVE_OPTION){ 
+                    new Thread() {
+                        @Override
+                        public void run() {
+                            String ruta = guardarDesc.getSelectedFile().getAbsolutePath();
+                            if (!ruta.endsWith("json")) {
+                                ruta = ruta + ".json";
+                            }
+                            FileJSON.exportJason(ruta, ficha);
+                        }
+                    }.start();
+                }
+            }
+        }
+        labelCargar.setVisible(false);
+    }
+    
+    private void guardar(Ficha ficha, int index) {
+        labelCargar.setVisible(true);
+        guardarSinPreguntar.set(index, true);
+        if (((String)comboNombre.getSelectedItem()).endsWith("json")) { // Actualiza
+            new Thread() {
+                    @Override
+                    public void run() {
+                        FileJSON.exportJason(ficha.getPath(), ficha);
+                    }
+             }.start();
+        } else {
+            try {
+                new Thread() {
+                    @Override
+                    public void run() {
+                        Anima.guardar(ficha);
+                    }
+                 }.start();
+            } catch (GuardaException ex) {
+                JFileChooser guardarDesc = new JFileChooser(this.ficha.getPath());
+                guardarDesc.setFileFilter(new FileNameExtensionFilter("JSON Files", "json")); 
+
+                if(guardarDesc.showSaveDialog(null)== JFileChooser.APPROVE_OPTION){ 
+                    new Thread() {
+                        @Override
+                        public void run() {
+                            String ruta = guardarDesc.getSelectedFile().getAbsolutePath();
+                            if (!ruta.endsWith("json")) {
+                                ruta = ruta + ".json";
+                            }
+                            FileJSON.exportJason(ruta, ficha);
+                        }
+                    }.start();
+                }
+            }
+        }
+        labelCargar.setVisible(false);
+    }
+    
+    private boolean preguntarGuardar() {
+        for (Boolean file : guardarSinPreguntar) {
+            if (file == false) {
+                return false;
+            }
+        }
+        return true;
     }
     
     public void actualizarVersion () {

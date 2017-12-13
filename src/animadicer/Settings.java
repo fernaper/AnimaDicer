@@ -4,11 +4,13 @@ public class Settings {
     boolean abiertas; // Si esta a true las abiertas son cada vez m�s dif�ciles
     boolean capicua;
     boolean fisicos;
+    boolean autoGuardado;
 
     public Settings() {
         abiertas = true;
         capicua = false;
         fisicos = false;
+        autoGuardado = true;
     }
 
     public boolean getAbiertas () {
@@ -22,6 +24,10 @@ public class Settings {
     public boolean getFisicos(){
         return fisicos;
     }
+    
+    public boolean getAutoguardado(){
+        return autoGuardado;
+    }
 
     public void setAbiertas(boolean abiertas) {
         this.abiertas = abiertas;
@@ -33,5 +39,9 @@ public class Settings {
     
     public void setFisicos(boolean fisicos) {
         this.fisicos = fisicos;
+    }
+    
+    public void setAutoguardado(boolean autoGuardado) {
+        this.autoGuardado = autoGuardado;
     }
 }
