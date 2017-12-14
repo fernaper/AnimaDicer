@@ -4,7 +4,7 @@
 
 Executable: [AnimaDicer](AnimaDicer.jar)
 
-Release information: [Release] (https://github.com/TheCorPlay/AnimaDicer/releases)
+Release information: [Release](https://github.com/TheCorPlay/AnimaDicer/releases "All Releases")
   
  	By: Fernando Pérez
  	E-Mail: fernaperg@gmail.com
