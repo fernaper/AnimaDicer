@@ -24,10 +24,6 @@ public class Settings {
     public boolean getFisicos(){
         return fisicos;
     }
-    
-    public boolean getAutoguardado(){
-        return autoGuardado;
-    }
 
     public void setAbiertas(boolean abiertas) {
         this.abiertas = abiertas;
@@ -39,9 +35,5 @@ public class Settings {
     
     public void setFisicos(boolean fisicos) {
         this.fisicos = fisicos;
-    }
-    
-    public void setAutoguardado(boolean autoGuardado) {
-        this.autoGuardado = autoGuardado;
     }
 }

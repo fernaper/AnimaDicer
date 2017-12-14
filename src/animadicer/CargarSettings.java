@@ -25,7 +25,6 @@ public class CargarSettings {
             settings.setAbiertas(((String)jsonObj.get("abiertas")).equals("true"));
             settings.setCapicua(((String)jsonObj.get("capicua")).equals("true"));
             settings.setFisicos(((String)jsonObj.get("fisicos")).equals("true"));
-            settings.setAutoguardado(((String)jsonObj.get("autoGuardado")).equals("true"));
         } catch(NullPointerException | IOException | ParseException | NumberFormatException e) {
         }
         
@@ -37,7 +36,6 @@ public class CargarSettings {
         obj.put("abiertas",(settings.getAbiertas())?"true":"false");
         obj.put("capicua",(settings.getCapicua())?"true":"false");
         obj.put("fisicos",(settings.getFisicos())?"true":"false");
-        obj.put("autoGuardado",(settings.getAutoguardado())?"true":"false");
         
         try (FileWriter file = new FileWriter(path)) {
             file.write(obj.toJSONString());

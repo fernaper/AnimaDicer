@@ -48,6 +48,10 @@ public class Ficha {
         return this.path;
     }
     
+    public void setPath(String path) {
+        this.path = path;
+    }
+    
     public void setNotas(String notas) {
        this.notas = notas; 
     }
