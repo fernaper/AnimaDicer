@@ -51,6 +51,7 @@ public final class Dicer extends javax.swing.JFrame {
      * @param ficha
      * @param direccion */
     public Dicer(String version, Settings settings, Ficha ficha, String direccion) {        
+        setIconImage(new ImageIcon(getClass().getResource("/imagenes/icon.png")).getImage());
         this.version = version;
         this.settings = settings;
         this.ficha = ficha;
