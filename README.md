@@ -3,6 +3,7 @@
 ## INFORMATION
 
 Executable: [AnimaDicer](AnimaDicer.jar)
+Release information: [Release] (https://github.com/TheCorPlay/AnimaDicer/releases)
   
  	By: Fernando Pérez
  	E-Mail: fernaperg@gmail.com
@@ -65,6 +66,7 @@ Please see [the licence file](LICENCE) for more information.
 	+	Improve the excel files to make them much more comfortable [Work in progress]
 	+	Make the program campatible with other excel files [ ]
    	+	Create and make compatible with an Android versión (AnimaDicer Mobile). [Work in progress]
+	+	Now we are thinking about create a new interface (probably in other language) [ ]
    
 ***
   
