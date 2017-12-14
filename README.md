@@ -3,6 +3,7 @@
 ## INFORMATION
 
 Executable: [AnimaDicer](AnimaDicer.jar)
+
 Release information: [Release] (https://github.com/TheCorPlay/AnimaDicer/releases)
   
  	By: Fernando Pérez
