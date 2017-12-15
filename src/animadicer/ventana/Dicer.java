@@ -5671,7 +5671,7 @@ public final class Dicer extends javax.swing.JFrame {
                 JFileChooser guardarDesc = new JFileChooser(this.ficha.getPath());
                 guardarDesc.setFileFilter(new FileNameExtensionFilter("JSON Files", "json")); 
 
-                if(guardarDesc.showSaveDialog(null)== JFileChooser.APPROVE_OPTION){ 
+                if(guardarDesc.showSaveDialog(null)== JFileChooser.APPROVE_OPTION){
                     new Thread() {
                         @Override
                         public void run() {
@@ -5713,7 +5713,7 @@ public final class Dicer extends javax.swing.JFrame {
                     } catch (GuardaException ex) {
                         JFileChooser guardarDesc = new JFileChooser(ficha.getPath());
                         guardarDesc.setFileFilter(new FileNameExtensionFilter("JSON Files", "json")); 
-
+                        guardarDesc.setDialogTitle("Guardar - " + ficha.getNombre());
                         if(guardarDesc.showSaveDialog(null)== JFileChooser.APPROVE_OPTION){
                             String ruta = guardarDesc.getSelectedFile().getAbsolutePath();
                             if (!ruta.endsWith("json")) {
@@ -5721,7 +5721,6 @@ public final class Dicer extends javax.swing.JFrame {
                             }
                             FileJSON.exportJason(ruta, ficha);
                             ficha.setPath(ruta);
-                            System.out.println("Ficha: " + ficha.getPath());
                             guardarSinPreguntar.set(index, true);
                             labelCargar.setVisible(false);
                         } else {
