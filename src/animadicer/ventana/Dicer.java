@@ -730,6 +730,9 @@ public final class Dicer extends javax.swing.JFrame {
         fieldVidaActual.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         fieldVidaActual.setOpaque(false);
         fieldVidaActual.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                fieldVidaActualFocusGained(evt);
+            }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 fieldVidaActualFocusLost(evt);
             }
@@ -803,6 +806,9 @@ public final class Dicer extends javax.swing.JFrame {
         fieldZeonActual.setBorder(null);
         fieldZeonActual.setOpaque(false);
         fieldZeonActual.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                fieldZeonActualFocusGained(evt);
+            }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 fieldZeonActualFocusLost(evt);
             }
@@ -870,6 +876,9 @@ public final class Dicer extends javax.swing.JFrame {
         fieldCansancioActual.setBorder(null);
         fieldCansancioActual.setOpaque(false);
         fieldCansancioActual.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                fieldCansancioActualFocusGained(evt);
+            }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 fieldCansancioActualFocusLost(evt);
             }
@@ -958,6 +967,9 @@ public final class Dicer extends javax.swing.JFrame {
         fieldKiActual.setBorder(null);
         fieldKiActual.setOpaque(false);
         fieldKiActual.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                fieldKiActualFocusGained(evt);
+            }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 fieldKiActualFocusLost(evt);
             }
@@ -3021,6 +3033,26 @@ public final class Dicer extends javax.swing.JFrame {
             i++;
         }
     }//GEN-LAST:event_menuGuardarTodoActionPerformed
+
+    private void fieldVidaActualFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldVidaActualFocusGained
+        fieldVidaActual.setSelectionStart(0);
+        fieldVidaActual.setSelectionEnd(fieldVidaActual.getText().length());
+    }//GEN-LAST:event_fieldVidaActualFocusGained
+
+    private void fieldZeonActualFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldZeonActualFocusGained
+        fieldZeonActual.setSelectionStart(0);
+        fieldZeonActual.setSelectionEnd(fieldZeonActual.getText().length());
+    }//GEN-LAST:event_fieldZeonActualFocusGained
+
+    private void fieldKiActualFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldKiActualFocusGained
+        fieldKiActual.setSelectionStart(0);
+        fieldKiActual.setSelectionEnd(fieldKiActual.getText().length());
+    }//GEN-LAST:event_fieldKiActualFocusGained
+
+    private void fieldCansancioActualFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldCansancioActualFocusGained
+        fieldCansancioActual.setSelectionStart(0);
+        fieldCansancioActual.setSelectionEnd(fieldCansancioActual.getText().length());
+    }//GEN-LAST:event_fieldCansancioActualFocusGained
 
     private boolean guardarTodo() {
         if (preguntarGuardar()) {
