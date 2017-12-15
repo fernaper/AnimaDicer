@@ -141,7 +141,21 @@ public class Anima {
                 try {
                     sheet.getRow(23).getCell(CellReference.convertColStringToIndex("F")).setCellValue(ficha.getKiActual());
                 } catch (NullPointerException ex) {throw new GuardaException("Error al guardar el ki actual");}
-            }else if ("v1.0.6".equals(vExcel)) {
+            } else if ("v1.0.7".equals(vExcel)) {
+                //v1.0.7
+                try {
+                    sheet.getRow(8).getCell(CellReference.convertColStringToIndex("U")).setCellValue(ficha.getVidaActual());
+                } catch (NullPointerException ex) {throw new GuardaException("Error al guardar la vida actual");}
+                try {
+                    sheet.getRow(10).getCell(CellReference.convertColStringToIndex("BF")).setCellValue(ficha.getZeonActual());
+                } catch (NullPointerException ex) {throw new GuardaException("Error al guardar el zeon actual");}
+                try {
+                    sheet.getRow(16).getCell(CellReference.convertColStringToIndex("AG")).setCellValue(ficha.getKiActual());
+                } catch (NullPointerException ex) {throw new GuardaException("Error al guardar el ki actual");}
+                try {
+                    sheet.getRow(96).getCell(CellReference.convertColStringToIndex("B")).setCellValue(ficha.getNotas());
+                } catch (NullPointerException ex) {throw new GuardaException("Error al guardar el zeon actual");}
+            } else if ("v1.0.6".equals(vExcel)) {
                 //v1.0.6
                 try {
                     sheet.getRow(8).getCell(CellReference.convertColStringToIndex("U")).setCellValue(ficha.getVidaActual());
