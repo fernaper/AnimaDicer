@@ -8,8 +8,8 @@ Release information: [Release](https://github.com/TheCorPlay/AnimaDicer/releases
   
  	By: Fernando Pérez
  	E-Mail: fernaperg@gmail.com
- 	Current program version: v1.0.7 - Release
-	Current excel version: v1.0.6 - RC
+ 	Current program version: v1.0.8 - Release
+	Current excel version: v1.0.7 - RC
 ***
 
 ## CONCEPTUAL IDEA
