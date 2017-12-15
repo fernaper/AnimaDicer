@@ -65,7 +65,8 @@ Please see [the licence file](LICENCE) for more information.
    	+	Improve the Battle organization. [X]
 	+	Make the program Multilanguage (Right now only in Spanish).[Discarded]
 	+	Improve the excel files to make them much more comfortable [Work in progress]
-	+	Make the program campatible with other excel files [ ]
+	+	Make the program campatible with other excel files [X]
+		From now on it is compatible with the Excel file of Solkar version 7.5
    	+	Create and make compatible with an Android versión (AnimaDicer Mobile). [Work in progress]
 	+	Now we are thinking about create a new interface (probably in other language) [ ]
    
