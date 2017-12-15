@@ -3964,11 +3964,12 @@
                     <Component class="javax.swing.JComboBox" name="comboTurno">
                       <Properties>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                          <StringArray count="4">
-                            <StringItem index="0" value="Turno Arma 1"/>
-                            <StringItem index="1" value="Turno Arma 2"/>
-                            <StringItem index="2" value="Turno Arma 3"/>
-                            <StringItem index="3" value="Turno Arma 4"/>
+                          <StringArray count="5">
+                            <StringItem index="0" value="Turno Desarmado"/>
+                            <StringItem index="1" value="Turno Arma 1"/>
+                            <StringItem index="2" value="Turno Arma 2"/>
+                            <StringItem index="3" value="Turno Arma 3"/>
+                            <StringItem index="4" value="Turno Arma 4"/>
                           </StringArray>
                         </Property>
                       </Properties>

@@ -1910,7 +1910,7 @@ public final class Dicer extends javax.swing.JFrame {
         jLabel358.setText("=");
         jPanel21.add(jLabel358, new org.netbeans.lib.awtextra.AbsoluteConstraints(195, 70, -1, 20));
 
-        comboTurno.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Turno Arma 1", "Turno Arma 2", "Turno Arma 3", "Turno Arma 4" }));
+        comboTurno.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Turno Desarmado", "Turno Arma 1", "Turno Arma 2", "Turno Arma 3", "Turno Arma 4" }));
         comboTurno.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 comboTurnoItemStateChanged(evt);
