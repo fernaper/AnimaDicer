@@ -3010,16 +3010,22 @@ public final class Dicer extends javax.swing.JFrame {
         labelCargar.setVisible(true);
         JFileChooser guardarDesc = new JFileChooser(this.ficha.getPath());
         guardarDesc.setFileFilter(new FileNameExtensionFilter("JSON Files", "json"));
-        String ruta; 
-
+        
         if(guardarDesc.showSaveDialog(null)== JFileChooser.APPROVE_OPTION){ 
-            ruta = guardarDesc.getSelectedFile().getAbsolutePath();
-            if (!ruta.endsWith("json")) {
-                ruta = ruta + ".json";
-            }
-            FileJSON.exportJason(ruta, this.ficha);
+            new Thread() {
+                @Override
+                public void run() {
+                    String ruta = guardarDesc.getSelectedFile().getAbsolutePath();
+                    if (!ruta.endsWith("json")) {
+                        ruta = ruta + ".json";
+                    }
+                    FileJSON.exportJason(ruta, ficha);
+                    guardarSinPreguntar.set(comboNombre.getSelectedIndex(), true);
+                    ficha.setPath(ruta);
+                    labelCargar.setVisible(false);
+                }
+            }.start();
         }
-        labelCargar.setVisible(false);
     }//GEN-LAST:event_menuGuardarComoActionPerformed
 
     private void checkArmadura4MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_checkArmadura4MouseReleased
