@@ -59,16 +59,19 @@ Please see [the licence file](LICENCE) for more information.
  	+	Redesign the interface to make it much more accesible, interactive and intuitive. [X]
    	+	Change the actual form to open lot of files, now it uses a system based in windows.
       	It will use a new system based in a multi charge (It will saturate less the interface). [X]
-   	+	Create a search engine that let the user find quickly the atributes, resistences or whatever. [Discarded]
    	+	Reorganize the interface. [X]
-   	+	Make the interface resizable. [Discarded]
    	+	Improve the Battle organization. [X]
-	+	Make the program Multilanguage (Right now only in Spanish).[Discarded]
 	+	Improve the excel files to make them much more comfortable [Work in progress]
 	+	Make the program campatible with other excel files [X]
 		From now on it is compatible with the Excel file of Solkar version 7.5
    	+	Create and make compatible with an Android versión (AnimaDicer Mobile). [Work in progress]
-	+	Now we are thinking about create a new interface (probably in other language) [ ]
+	+	Add a situation control system that manages bonuses and negatives (thus saving a lot of work) [ ]
+	
+## DISCARDED IDEAS
+	+	Create a search engine that let the user find quickly the atributes, resistences or whatever.
+	+	Make the interface resizable.
+	+	Make the program Multilanguage (Right now only in Spanish).
+	+	Now we are thinking about create a new interface (probably in other language).
    
 ***
   
