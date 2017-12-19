@@ -73,8 +73,8 @@ public class Anima {
                 if (solkar) {
                     // Ficha Solkar v7.5
                     this.ficha = cargarSolkarV75(this.seleccionado.getAbsolutePath());
-                } else if ("v1.0.7".equals(vExcel)) {
-                    // v1.0.7
+                } else if ("v1.0.7".equals(vExcel) || "v1.0.8".equals(vExcel)) {
+                    // v1.0.7 o v1.0.8
                     this.ficha = cargarAlfV107(sheet, this.seleccionado.getAbsolutePath());
                 } else if ("v1.0.6".equals(vExcel)) {
                     //v1.0.6
@@ -672,6 +672,8 @@ public class Anima {
     }
     
     private Ficha cargarAlfV107(Sheet sheet, String path) throws CargaException {
+        String versionExcel = sheet.getRow(0).getCell(0).getStringCellValue();
+        
         ficha = new Ficha(path);
         
         ficha.setNombre(sheet.getRow(0).getCell(CellReference.convertColStringToIndex("C")).getStringCellValue());
@@ -679,8 +681,19 @@ public class Anima {
         ficha.setNivel((int)(sheet.getRow(2).getCell(CellReference.convertColStringToIndex("C")).getNumericCellValue()));
         ficha.setVida((int)(sheet.getRow(6).getCell(CellReference.convertColStringToIndex("W")).getNumericCellValue()));
         ficha.setZeon((int)(sheet.getRow(8).getCell(CellReference.convertColStringToIndex("BH")).getNumericCellValue()));
-        ficha.setCansancio((int)(sheet.getRow(85).getCell(CellReference.convertColStringToIndex("O")).getNumericCellValue()));
-        
+        {
+            int add = 0;
+            if ("v1.0.8".equals(versionExcel)) {
+                add = 4;
+            }
+            ficha.setCansancio((int)(sheet.getRow(85+add).getCell(14+(add/4)).getNumericCellValue()));
+            
+            try {
+                ficha.setCansancioActual((int)(sheet.getRow(87 + add).getCell(14+(add/4)).getNumericCellValue()));
+            } catch (NullPointerException ex) {
+                ficha.setCansancioActual(ficha.getCansancio());
+            }
+        }
         try {
             ficha.setVidaActual((int)(sheet.getRow(8).getCell(CellReference.convertColStringToIndex("U")).getNumericCellValue()));
         } catch (NullPointerException ex) {
@@ -690,13 +703,7 @@ public class Anima {
             ficha.setZeonActual((int)(sheet.getRow(10).getCell(CellReference.convertColStringToIndex("BF")).getNumericCellValue()));
         } catch (NullPointerException ex) {
             ficha.setZeonActual(this.ficha.getZeon());
-        }
-        try {
-            ficha.setCansancioActual((int)(sheet.getRow(87).getCell(CellReference.convertColStringToIndex("O")).getNumericCellValue()));
-        } catch (NullPointerException ex) {
-            ficha.setCansancioActual(ficha.getCansancio());
-        }
-        
+        }       
         {
             ficha.setKi((int)(sheet.getRow(15).getCell(CellReference.convertColStringToIndex("AG")).getNumericCellValue()));
             ficha.setKiActual((int)(sheet.getRow(16).getCell(CellReference.convertColStringToIndex("AG")).getNumericCellValue()));
@@ -795,10 +802,14 @@ public class Anima {
             ficha.setArmadura(armadura);
         }
         {
+            int add = 0;
+            if ("v1.0.8".equals(versionExcel)) {
+                add = 5;
+            }
             int[] convocatoria;
             convocatoria = new int [4];
             for (int i = 0; i < 4; i++) {
-                    convocatoria[i] = (int)(sheet.getRow(76+i).getCell(CellReference.convertColStringToIndex("W")).getNumericCellValue());
+                    convocatoria[i] = (int)(sheet.getRow(76+add+i).getCell(CellReference.convertColStringToIndex("W")).getNumericCellValue());
             }
             ficha.setConvocatoria(convocatoria);
         }
