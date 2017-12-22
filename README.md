@@ -24,21 +24,21 @@ allowing both players and the master to focus on the immersion in this world.
 	
 ## CONTRIBUTORS
   
-FERNANDO PÉREZ GUTIÉRREZ
-	Main programmer, conceptual designer.
-	The vast majority of the code is written by him.
+### FERNANDO PÉREZ GUTIÉRREZ
+Main programmer, conceptual designer.
+The vast majority of the code is written by him.
 
-ALFREDO PÉREZ GUTIÉRREZ
-	Designer of the excel documents with wich the program works.
-	Tester, and ideas provider.
+### ALFREDO PÉREZ GUTIÉRREZ
+Designer of the excel documents with wich the program works.
+Tester, and ideas provider.
 
-JUAN MAS AGUILAR
-	Co-worker to create and make compatible AnimaDicer Mobile and
-	improve the basic multi-load
-	Programmer, tester, and ideas provider.
+### JUAN MAS AGUILAR
+Co-worker to create and make compatible AnimaDicer Mobile and
+improve the basic multi-load
+Programmer, tester, and ideas provider.
 
-EDGEE
-	Creators of "Anima Beyond Fantasy" for which our program serves.
+### EDGEE
+Creators of "Anima Beyond Fantasy" for which our program serves.
 ***
  	
 ## COPYRIGHT ©
