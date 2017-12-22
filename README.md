@@ -47,7 +47,7 @@ This file has copyright assigned.
 It is free to use, but give credit used.
 
 Example of minimum credits:
-> AnimaDicer made by Fernando Pérez you can find this and more done for him here:
+> AnimaDicer made by **Fernando Pérez Gutiérrez** you can find this and more done for him here:
 > https://github.com/TheCorPlay
 
 Please see [the licence file](LICENCE) for more information.
