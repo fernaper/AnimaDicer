@@ -56,16 +56,16 @@ Please see [the licence file](LICENCE) for more information.
  	
 ## FUTURE UPDATES
  	
- 	+	Redesign the interface to make it much more accesible, interactive and intuitive. [X]
-   	+	Change the actual form to open lot of files, now it uses a system based in windows.
-      	It will use a new system based in a multi charge (It will saturate less the interface). [X]
-   	+	Reorganize the interface. [X]
-   	+	Improve the Battle organization. [X]
-	+	Improve the excel files to make them much more comfortable [Work in progress]
-	+	Make the program campatible with other excel files [X]
-		From now on it is compatible with the Excel file of Solkar version 7.5
-   	+	Create and make compatible with an Android versión (AnimaDicer Mobile). [Work in progress]
-	+	Add a situation control system that manages bonuses and negatives (thus saving a lot of work) [ ]
+- [X] Redesign the interface to make it much more accesible, interactive and intuitive.
+- [X] Change the actual form to open lot of files, now it uses a system based in windows.
+  - [X] It will use a new system based in a multi charge (It will saturate less the interface).
+- [X] Reorganize the interface.
+- [X] Improve the Battle organization.
+- [ ] Improve the excel files to make them much more comfortable. [Work in progress]
+- [X] Make the program campatible with other excel files.
+  From now on it is compatible with the Excel file of Solkar version 7.5.
+- [ ] Create and make compatible with an Android versión (AnimaDicer Mobile). [Work in progress]
+- [ ] Add a situation control system that manages bonuses and negatives (thus saving a lot of work).
 	
 ## DISCARDED IDEAS
 	+	Create a search engine that let the user find quickly the atributes, resistences or whatever.
