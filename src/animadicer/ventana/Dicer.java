@@ -78,6 +78,8 @@ public final class Dicer extends javax.swing.JFrame {
         menuGuardarComo.setEnabled(false);
         menuGuardarTodo.setEnabled(false);
         duplicarInstancia.setEnabled(false);
+        textNotas1.setEnabled(false);
+        textNotas1.setEditable(false);
 
         checkAbiertas.setSelected(settings.getAbiertas());
         checkCapicua.setSelected(settings.getCapicua());
@@ -1965,6 +1967,7 @@ public final class Dicer extends javax.swing.JFrame {
 
         resCritico.setEditable(false);
         resCritico.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        resCritico.setText("0");
         jPanel22.add(resCritico, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 60, 60, -1));
 
         damageCritico.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -1987,6 +1990,7 @@ public final class Dicer extends javax.swing.JFrame {
 
         dadoCritico.setEditable(false);
         dadoCritico.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        dadoCritico.setText("0");
         jPanel22.add(dadoCritico, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, 40, -1));
 
         jLabel351.setText("+");
@@ -2810,6 +2814,8 @@ public final class Dicer extends javax.swing.JFrame {
             menuGuardarTodo.setEnabled(true);
             duplicarInstancia.setEnabled(true);
             comboEntidad.setEnabled(true);
+            textNotas1.setEnabled(true);
+            textNotas1.setEditable(true);
             
             new Thread () {
                 @Override
@@ -5024,16 +5030,37 @@ public final class Dicer extends javax.swing.JFrame {
     private void valuesCombate(Ficha ficha) {
         for (int i = 0; i < 3; i++){ // Cojo ataque, defensa y esquiva
             base_combateFisico[i].setText(String.valueOf(ficha.getCombate(i)));
+            libre_combateFisico[i].setText(String.valueOf(0));
+            dado_combateFisico[i].setText(String.valueOf(0));
+            res_combateFisico[i].setText(String.valueOf(ficha.getCombate(i)));
         }
         
         base_turno.setText(String.valueOf(ficha.getTurno(comboTurno.getSelectedIndex())));
+        libre_turno.setText(String.valueOf(0));
+        dado_turno.setText(String.valueOf(0));
+        res_turno.setText(String.valueOf(ficha.getTurno(comboTurno.getSelectedIndex())));
         
         base_combateSobrenatural[0].setText(String.valueOf(ficha.getCombate(3)));
+        libre_combateSobrenatural[0].setText(String.valueOf(0));
+        dado_combateSobrenatural[0].setText(String.valueOf(0));
+        res_combateSobrenatural[0].setText(String.valueOf(ficha.getCombate(3)));
+        
+        
         base_combateSobrenatural[1].setText(String.valueOf(ficha.getPotencialPsiquico()));
+        libre_combateSobrenatural[1].setText(String.valueOf(0));
+        dado_combateSobrenatural[1].setText(String.valueOf(0));
+        res_combateSobrenatural[1].setText(String.valueOf(ficha.getPotencialPsiquico()));
+        
         base_combateSobrenatural[2].setText(String.valueOf(ficha.getCombate(4)));
+        libre_combateSobrenatural[2].setText(String.valueOf(0));
+        dado_combateSobrenatural[2].setText(String.valueOf(0));
+        res_combateSobrenatural[2].setText(String.valueOf(ficha.getCombate(4)));
         
         for (int i = 0; i < 4; i++) {
             base_convocatoria[i].setText(String.valueOf(ficha.getConvocatoria(i)));
+            libre_convocatoria[i].setText(String.valueOf(0));
+            dado_convocatoria[i].setText(String.valueOf(0));
+            res_convocatoria[i].setText(String.valueOf(ficha.getConvocatoria(i)));
         }
     }
     
