@@ -8,13 +8,13 @@ Release information: [Release](https://github.com/TheCorPlay/AnimaDicer/releases
   
 - By: Fernando Pérez
 - E-Mail: fernaperg@gmail.com
-- Current program version: v1.0.8 - Release
-- Current excel version: v1.0.8 - RC
+- Current program version: v1.0.9 - Release
+- Current excel version: v1.0.9 - RC
 ***
 
 ## CONCEPTUAL IDEA
 	
-The purpouse of this project is to make the rol games faster.
+The purpose of this project is to make the rol games faster.
 This project is specifically focused on the role play Anima.
 
 It is an especially complex and slow roll game in terms of dice and calculations,
@@ -50,12 +50,12 @@ Example of minimum credits:
 > AnimaDicer made by **Fernando Pérez Gutiérrez** you can find this and more done for him here:
 > https://github.com/TheCorPlay
 
-Please see [the licence file](LICENCE) for more information.
+Please see [the license file](LICENSE) for more information.
 ***
  	
 ## FUTURE UPDATES
  	
-- [X] Redesign the interface to make it much more accesible, interactive and intuitive.
+- [X] Redesign the interface to make it much more accessible, interactive and intuitive.
 - [X] Change the actual form to open lot of files, now it uses a system based in windows.
   - [X] It will use a new system based in a multi charge (It will saturate less the interface).
 - [X] Reorganize the interface.
@@ -63,11 +63,11 @@ Please see [the licence file](LICENCE) for more information.
 - [ ] Improve the excel files to make them much more comfortable. **[Work in progress]**
 - [X] Make the program campatible with other excel files.
   From now on it is compatible with the Excel file of Solkar version 7.5.
-- [ ] Create and make compatible with an Android versión (AnimaDicer Mobile). **[Work in progress]**
+- [ ] Create and make compatible with an Android version (AnimaDicer Mobile). **[Work in progress]**
 - [ ] Add a situation control system that manages bonuses and negatives (thus saving a lot of work).
 	
 ## DISCARDED IDEAS
--	Create a search engine that let the user find quickly the atributes, resistences or whatever.
+-	Create a search engine that let the user find quickly the attributes, resistances or whatever.
 -	Make the interface resizable.
 -	Make the program Multilanguage (Right now only in Spanish).
 -	Now we are thinking about create a new interface (probably in other language).
@@ -79,7 +79,7 @@ Please see [the licence file](LICENCE) for more information.
 Since version 1.0.7 is a release, therefore it is fully functional and complies with the requirements and
 proposed standards, however if there is something you do not understand or do not like how it is, please contact us.
 
-If you want to help to create or change somthing send me an e-mail with some code you want to see here.
+If you want to help to create or change something send me an e-mail with some code you want to see here.
 Of course all credits for these changes will be yours.
 Also you could contact me if you find some bugs.
 It will help a lot.
