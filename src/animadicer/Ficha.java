@@ -1,5 +1,8 @@
 package animadicer;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Ficha {
     String nombre;
     String categoria;
@@ -8,13 +11,15 @@ public class Ficha {
     String path;
     int nivel;
     int vida;
-    int vidaActual;
     int zeon;
-    int zeonActual;
     int cansancio;
-    int cansancioActual;
     int ki;
-    int kiActual;
+    int seleccionado;
+    
+    List<Integer> vidasActuales;
+    List<Integer> zeonesActuales;
+    List<Integer> cansanciosActuales;
+    List<Integer> kisActuales;
     
     // Todos los tipos de armaduras (para saber cu�l es aplicable en cada caso)
     int[]atributos; // AGI, CON, DES, FUE, INT, PER, POD, VOL
@@ -40,12 +45,40 @@ public class Ficha {
         convocatoria = new int [4];
         arma = new Arma[4];
         armadura = new Armadura[4];
+        vidasActuales = new ArrayList<>();
+        zeonesActuales = new ArrayList<>();
+        cansanciosActuales = new ArrayList<>();
+        kisActuales = new ArrayList<>();
+        
+        vidasActuales.add(0);
+        zeonesActuales.add(0);
+        cansanciosActuales.add(0);
+        kisActuales.add(0);
+        
+        seleccionado = 0;
         log = "";
         this.path = path;
     }
     
     public String getPath() {
         return this.path;
+    }
+    
+    public void setSeleccionado(int i){
+        this.seleccionado = i;
+    }
+    
+    public int getCopias() {
+        return this.zeonesActuales.size()+1;
+    }
+    
+    public void aumentarCopias(int copias) {
+        for (int i = 0; i < copias; i++) {
+            vidasActuales.add(vidasActuales.get(seleccionado));
+            zeonesActuales.add(zeonesActuales.get(seleccionado));
+            kisActuales.add(kisActuales.get(seleccionado));
+            cansanciosActuales.add(cansanciosActuales.get(seleccionado));
+        }
     }
     
     public void setPath(String path) {
@@ -109,11 +142,11 @@ public class Ficha {
     }
 
     public void setVidaActual(int vida) {
-        this.vidaActual = vida;
+        this.vidasActuales.set(this.seleccionado, vida);
     }
 
     public int getVidaActual() {
-        return this.vidaActual;
+        return this.vidasActuales.get(seleccionado);
     }
 
     public void setZeon(int zeon) {
@@ -125,11 +158,11 @@ public class Ficha {
     }
 
     public void setZeonActual(int zeon) {
-        this.zeonActual = zeon;
+        this.zeonesActuales.set(this.seleccionado, zeon);
     }
 
     public int getZeonActual() {
-        return this.zeonActual;
+        return this.zeonesActuales.get(seleccionado);
     }
     
     public int getCansancio() {
@@ -141,11 +174,11 @@ public class Ficha {
     }
     
     public int getCansancioActual() {
-        return this.cansancioActual;
+        return this.cansanciosActuales.get(seleccionado);
     }
     
     public void setCansancioActual (int cansancio) {
-        this.cansancioActual = cansancio;
+        this.cansanciosActuales.set(this.seleccionado, cansancio);
     }
     
     public void setKi(int ki) {
@@ -157,11 +190,11 @@ public class Ficha {
     }
     
     public void setKiActual(int ki) {
-        this.kiActual = ki;
+        this.kisActuales.set(this.seleccionado, ki);
     }
 
     public int getKiActual() {
-        return this.kiActual;
+        return this.kisActuales.get(seleccionado);
     }
 
     public void setAtributos(int[] atributos) {
