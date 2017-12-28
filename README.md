@@ -9,7 +9,7 @@ Release information: [Release](https://github.com/TheCorPlay/AnimaDicer/releases
 - By: Fernando Pérez
 - E-Mail: fernaperg@gmail.com
 - Current program version: v1.0.9 - Release
-- Current excel version: v1.0.9 - RC
+- Current excel version: v1.1.0 - RC
 ***
 
 ## CONCEPTUAL IDEA

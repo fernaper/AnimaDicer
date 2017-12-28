@@ -1,5 +1,6 @@
 package animadicer;
 
+import animadicer.connection.Descargar;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -90,8 +91,8 @@ public class Anima {
     }
     
     private void cargarVersionAlf(String version, Sheet sheet) {
-        if ("v1.0.9".equals(version)) {
-            // v1.0.9
+        if (Descargar.newVersion(version, "v1.0.8")) {
+            // v1.0.9 o más
             this.ficha = cargarAlfV109(sheet, this.seleccionado.getAbsolutePath());
         } else if ("v1.0.7".equals(version)) {
             // v1.0.7
@@ -121,8 +122,8 @@ public class Anima {
         }
         try {
             Sheet sheet = workbook.getSheetAt(0);
-            if ("v1.0.9".equals(version)) {
-                //v1.0.9
+            if (Descargar.newVersion(version, "v1.0.8")) {
+                //v1.0.9 o más
                 try {
                     sheet.getRow(8).getCell(CellReference.convertColStringToIndex("U")).setCellValue(ficha.getVidaActual());
                 } catch (NullPointerException ex) {throw new GuardaException("Error al guardar la vida actual");}

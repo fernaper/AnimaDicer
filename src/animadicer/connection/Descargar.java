@@ -8,8 +8,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -100,7 +98,7 @@ public class Descargar {
         return contenido;
     }
     
-    private static boolean newVersion(String urlVersion, String myVersion) {
+    public static boolean newVersion(String urlVersion, String myVersion) {
         urlVersion = urlVersion.substring(1);
         myVersion = myVersion.substring(1);
         
