@@ -14,7 +14,7 @@ import java.net.URLConnection;
  * @author Fernando
  */
 public class Descargar {
-    private static final String URL = "https://raw.githubusercontent.com/TheCorPlay/AnimaDicer/master/Downloader";
+    private static final String URL = "https://raw.githubusercontent.com/fernaper/AnimaDicer/master/Downloader";
     
     public static void descargar(String ficheroDestino) throws Exception {
         try {
