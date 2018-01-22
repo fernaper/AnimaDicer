@@ -48,13 +48,14 @@ It is free to use, but give credit used.
 
 Example of minimum credits:
 > AnimaDicer made by **Fernando Pérez Gutiérrez** you can find this and more done for him here:
-> https://github.com/TheCorPlay
+> https://github.com/fernaper
 
 Please see [the license file](LICENSE) for more information.
 ***
  	
 ## FUTURE UPDATES
- 	
+ ### For more information, look [here](https://github.com/fernaper/AnimaDicer/projects/1).
+ 
 - [X] Redesign the interface to make it much more accessible, interactive and intuitive.
 - [X] Change the actual form to open lot of files, now it uses a system based in windows.
   - [X] It will use a new system based in a multi charge (It will saturate less the interface).
@@ -71,7 +72,7 @@ Please see [the license file](LICENSE) for more information.
 -	Make the interface resizable.
 -	Make the program Multilanguage (Right now only in Spanish).
 -	Now we are thinking about create a new interface (probably in other language).
-   
+
 ***
   
 ## HELP
