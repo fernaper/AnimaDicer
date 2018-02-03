@@ -160,6 +160,39 @@ public class ArmaGUI {
         });
     }
     
+    public void resetDados() {
+        {
+            int libre = 0;
+            try {
+                libre = Integer.parseInt(this.enterezaLibre.getText());
+            } catch (NumberFormatException e) {
+
+            }
+            this.enterezaDado.setText("0");
+            this.enterezaResultado.setText(String.valueOf(libre + Integer.parseInt(this.enterezaBase.getText())));
+        }
+        {
+            int libre = 0;
+            try {
+                libre = Integer.parseInt(this.roturaLibre.getText());
+            } catch (NumberFormatException e) {
+
+            }
+            this.roturaDado.setText("0");
+            this.roturaResultado.setText(String.valueOf(libre + Integer.parseInt(this.roturaBase.getText())));
+        }
+        {
+            int libre = 0;
+            try {
+                libre = Integer.parseInt(this.presenciaLibre.getText());
+            } catch (NumberFormatException e) {
+
+            }
+            this.presenciaDado.setText("0");
+            this.presenciaResultado.setText(String.valueOf(libre + Integer.parseInt(this.presenciaBase.getText())));
+        }
+    }
+    
     private void initBotones() {
         this.enterezaB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/boton.png")));
         this.roturaB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/boton.png")));

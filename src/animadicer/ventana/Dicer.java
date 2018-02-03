@@ -587,6 +587,8 @@ public final class Dicer extends javax.swing.JFrame {
         checkCapicua = new javax.swing.JCheckBoxMenuItem();
         jSeparator3 = new javax.swing.JPopupMenu.Separator();
         checkDadosFisicos = new javax.swing.JCheckBoxMenuItem();
+        jSeparator4 = new javax.swing.JPopupMenu.Separator();
+        mnuAbrir1 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         ayuda = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
@@ -2555,6 +2557,15 @@ public final class Dicer extends javax.swing.JFrame {
             }
         });
         jMenu2.add(checkDadosFisicos);
+        jMenu2.add(jSeparator4);
+
+        mnuAbrir1.setText("Limpiar tiradas");
+        mnuAbrir1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuAbrir1ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(mnuAbrir1);
 
         jMenuBar1.add(jMenu2);
 
@@ -3115,6 +3126,10 @@ public final class Dicer extends javax.swing.JFrame {
         barraZeon.setValue(ficha.getZeonActual());
         barraCansancio.setValue(ficha.getCansancioActual());
     }//GEN-LAST:event_comboEntidadActionPerformed
+
+    private void mnuAbrir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuAbrir1ActionPerformed
+        resetDados();
+    }//GEN-LAST:event_mnuAbrir1ActionPerformed
 
     private boolean guardarTodo() {
         if (preguntarGuardar()) {
@@ -3850,6 +3865,7 @@ public final class Dicer extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
+    private javax.swing.JPopupMenu.Separator jSeparator4;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JLabel l_Acrobacias;
@@ -3898,6 +3914,7 @@ public final class Dicer extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuGuardarComo;
     private javax.swing.JMenuItem menuGuardarTodo;
     private javax.swing.JMenuItem mnuAbrir;
+    private javax.swing.JMenuItem mnuAbrir1;
     private javax.swing.JTextField posCritico;
     private javax.swing.JTextField resCritico;
     private javax.swing.JTextArea textNotas;
@@ -5885,6 +5902,123 @@ public final class Dicer extends javax.swing.JFrame {
             this.armas[i].enterezaResultado.setForeground(Color.BLACK);
             this.armas[i].roturaResultado.setForeground(Color.BLACK);
             this.armas[i].presenciaResultado.setForeground(Color.BLACK);
+        }
+    }
+    
+    private void resetDados(){
+        resetColors();
+        // Crítico
+        {
+            dadoCritico.setText("0");
+
+            int libre = 0, damage = 0;
+            try {
+                libre = Integer.parseInt(libreCritico.getText());
+            } catch (NumberFormatException e) {
+
+            }
+            try {
+            damage = Integer.parseInt(damageCritico.getText());
+            } catch (NumberFormatException e) {
+
+            }
+            resCritico.setText(String.valueOf(damage + libre));
+            posCritico.setText("");
+        }
+        // Secundarias
+        for (int i = 0; i < 38; i++) {
+            dado_Secundarias[i].setText("0");
+            
+            int libre = 0;
+            try {
+                libre = Integer.parseInt(libre_Secundarias[i].getText());
+            } catch (NumberFormatException e) {
+
+            }
+            
+            res_Secundarias[i].setText(String.valueOf(Integer.parseInt(base_Secundarias[i].getText()) + libre));
+        }
+        // Atributos
+        for (int i = 0; i < 8; i++) {
+            dado_Atributos[i].setText("0");
+            
+            int libre = 0;
+            try {
+                libre = Integer.parseInt(libre_Atributos[i].getText());
+            } catch (NumberFormatException e) {
+
+            }
+            
+            res_Atributos[i].setText(String.valueOf(Integer.parseInt(base_Atributos[i].getText()) + libre));
+        }
+        // Resistencias
+        for (int i = 0; i < 5; i++) {
+            dado_Resistencias[i].setText("0");
+            
+            int libre = 0;
+            try {
+                libre = Integer.parseInt(libre_Resistencias[i].getText());
+            } catch (NumberFormatException e) {
+
+            }
+            
+            res_Resistencias[i].setText(String.valueOf(Integer.parseInt(base_Resistencias[i].getText()) + libre));
+        }
+        // Combate Fisico
+        for (int i = 0; i < 3; i++) {
+            dado_combateFisico[i].setText("0");
+            
+            int libre = 0;
+            try {
+                libre = Integer.parseInt(libre_combateFisico[i].getText());
+            } catch (NumberFormatException e) {
+                
+            }
+            
+            res_combateFisico[i].setText(String.valueOf(Integer.parseInt(base_combateFisico[i].getText()) + libre));
+        }
+        // Turno
+        {
+            dado_turno.setText("0");
+            
+            int libre = 0;
+            try {
+                libre = Integer.parseInt(libre_turno.getText());
+            } catch (NumberFormatException e) {
+
+            }
+            
+            res_turno.setText(String.valueOf(Integer.parseInt(base_turno.getText()) + libre));
+        }
+        // Combate Sobrenatural
+        for (int i = 0; i < 3; i++) {
+            dado_combateSobrenatural[i].setText("0");
+            
+            int libre = 0;
+            try {
+                libre = Integer.parseInt(libre_combateSobrenatural[i].getText());
+            } catch (NumberFormatException e) {
+
+            }
+            
+            res_combateSobrenatural[i].setText(String.valueOf(Integer.parseInt(base_combateSobrenatural[i].getText()) + libre));
+        }
+        // Convocatoria
+        for (int i = 0; i < 4; i++) {
+            dado_convocatoria[i].setText("0");
+            
+            int libre = 0;
+            try {
+                libre = Integer.parseInt(libre_convocatoria[i].getText());
+            } catch (NumberFormatException e) {
+
+            }
+            
+            res_convocatoria[i].setText(String.valueOf(Integer.parseInt(base_convocatoria[i].getText()) + libre));
+        }
+        // Armas
+        for (int i = 0; i < 4; i++) {
+            this.armas[i].resetDados();
         }
     }
     
