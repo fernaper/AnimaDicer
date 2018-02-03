@@ -36,6 +36,8 @@ public class Log {
     }
     
     public String addLog(String tirada) {
+        if (tirada.endsWith(": null"))
+            return "";
         Calendar calendario = new GregorianCalendar();
         String text = "[" + calendario.get(Calendar.HOUR_OF_DAY) + ":" + calendario.get(Calendar.MINUTE)+"] " + tirada;
         info.add(text);

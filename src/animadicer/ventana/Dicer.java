@@ -3921,8 +3921,7 @@ public final class Dicer extends javax.swing.JFrame {
                 int number;
                 @Override
                 public void mouseClicked(java.awt.event.MouseEvent evt) {
-                    ficha.addLog(log.addLog(log.queBoton("Atributos", number) + ": " + b_MouseClickedAtr(number)));
-                    
+                    ficha.addLog(log.addLog(log.queBoton("Atributos", number) + ": " + b_MouseClickedAtr(evt, number)));
                 }
                 @Override
                 public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -4000,7 +3999,7 @@ public final class Dicer extends javax.swing.JFrame {
                 int number;
                 @Override
                 public void mouseClicked(java.awt.event.MouseEvent evt) {
-                    ficha.addLog(log.addLog(log.queBoton("Secundarias", number) + ": " + b_MouseClicked(number)));
+                    ficha.addLog(log.addLog(log.queBoton("Secundarias", number) + ": " + b_MouseClicked(evt, number)));
                 }
                 @Override
                 public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -4088,7 +4087,7 @@ public final class Dicer extends javax.swing.JFrame {
                 int number;
                 @Override
                 public void mouseClicked(java.awt.event.MouseEvent evt) {
-                    ficha.addLog(log.addLog(log.queBoton("Resistencias", number) + ": " + b_MouseClickedRes(number)));
+                    ficha.addLog(log.addLog(log.queBoton("Resistencias", number) + ": " + b_MouseClickedRes(evt, number)));
                 }
                 @Override
                 public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -4504,7 +4503,7 @@ public final class Dicer extends javax.swing.JFrame {
                 int number;
                 @Override
                 public void mouseClicked(java.awt.event.MouseEvent evt) {
-                    ficha.addLog(log.addLog(log.queBoton("Combate Fisico", number) + ": " + b_MouseClickedFisico(number)));
+                    ficha.addLog(log.addLog(log.queBoton("Combate Fisico", number) + ": " + b_MouseClickedFisico(evt, number)));
                 }
                 @Override
                 public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -4572,7 +4571,7 @@ public final class Dicer extends javax.swing.JFrame {
             JLabel j;
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                ficha.addLog(log.addLog("Turno arma" + String.valueOf(comboTurno.getSelectedIndex()+1) + ": " + b_MouseClickedTurno()));
+                ficha.addLog(log.addLog("Turno arma" + String.valueOf(comboTurno.getSelectedIndex()+1) + ": " + b_MouseClickedTurno(evt)));
             }
             @Override
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -4640,7 +4639,7 @@ public final class Dicer extends javax.swing.JFrame {
                 int number;
                 @Override
                 public void mouseClicked(java.awt.event.MouseEvent evt) {
-                    ficha.addLog(log.addLog(log.queBoton("Combate Sobrenatural", number) + ": " + b_MouseClickedSobrenatural(number)));
+                    ficha.addLog(log.addLog(log.queBoton("Combate Sobrenatural", number) + ": " + b_MouseClickedSobrenatural(evt, number)));
                 }
                 @Override
                 public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -4710,7 +4709,7 @@ public final class Dicer extends javax.swing.JFrame {
                 int number;
                 @Override
                 public void mouseClicked(java.awt.event.MouseEvent evt) {
-                    ficha.addLog(log.addLog(log.queBoton("Convocatoria", number) + ": " + b_MouseClickedConvocatoria(number)));
+                    ficha.addLog(log.addLog(log.queBoton("Convocatoria", number) + ": " + b_MouseClickedConvocatoria(evt, number)));
                 }
                 @Override
                 public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -4834,70 +4833,74 @@ public final class Dicer extends javax.swing.JFrame {
                 int number;
                 @Override
                 public void mouseClicked(java.awt.event.MouseEvent evt) {
-                    ficha.addLog(log.addLog("Critico: " + b_MouseClickedCritico()));
-                    
+                    ficha.addLog(log.addLog("Critico: " + b_MouseClickedCritico(evt)));
                     String localizacion;
-                    int pos = (int)(Math.random()*100) + 1;
-                    
-                    if (pos <= 10) {
-                        localizacion = "Costillas";
-                        posCritico.setForeground(Color.BLACK);
-                    } else if (pos <= 20) {
-                        localizacion = "Hombro";
-                        posCritico.setForeground(Color.BLACK);
-                    } else if (pos <= 30) {
-                        localizacion = "Estómago";
-                        posCritico.setForeground(Color.BLACK);
-                    } else if (pos <= 35) {
-                        localizacion = "Riñones";
-                        posCritico.setForeground(Color.BLACK);
-                    } else if (pos <= 48) {
-                        localizacion = "Pecho";
-                        posCritico.setForeground(Color.BLACK);
-                    } else if (pos <= 50) {
-                        localizacion = "Corazón";
-                        posCritico.setForeground(Color.RED);
-                    } else if (pos <= 54) {
-                        localizacion = "Antebrazo derecho superior";
-                        posCritico.setForeground(Color.BLACK);
-                    } else if (pos <= 58) {
-                        localizacion = "Antebrazo derecho inferior";
-                        posCritico.setForeground(Color.BLACK);
-                    } else if (pos <= 60) {
-                        localizacion = "Mano derecha";
-                        posCritico.setForeground(Color.BLACK);
-                    } else if (pos <= 64) {
-                        localizacion = "Antebrazo izquierdo superior";
-                        posCritico.setForeground(Color.BLACK);
-                    } else if (pos <= 68) {
-                        localizacion = "Antebrazo izquierdo inferior";
-                        posCritico.setForeground(Color.BLACK);
-                    } else if (pos <= 70) {
-                        localizacion = "Mano izquierda";
-                        posCritico.setForeground(Color.BLACK);
-                    } else if (pos <= 74) {
-                        localizacion = "Muslo derecho";
-                        posCritico.setForeground(Color.BLACK);
-                    } else if (pos <= 78) {
-                        localizacion = "Pantorrilla derecha";
-                        posCritico.setForeground(Color.BLACK);
-                    } else if (pos <= 80) {
-                        localizacion = "Pie derecho";
-                        posCritico.setForeground(Color.BLACK);
-                    } else if (pos <= 84) {
-                        localizacion = "Muslo izquierdo";
-                        posCritico.setForeground(Color.BLACK);
-                    } else if (pos <= 88) {
-                        localizacion = "Pantorrilla izquierda";
-                        posCritico.setForeground(Color.BLACK);
-                    } else if (pos <= 90) {
-                        localizacion = "Pie izquierdo";
-                        posCritico.setForeground(Color.BLACK);
+                    if (javax.swing.SwingUtilities.isLeftMouseButton(evt)) {
+                        int pos = (int)(Math.random()*100) + 1;
+
+                        if (pos <= 10) {
+                            localizacion = "Costillas";
+                            posCritico.setForeground(Color.BLACK);
+                        } else if (pos <= 20) {
+                            localizacion = "Hombro";
+                            posCritico.setForeground(Color.BLACK);
+                        } else if (pos <= 30) {
+                            localizacion = "Estómago";
+                            posCritico.setForeground(Color.BLACK);
+                        } else if (pos <= 35) {
+                            localizacion = "Riñones";
+                            posCritico.setForeground(Color.BLACK);
+                        } else if (pos <= 48) {
+                            localizacion = "Pecho";
+                            posCritico.setForeground(Color.BLACK);
+                        } else if (pos <= 50) {
+                            localizacion = "Corazón";
+                            posCritico.setForeground(Color.RED);
+                        } else if (pos <= 54) {
+                            localizacion = "Antebrazo derecho superior";
+                            posCritico.setForeground(Color.BLACK);
+                        } else if (pos <= 58) {
+                            localizacion = "Antebrazo derecho inferior";
+                            posCritico.setForeground(Color.BLACK);
+                        } else if (pos <= 60) {
+                            localizacion = "Mano derecha";
+                            posCritico.setForeground(Color.BLACK);
+                        } else if (pos <= 64) {
+                            localizacion = "Antebrazo izquierdo superior";
+                            posCritico.setForeground(Color.BLACK);
+                        } else if (pos <= 68) {
+                            localizacion = "Antebrazo izquierdo inferior";
+                            posCritico.setForeground(Color.BLACK);
+                        } else if (pos <= 70) {
+                            localizacion = "Mano izquierda";
+                            posCritico.setForeground(Color.BLACK);
+                        } else if (pos <= 74) {
+                            localizacion = "Muslo derecho";
+                            posCritico.setForeground(Color.BLACK);
+                        } else if (pos <= 78) {
+                            localizacion = "Pantorrilla derecha";
+                            posCritico.setForeground(Color.BLACK);
+                        } else if (pos <= 80) {
+                            localizacion = "Pie derecho";
+                            posCritico.setForeground(Color.BLACK);
+                        } else if (pos <= 84) {
+                            localizacion = "Muslo izquierdo";
+                            posCritico.setForeground(Color.BLACK);
+                        } else if (pos <= 88) {
+                            localizacion = "Pantorrilla izquierda";
+                            posCritico.setForeground(Color.BLACK);
+                        } else if (pos <= 90) {
+                            localizacion = "Pie izquierdo";
+                            posCritico.setForeground(Color.BLACK);
+                        } else {
+                            localizacion = "Cabeza";
+                            posCritico.setForeground(Color.RED);
+                        }
+                        ficha.addLog(log.addLog("Localización Crítico: " + localizacion + " ("+String.valueOf(pos)+")"));
+                        
                     } else {
-                        localizacion = "Cabeza";
-                        posCritico.setForeground(Color.RED);
+                        localizacion = "";
                     }
-                    ficha.addLog(log.addLog("Localización Crítico: " + localizacion + " ("+String.valueOf(pos)+")"));
                     posCritico.setText(localizacion);
                 }
                 
@@ -5064,7 +5067,22 @@ public final class Dicer extends javax.swing.JFrame {
         }
     }
     
-    private String b_MouseClicked(int i) {                                           
+    private String b_MouseClicked(java.awt.event.MouseEvent evt, int i) {                                           
+        // No he pulsado el botón izquierdo
+        if (evt != null && !javax.swing.SwingUtilities.isLeftMouseButton(evt)) {
+            res_Secundarias[i].setForeground(Color.BLACK);
+            dado_Secundarias[i].setText("0");
+            
+            int libre = 0;
+            try {
+                libre = Integer.parseInt(libre_Secundarias[i].getText());
+            } catch (NumberFormatException e) {
+
+            }
+            
+            res_Secundarias[i].setText(String.valueOf(Integer.parseInt(base_Secundarias[i].getText()) + libre));
+            return null;
+        }
         // Hace el cálculo con el dado nuevo
         Dado d = new Dado(settings);
         if (settings.getFisicos()) {
@@ -5107,7 +5125,23 @@ public final class Dicer extends javax.swing.JFrame {
         return (base_Secundarias[i].getText() + " + " + libre + " + " + String.valueOf(d.getResultado()) + " = " + String.valueOf(Integer.parseInt(base_Secundarias[i].getText()) + libre + d.getResultado()));
     }
     
-    private String b_MouseClickedAtr(int i) {                                           
+    private String b_MouseClickedAtr(java.awt.event.MouseEvent evt, int i) {                                           
+        // No he pulsado el botón izquierdo
+        if (evt != null && !javax.swing.SwingUtilities.isLeftMouseButton(evt)) {
+            res_Atributos[i].setForeground(Color.BLACK);
+            dado_Atributos[i].setText("0");
+            
+            int libre = 0;
+            try {
+                libre = Integer.parseInt(libre_Atributos[i].getText());
+            } catch (NumberFormatException e) {
+
+            }
+            
+            res_Atributos[i].setText(String.valueOf(Integer.parseInt(base_Atributos[i].getText()) + libre));
+            return null;
+        }
+
         // Hace el cálculo con el dado nuevo
         Dado d = new Dado(settings);
         if (settings.getFisicos()) {
@@ -5147,7 +5181,23 @@ public final class Dicer extends javax.swing.JFrame {
         return (base_Atributos[i].getText() + " + " + libre + " + " + String.valueOf(d.getResultado() + add) + " = " + String.valueOf(add + Integer.parseInt(base_Atributos[i].getText()) + libre + d.getResultado()));
     }
     
-    private String b_MouseClickedRes(int i) {                                           
+    private String b_MouseClickedRes(java.awt.event.MouseEvent evt, int i) {    
+        // No he pulsado el botón izquierdo
+        if (evt != null && !javax.swing.SwingUtilities.isLeftMouseButton(evt)) {
+            res_Resistencias[i].setForeground(Color.BLACK);
+            dado_Resistencias[i].setText("0");
+            
+            int libre = 0;
+            try {
+                libre = Integer.parseInt(libre_Resistencias[i].getText());
+            } catch (NumberFormatException e) {
+
+            }
+            
+            res_Resistencias[i].setText(String.valueOf(Integer.parseInt(base_Resistencias[i].getText()) + libre));
+            return null;
+        }
+        
         // Hace el cálculo con el dado nuevo
         Dado d = new Dado(settings);
         
@@ -5184,7 +5234,23 @@ public final class Dicer extends javax.swing.JFrame {
         return (base_Resistencias[i].getText() + " + " + libre + " + " + String.valueOf(d.getResultado()) + " = " + String.valueOf(Integer.parseInt(base_Resistencias[i].getText()) + libre + d.getResultado()));
     }
     
-    private String b_MouseClickedFisico(int i) {
+    private String b_MouseClickedFisico(java.awt.event.MouseEvent evt, int i) {
+        // No he pulsado el botón izquierdo
+        if (evt != null && !javax.swing.SwingUtilities.isLeftMouseButton(evt)) {
+            res_combateFisico[i].setForeground(Color.BLACK);
+            dado_combateFisico[i].setText("0");
+            
+            int libre = 0;
+            try {
+                libre = Integer.parseInt(libre_combateFisico[i].getText());
+            } catch (NumberFormatException e) {
+
+            }
+            
+            res_combateFisico[i].setText(String.valueOf(Integer.parseInt(base_combateFisico[i].getText()) + libre));
+            return null;
+        }
+        
         // Hace el cálculo con el dado nuevo
         Dado d = new Dado(settings);
         d.lanzarDado(true);
@@ -5229,7 +5295,23 @@ public final class Dicer extends javax.swing.JFrame {
             return (base_combateFisico[i].getText() + " + " + libre + " + " + String.valueOf(d.getResultado()) + " = " + String.valueOf(Integer.parseInt(base_combateFisico[i].getText()) + libre + d.getResultado()));
     }
     
-    private String b_MouseClickedTurno() {
+    private String b_MouseClickedTurno(java.awt.event.MouseEvent evt) {
+        // No he pulsado el botón izquierdo
+        if (evt != null && !javax.swing.SwingUtilities.isLeftMouseButton(evt)) {
+            res_turno.setForeground(Color.BLACK);
+            dado_turno.setText("0");
+            
+            int libre = 0;
+            try {
+                libre = Integer.parseInt(libre_turno.getText());
+            } catch (NumberFormatException e) {
+
+            }
+            
+            res_turno.setText(String.valueOf(Integer.parseInt(base_turno.getText()) + libre));
+            return null;
+        }
+        
         // Hace el cálculo con el dado nuevo
         Dado d = new Dado(settings);
         d.lanzarDado(true);
@@ -5274,7 +5356,23 @@ public final class Dicer extends javax.swing.JFrame {
             return (base_turno.getText() + " + " + libre + " + " + String.valueOf(d.getResultado()) + " = " + String.valueOf(Integer.parseInt(base_turno.getText()) + libre + d.getResultado()));
     }
     
-    private String b_MouseClickedSobrenatural(int i) {
+    private String b_MouseClickedSobrenatural(java.awt.event.MouseEvent evt, int i) {
+        // No he pulsado el botón izquierdo
+        if (evt != null && !javax.swing.SwingUtilities.isLeftMouseButton(evt)) {
+            res_combateSobrenatural[i].setForeground(Color.BLACK);
+            dado_combateSobrenatural[i].setText("0");
+            
+            int libre = 0;
+            try {
+                libre = Integer.parseInt(libre_combateSobrenatural[i].getText());
+            } catch (NumberFormatException e) {
+
+            }
+            
+            res_combateSobrenatural[i].setText(String.valueOf(Integer.parseInt(base_combateSobrenatural[i].getText()) + libre));
+            return null;
+        }
+
         // Hace el cálculo con el dado nuevo
         Dado d = new Dado(settings);
         d.lanzarDado(true);
@@ -5319,7 +5417,23 @@ public final class Dicer extends javax.swing.JFrame {
             return (base_combateSobrenatural[i].getText() + " + " + libre + " + " + String.valueOf(d.getResultado()) + " = " + String.valueOf(Integer.parseInt(base_combateSobrenatural[i].getText()) + libre + d.getResultado()));
     }
     
-    private String b_MouseClickedConvocatoria(int i) {
+    private String b_MouseClickedConvocatoria(java.awt.event.MouseEvent evt, int i) {
+        // No he pulsado el botón izquierdo
+        if (evt != null && !javax.swing.SwingUtilities.isLeftMouseButton(evt)) {
+            res_convocatoria[i].setForeground(Color.BLACK);
+            dado_convocatoria[i].setText("0");
+            
+            int libre = 0;
+            try {
+                libre = Integer.parseInt(libre_convocatoria[i].getText());
+            } catch (NumberFormatException e) {
+
+            }
+            
+            res_convocatoria[i].setText(String.valueOf(Integer.parseInt(base_convocatoria[i].getText()) + libre));
+            return null;
+        }
+
         // Hace el cálculo con el dado nuevo
         Dado d = new Dado(settings);
         
@@ -5364,7 +5478,28 @@ public final class Dicer extends javax.swing.JFrame {
         return (base_convocatoria[i].getText() + " + " + libre + " + " + String.valueOf(d.getResultado()) + " = " + String.valueOf(Integer.parseInt(base_convocatoria[i].getText()) + libre + d.getResultado()));
     }
     
-    private String b_MouseClickedCritico() {
+    private String b_MouseClickedCritico(java.awt.event.MouseEvent evt) {
+        // No he pulsado el botón izquierdo
+        if (evt != null && !javax.swing.SwingUtilities.isLeftMouseButton(evt)) {
+            resCritico.setForeground(Color.BLACK);
+            dadoCritico.setText("0");
+            
+            int libre = 0, damage = 0;
+            try {
+                libre = Integer.parseInt(libreCritico.getText());
+            } catch (NumberFormatException e) {
+
+            }
+            try {
+            damage = Integer.parseInt(damageCritico.getText());
+            } catch (NumberFormatException e) {
+
+            }
+            
+            resCritico.setText(String.valueOf(damage + libre));
+            return null;
+        }
+
         // Hace el cálculo con el dado nuevo
         Dado d = new Dado(settings);
         if (settings.getFisicos()) {
@@ -5496,7 +5631,7 @@ public final class Dicer extends javax.swing.JFrame {
                     }else if (d <= 0) {
                         dado_Atributos[i].setText("1");
                     }
-                    b_MouseClickedAtr(i);
+                    b_MouseClickedAtr(null, i);
                 }
                 
                 public KeyListener init (int i) {
@@ -5527,7 +5662,7 @@ public final class Dicer extends javax.swing.JFrame {
                         dado_Secundarias[i].setText("1");
                     }
                     
-                    b_MouseClicked(i);
+                    b_MouseClicked(null, i);
                 }
                 
                 public KeyListener init (int i) {
@@ -5559,7 +5694,7 @@ public final class Dicer extends javax.swing.JFrame {
                     }else if (d <= 0) {
                         dado_Resistencias[i].setText("1");
                     }
-                    b_MouseClickedRes(i);
+                    b_MouseClickedRes(null, i);
                 }
                 
                 public KeyListener init (int i) {
@@ -5594,7 +5729,7 @@ public final class Dicer extends javax.swing.JFrame {
                     if (d <= 0) {
                         dado_combateFisico[i].setText("1");
                     }
-                    b_MouseClickedFisico(i);
+                    b_MouseClickedFisico(null, i);
                 }
                 
                 public KeyListener init (int i) {
@@ -5621,7 +5756,7 @@ public final class Dicer extends javax.swing.JFrame {
                     if (d <= 0) {
                         dado_combateSobrenatural[i].setText("1");
                     }
-                    b_MouseClickedSobrenatural(i);
+                    b_MouseClickedSobrenatural(null, i);
                 }
                 
                 public KeyListener init (int i) {
@@ -5650,7 +5785,7 @@ public final class Dicer extends javax.swing.JFrame {
                     if (d <= 0) {
                         dado_turno.setText("1");
                     }
-                    b_MouseClickedTurno();
+                    b_MouseClickedTurno(null);
                 }
             });   
         }
@@ -5675,7 +5810,7 @@ public final class Dicer extends javax.swing.JFrame {
                     if (d <= 0) {
                         dado_convocatoria[i].setText("1");
                     }
-                    b_MouseClickedConvocatoria(i);
+                    b_MouseClickedConvocatoria(null, i);
                 }
                 
                 public KeyListener init (int i) {
@@ -5706,7 +5841,7 @@ public final class Dicer extends javax.swing.JFrame {
                     dadoCritico.setText("1");
                 }
                 
-                b_MouseClickedCritico();
+                b_MouseClickedCritico(null);
             }
         });
     }

@@ -106,7 +106,7 @@ public class ArmaGUI {
                 }else if (d <= 0) {
                     enterezaDado.setText("1");
                 }
-                b_MouseClicked(0);
+                b_MouseClicked(null,0);
             }
         });
         roturaDado.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -130,7 +130,7 @@ public class ArmaGUI {
                 }else if (d <= 0) {
                     roturaDado.setText("1");
                 }
-                b_MouseClicked(1);
+                b_MouseClicked(null, 1);
             }
         });
         presenciaDado.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -155,7 +155,7 @@ public class ArmaGUI {
                     presenciaDado.setText("1");
                 }
                 
-                b_MouseClicked(2);
+                b_MouseClicked(null, 2);
             }
         });
     }
@@ -169,7 +169,7 @@ public class ArmaGUI {
             JLabel j;
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                log.addLog(log.queBoton("Arma", 0+id*3) + ": " + b_MouseClicked(0));
+                log.addLog(log.queBoton("Arma", 0+id*3) + ": " + b_MouseClicked(evt, 0));
             }
             @Override
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -197,7 +197,7 @@ public class ArmaGUI {
             JLabel j;
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                log.addLog(log.queBoton("Arma", 1+id*3) + ": " + b_MouseClicked(1));
+                log.addLog(log.queBoton("Arma", 1+id*3) + ": " + b_MouseClicked(evt, 1));
             }
             @Override
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -225,7 +225,7 @@ public class ArmaGUI {
             JLabel j;
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                log.addLog(log.queBoton("Arma", 2+id*3) + ": " + b_MouseClicked(2));
+                log.addLog(log.queBoton("Arma", 2+id*3) + ": " + b_MouseClicked(evt, 2));
             }
             @Override
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -295,7 +295,7 @@ public class ArmaGUI {
         presenciaResultado.setFont(presenciaResultado.getFont().deriveFont(Font.BOLD));
     }
     
-    private String b_MouseClicked(int i) {        
+    private String b_MouseClicked(java.awt.event.MouseEvent evt, int i) {   
         // Hace el cálculo con el dado nuevo
         Dado d = new Dado(settings);
         if (settings.getFisicos()) {
@@ -321,6 +321,12 @@ public class ArmaGUI {
             else
                 d.lanzarDado(false);
         }
+        
+        if (evt != null && !javax.swing.SwingUtilities.isLeftMouseButton(evt)) {
+            d.reset();
+            d.trucarDado(0);
+        }
+        
         if (i < 2) {
             switch (d.getResultado()) {
                 case 10:
@@ -342,7 +348,9 @@ public class ArmaGUI {
                         this.roturaResultado.setForeground(Color.BLACK);
             }
         } else {
-            if (d.getResultado() >= 90) {
+            if (evt != null && !javax.swing.SwingUtilities.isLeftMouseButton(evt)) {
+                this.presenciaResultado.setForeground(Color.BLACK);
+            } else if (d.getResultado() >= 90) {
                 this.presenciaResultado.setForeground(Color.GREEN);
             } else if (d.getResultado() <= 3) {
                 this.presenciaResultado.setForeground(Color.RED);
@@ -373,16 +381,22 @@ public class ArmaGUI {
                 if (!settings.getFisicos())
                     this.enterezaDado.setText(String.valueOf(d.getResultado()));
                 this.enterezaResultado.setText(String.valueOf(Integer.parseInt(this.enterezaBase.getText()) + libre + d.getResultado()));
+                if (evt != null && !javax.swing.SwingUtilities.isLeftMouseButton(evt))
+                    return null;
                 return (this.enterezaBase.getText() + " + " + libre + " + " + String.valueOf(d.getResultado()) + " = " + String.valueOf(Integer.parseInt(this.enterezaBase.getText()) + libre + d.getResultado()));
             case 1:
                 if (!settings.getFisicos())
                     this.roturaDado.setText(String.valueOf(d.getResultado()));
                 this.roturaResultado.setText(String.valueOf(Integer.parseInt(this.roturaBase.getText()) + libre + d.getResultado()));
+                if (evt != null && !javax.swing.SwingUtilities.isLeftMouseButton(evt))
+                    return null;
                 return (this.roturaBase.getText() + " + " + libre + " + " + String.valueOf(d.getResultado()) + " = " + String.valueOf(Integer.parseInt(this.roturaBase.getText()) + libre + d.getResultado()));
             default:
                 if (!settings.getFisicos())
                     this.presenciaDado.setText(String.valueOf(d.getResultado()));
                 this.presenciaResultado.setText(String.valueOf(Integer.parseInt(this.presenciaBase.getText()) + libre + d.getResultado()));
+                if (evt != null && !javax.swing.SwingUtilities.isLeftMouseButton(evt))
+                    return null;
                 return (this.presenciaBase.getText() + " + " + libre + " + " + String.valueOf(d.getResultado()) + " = " + String.valueOf(Integer.parseInt(this.presenciaBase.getText()) + libre + d.getResultado()));
         }
     }
