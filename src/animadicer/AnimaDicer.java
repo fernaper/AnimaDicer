@@ -10,7 +10,7 @@ import java.io.InputStream;
  * @author Fernando Pérez Gutiérrez, Alfredo Pérez Gutiérrez y Juan Mas Aguilar
  */
 public class AnimaDicer {
-    private static final String VERSION = "v1.0.9";
+    private static final String VERSION = "v1.1.0";
     /**
      * @param args the command line arguments
      */
