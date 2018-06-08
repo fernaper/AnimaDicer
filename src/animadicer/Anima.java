@@ -1210,8 +1210,12 @@ public class Anima {
             ficha.setZeonActual(this.ficha.getZeon());
         }
         sheet = workbook.getSheetAt(7);
-        ficha.setPotencialPsiquico((int)(sheet.getRow(10).getCell(CellReference.convertColStringToIndex("H")).getNumericCellValue()));
         
+        try {
+        ficha.setPotencialPsiquico((int)(sheet.getRow(10).getCell(CellReference.convertColStringToIndex("H")).getNumericCellValue()));
+        } catch (java.lang.IllegalStateException ex){
+            
+        }
         return ficha;
     }
     
