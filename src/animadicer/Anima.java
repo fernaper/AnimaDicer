@@ -1015,7 +1015,7 @@ public class Anima {
         
         try {
             ficha.setVidaActual((int)(sheet.getRow(10).getCell(CellReference.convertColStringToIndex("P")).getNumericCellValue()));
-            if (ficha.getVidaActual() == 0)
+            if (ficha.getVidaActual() < ficha.getVida())
                 ficha.setVidaActual(ficha.getVida());
         } catch (NullPointerException ex) {
             ficha.setVidaActual(ficha.getVida());
@@ -1024,7 +1024,7 @@ public class Anima {
         try {
             ficha.setCansancioActual((int)(sheet.getRow(15).getCell(CellReference.convertColStringToIndex("P")).getNumericCellValue()));
             if (ficha.getCansancioActual() == 0)
-                ficha.setCansancioActual(ficha.getVida());
+                ficha.setCansancioActual(ficha.getCansancio());
         } catch (NullPointerException ex) {
             ficha.setCansancioActual(ficha.getCansancio());
         }
@@ -1195,7 +1195,7 @@ public class Anima {
             try {
                 ficha.setKiActual((int)(sheet.getRow(23).getCell(CellReference.convertColStringToIndex("F")).getNumericCellValue()));
                 if (ficha.getKiActual() == 0)
-                    ficha.setKiActual(ficha.getVida());
+                    ficha.setKiActual(ficha.getKi());
             } catch(NullPointerException ex) {
                 ficha.setKiActual(this.ficha.getKi());
             }
@@ -1205,16 +1205,17 @@ public class Anima {
         try {
             ficha.setZeonActual((int)(sheet.getRow(16).getCell(CellReference.convertColStringToIndex("M")).getNumericCellValue()));
             if (ficha.getZeonActual() == 0)
-                    ficha.setZeonActual(ficha.getVida());
+                ficha.setZeonActual(ficha.getZeon());
         } catch (NullPointerException ex) {
             ficha.setZeonActual(this.ficha.getZeon());
         }
-        sheet = workbook.getSheetAt(7);
         
+        sheet = workbook.getSheetAt(7);
         try {
-        ficha.setPotencialPsiquico((int)(sheet.getRow(10).getCell(CellReference.convertColStringToIndex("H")).getNumericCellValue()));
+            ficha.setPotencialPsiquico((int)(sheet.getRow(10).getCell(CellReference.convertColStringToIndex("H")).getNumericCellValue()));
         } catch (java.lang.IllegalStateException ex){
-            
+            sheet = workbook.getSheetAt(9);
+            ficha.setPotencialPsiquico((int)(sheet.getRow(10).getCell(CellReference.convertColStringToIndex("H")).getNumericCellValue()));
         }
         return ficha;
     }
